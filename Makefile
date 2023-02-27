@@ -27,6 +27,7 @@ SRCS	=	main.c\
 			Env/env_change.c\
 			Env/env_add.c\
 			Env/env_clear.c\
+			Env/env_unset.c\
 			\
 			Built_in/env.c\
 			Built_in/get_pwd.c\

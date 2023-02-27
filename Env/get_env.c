@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/27 17:52:12 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 21:06:32 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ char	**env_split(char **env, int nb)
 	char			**rtn;
 	size_t			max;
 	size_t			stop;
+	char 			*tmp;
 
 	i = 0;
 	rtn = malloc(sizeof(char *) * 2);
@@ -85,7 +86,10 @@ char	**env_split(char **env, int nb)
 	max = ft_strlen(env[nb]);
 	while (i < max && env[nb][i] != '=')
 		i++;
-	stop = ++i;
+	if (env[nb][i] == '=')
+		stop = ++i;
+	else
+		stop = i;
 	rtn[0] = malloc(sizeof(char) * (stop + 1));
 	rtn[1] = malloc(sizeof(char) * (max - stop + 1));
 	if (!rtn[0] || !rtn[1])
@@ -94,6 +98,12 @@ char	**env_split(char **env, int nb)
 	while (++i < stop)
 		rtn[0][i] = env[nb][i];
 	rtn[0][i] = '\0';
+	if (rtn[0][i - 1] != '=')
+	{
+		tmp = ft_strjoin(rtn[0], "=");
+		free(rtn[0]);
+		rtn[0] = tmp;
+	}
 	i = -1;
 	while (++i < max - stop)
 		rtn[1][i] = env[nb][stop + i];

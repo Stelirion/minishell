@@ -1,41 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_add.c                                          :+:      :+:    :+:   */
+/*   env_relink.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 15:11:43 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/27 20:52:33 by mbrement         ###   ########lyon.fr   */
+/*   Created: 2023/02/27 18:40:06 by mbrement          #+#    #+#             */
+/*   Updated: 2023/02/27 20:10:06 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	env_add(t_env *env, char *str)
+t_env	*env_unset(t_env *env, char *str)
 {
-	char	*tmp[1];
-	char	**add;
-	t_env	*tmp_env;
+	t_env	*tmp;
+	t_env	*next;
+	t_env	*last;
 
-	if (!str || !*str)
-		return ;
-	tmp[0] = str;
-	add = env_split(tmp, 0);
-	tmp_env = env_search(env, add[0]);
-	if (tmp_env)
+	if (!str)
+		return (env);
+	last = env_search_before(env, str);
+	if (last == env)
 	{
-		printf("hi\n");
-		free(add[0]);
-		free(add[1]);
-		free(add);
+		env = env->next;
+		env_lstdelone(last);
+		return (env);
 	}
-	if (tmp_env)
-	{
-		free(tmp_env->content);
-		tmp_env->content = add[1];
-	}
-	else
-		env_lstadd_back(&env, env_lstnew(add));
-	free(add);
+	tmp = last->next;
+	last->next = NULL;
+	if (!tmp)
+		return (env);
+	if (tmp->next)
+		next = tmp->next;
+	env_lstdelone(tmp);
+	last->next = next;
+	return (env);
 }

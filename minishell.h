@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/27 17:33:10 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 20:10:20 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	env_change(char *name, char *content, t_env *env);
 char	**env_split(char **env, int nb);
 void	env_add(t_env *env, char *str);
 void	env_clear(t_env *env);
-t_env	*env_search_less(t_env *list, char *str);
+t_env	*env_search_before(t_env *list, char *str);
+t_env	*env_unset(t_env *env, char *str);
 
 
 
