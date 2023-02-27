@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:38:47 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/27 16:09:22 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 17:49:26 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	g_return_value = 0;
 	env = get_env(envp);
-	print_env(env);
-	env_search(env, "PATH");
-	printf("%p || %p", env_search_less(env, "PATH="), env_search(env, "PATH="));
+	// print_env(env);
+	// env_add(env, "PATH=hi");
+	// print_env(env);
+	end_of_prog(env, 0);
+	// printf("%p || %p", env_search_less(env, "PATH="), env_search(env, "PATH="));
 	// env_add(env, "PATH=cookie");
 	// print_env(env);
 	// end_of_prog(env, 0);

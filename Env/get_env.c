@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/27 15:25:23 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 17:52:12 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,29 @@ static void	env_fill(t_env *list);
 t_env	*get_env(char **env)
 {
 	t_env	*list;
+	t_env	*tmp;
 	size_t	i;
+	char	**str;
 
 
 	if (!env[0])
 	{
 		list = env_lstnew(NULL);
 		env_fill (list);
-		return (list);
+		tmp = list->next;
+		free(list);
+		return (tmp);
 	}
 	i = 0;
-	list = env_lstnew(env_split(env, 0));
+	str = env_split(env, 0);
+	list = env_lstnew(str);
+	free(str);
 	while (env[++i])
-		env_lstadd_back(&list, env_lstnew(env_split(env, i)));
+	{
+		str = env_split(env, i);
+		env_lstadd_back(&list, env_lstnew(str));
+		free(str);
+	}
 	env_fill (list);
 	return (list);
 }
@@ -43,22 +53,20 @@ static void	env_fill(t_env *list)
 	tmp = env_search(list, "PATH=");
 	if (!tmp)
 	{
-		str[0] = malloc(sizeof(char) * 6);
-		str[0] = "PATH=";
+		str[0] = ft_strdup("PATH=");
 		str[1] = get_pwd();
 		env_lstadd_back(&list, env_lstnew(str));
 	}
 	tmp = env_search(list, "SHLVL=");
 	if (!tmp)
 	{
-		str[0] = malloc(sizeof(char) * 7);
-		str[0] = "SHLVL=";
-		str[1] = malloc(sizeof(char) * 2);
-		str[1] = "1";
+		str[0] = ft_strdup("SHLVL=");
+		str[1] = ft_strdup("1");
 		env_lstadd_back(&list, env_lstnew(str));
 	}
 	else
 	{
+		free(tmp->content);
 		tmp->content = ft_itoa(ft_atoi(tmp->content) + 1);
 	}
 }
@@ -72,9 +80,9 @@ char	**env_split(char **env, int nb)
 
 	i = 0;
 	rtn = malloc(sizeof(char *) * 2);
-	max = ft_strlen(env[nb]);
 	if (!rtn)
 		error_handler(0);
+	max = ft_strlen(env[nb]);
 	while (i < max && env[nb][i] != '=')
 		i++;
 	stop = ++i;

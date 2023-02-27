@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:17:07 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/24 18:38:37 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/02/27 17:49:57 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 void	error_handler(int name)
 {
-	
 	exit(name);
 }
