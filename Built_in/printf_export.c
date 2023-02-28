@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   printf_export.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/25 17:18:03 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/28 13:25:39 by mbrement         ###   ########lyon.fr   */
+/*   Created: 2023/02/28 13:59:48 by mbrement          #+#    #+#             */
+/*   Updated: 2023/02/28 14:03:15 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	print_env(t_env *list)
+
+t_env	*find_next(t_env *list, int nb)
 {
-	while (list)
-	{
-		if (list->is_env)
-		{
-			ft_putstr_fd(list->name, 1);
-			ft_putstr_fd(list->content, 1);
-			ft_putchar_fd('\n', 1);
-		}
-		list = list->next;
-	}
+	t_env	*target;
+
+	return (target);
+}
+
+void	print_export(t_env *list)
+{
+	size_t	i;
+	t_env	*target;
+	i = -1;
+	target = find_next(list, 0);
+	while (target)
+		
 }

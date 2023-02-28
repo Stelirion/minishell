@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/27 21:06:32 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/02/28 13:27:57 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ static void	env_fill(t_env *list)
 	{
 		free(tmp->content);
 		tmp->content = ft_itoa(ft_atoi(tmp->content) + 1);
+	}
+	tmp = list;
+	while (tmp)
+	{
+		tmp->is_env = 1;
+		tmp->is_export = 1;
+		tmp = tmp->next;
 	}
 }
 
