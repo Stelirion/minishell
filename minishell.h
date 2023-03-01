@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/27 20:10:20 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 02:01:41 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "Tools/Libft/libft.h"
 
 # include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 typedef struct s_env
 {
@@ -25,6 +27,13 @@ typedef struct s_env
 	int				is_export;
 	struct s_env	*next;
 }					t_env;
+
+typedef struct s_param
+{
+	char			*content;
+	int				type;
+	struct s_param	*next;
+}					t_param;
 
 int	g_return_value;
 
@@ -47,7 +56,8 @@ void	env_clear(t_env *env);
 t_env	*env_search_before(t_env *list, char *str);
 t_env	*env_unset(t_env *env, char *str);
 
-
+void	param_lstadd_back(t_param **lst, t_param *next);
+t_env	*param_lstnew(char *content);
 
 ///BUILT_IN
 void	pwd(t_list *env);
