@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/01 02:01:41 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 03:08:37 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ t_env	*env_search_before(t_env *list, char *str);
 t_env	*env_unset(t_env *env, char *str);
 
 void	param_lstadd_back(t_param **lst, t_param *next);
-t_env	*param_lstnew(char *content);
+t_param	*param_lstnew(char *content);
+void	param_lstclear(t_param **lst);
 
 ///BUILT_IN
 void	pwd(t_list *env);

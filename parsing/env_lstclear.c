@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   env_lstclear.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 13:50:17 by mbrement          #+#    #+#             */
-/*   Updated: 2022/11/13 17:50:15 by mbrement         ###   ########lyon.fr   */
+/*   Created: 2022/11/16 17:36:25 by mbrement          #+#    #+#             */
+/*   Updated: 2023/03/01 03:10:22 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-size_t	ft_strlen(const char *s)
+void	param_lstclear(t_param **lst)
 {
-	size_t	i;
+	t_param	*next;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if (!lst || !(*lst))
+		return ;
+	while (*lst)
+	{
+		next = (*lst)->next;
+		free(*lst);
+		*lst = next;
+	}
 }

@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_lstclear.c                                     :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 17:36:25 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/24 17:25:27 by mbrement         ###   ########lyon.fr   */
+/*   Created: 2022/11/07 13:50:17 by mbrement          #+#    #+#             */
+/*   Updated: 2023/03/01 02:16:01 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	env_lstclear(t_env **lst)
+size_t	ft_strlen(const char *s)
 {
-	t_env	*next;
+	size_t	i;
 
-	if (!lst || !(*lst))
-		return ;
-	while (*lst)
-	{
-		next = (*lst)->next;
-		env_lstdelone(*lst);
-		*lst = next;
-	}
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
