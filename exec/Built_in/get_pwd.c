@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   get_pwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/25 17:18:03 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/28 13:25:39 by mbrement         ###   ########lyon.fr   */
+/*   Created: 2023/02/25 17:56:05 by mbrement          #+#    #+#             */
+/*   Updated: 2023/03/02 19:28:50 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	print_env(t_env *list)
+char	*get_pwd(void)
 {
-	while (list)
+	int		i;
+	char	*str;
+
+	i = 0;
+	str = malloc(sizeof(char) * 2);
+	str[1] = '\0';
+	while (!getcwd(str, i))
 	{
-		if (list->is_env)
-		{
-			ft_putstr_fd(list->name, 1);
-			ft_putstr_fd(list->content, 1);
-			ft_putchar_fd('\n', 1);
-		}
-		list = list->next;
+		free(str);
+		i++;
+		str = malloc(sizeof(char) * (i + 1));
+		str[i] = '\0';
 	}
+	return (str);
 }

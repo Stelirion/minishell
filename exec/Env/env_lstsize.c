@@ -1,39 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_relink.c                                       :+:      :+:    :+:   */
+/*   env_lstsize.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/27 18:40:06 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/27 20:10:06 by mbrement         ###   ########lyon.fr   */
+/*   Created: 2022/11/16 14:58:00 by mbrement          #+#    #+#             */
+/*   Updated: 2023/03/01 02:13:34 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_env	*env_unset(t_env *env, char *str)
+size_t	env_lstsize(t_env *lst)
 {
-	t_env	*tmp;
-	t_env	*next;
-	t_env	*last;
+	size_t	i;
+	t_env	*index;
 
-	if (!str)
-		return (env);
-	last = env_search_before(env, str);
-	if (last == env)
+	i = 0;
+	if (!lst)
+		return (0);
+	index = lst;
+	while (index->next != NULL)
 	{
-		env = env->next;
-		env_lstdelone(last);
-		return (env);
+		index = index->next;
+		i++;
+		if (index->next == NULL)
+			return (i + 1);
 	}
-	tmp = last->next;
-	last->next = NULL;
-	if (!tmp)
-		return (env);
-	if (tmp->next)
-		next = tmp->next;
-	env_lstdelone(tmp);
-	last->next = next;
-	return (env);
+	return (1);
 }

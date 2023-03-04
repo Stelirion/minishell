@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_lstsize.c                                      :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 14:58:00 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/24 17:21:18 by mbrement         ###   ########lyon.fr   */
+/*   Created: 2022/11/14 17:40:00 by mbrement          #+#    #+#             */
+/*   Updated: 2022/11/14 18:18:28 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-int	env_lstsize(t_env *lst)
+void	ft_putstr_fd(char *s, int fd)
 {
-	int		i;
-	t_env	*index;
-
-	i = 0;
-	if (!lst)
-		return (0);
-	index = lst;
-	while (index->next != NULL)
-	{
-		index = index->next;
-		i++;
-		if (index->next == NULL)
-			return (i + 1);
-	}
-	return (1);
+	if (!s)
+		return ;
+	write (fd, s, ft_strlen(s));
 }

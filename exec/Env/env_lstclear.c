@@ -1,40 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_lstnew.c                                       :+:      :+:    :+:   */
+/*   env_lstclear.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 13:55:33 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/27 14:47:33 by mbrement         ###   ########lyon.fr   */
+/*   Created: 2022/11/16 17:36:25 by mbrement          #+#    #+#             */
+/*   Updated: 2023/02/24 17:25:27 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-t_env	*env_lstnew(char **content)
+void	env_lstclear(t_env **lst)
 {
-	t_env	*new;
+	t_env	*next;
 
-	new = malloc(sizeof(t_env));
-	if (!new)
-		error_handler(0);
-	if (content)
+	if (!lst || !(*lst))
+		return ;
+	while (*lst)
 	{
-		if (content[0])
-			new->name = content[0];
-		else
-			new->name = NULL;
-		if (content[1])
-			new->content = content[1];
-		else
-			new->content = NULL;
+		next = (*lst)->next;
+		env_lstdelone(*lst);
+		*lst = next;
 	}
-	else
-	{
-		new->content = NULL;
-		new->name = NULL;
-	}
-	new->next = NULL;
-	return (new);
 }

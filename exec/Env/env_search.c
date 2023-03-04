@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:51:41 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/27 20:06:56 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/01 19:15:09 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,13 @@ t_env	*env_search_before(t_env *list, char *str)
 		return (NULL);
 	tmp = list;
 	i = ft_strlen(str);
-	if (!ft_strncmp(str, list->name, i) && !list->name[i+ 1])
+	if (!ft_strncmp(str, list->name, i) && list->name[i] == '\0')
 		return (list);
 	while (list->next)
 	{
-		if (!ft_strncmp(str, list->next->name, i) && !list->next->name[i + 1])
-		{
-			printf("%s\n", list->name);
+		if (list->next->name && !ft_strncmp(str, list->next->name, i)
+			&& list->next->name[i] == '\0')
 			break ;
-		}
 		list = list->next;
 		if (!list)
 			return (0);

@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/28 13:27:57 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/04 13:22:16 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,34 +45,67 @@ t_env	*get_env(char **env)
 	return (list);
 }
 
-static void	env_fill(t_env *list)
+t_env	*fill_in(int nb, t_env *env)
 {
-	t_env	*tmp;
 	char	*str[2];
 
-	tmp = env_search(list, "PATH=");
-	if (!tmp)
+	if (nb == 1)
 	{
-		str[0] = ft_strdup("PATH=");
+		str[0] = ft_strdup("PWD=");
 		str[1] = get_pwd();
-		env_lstadd_back(&list, env_lstnew(str));
+		env_lstadd_back(&env, env_lstnew(str));
 	}
-	tmp = env_search(list, "SHLVL=");
-	if (!tmp)
+	else if (nb == 2)
 	{
 		str[0] = ft_strdup("SHLVL=");
 		str[1] = ft_strdup("1");
-		env_lstadd_back(&list, env_lstnew(str));
+		env_lstadd_back(&env, env_lstnew(str));
+	}
+	else if (nb == 3)
+	{
+		if ((ft_atoi(env_search(env, "SHLVL=")->content) + 1) > 999)
+		{
+			ft_putstr_fd("Minishell : warning: shell level too high", 1);
+			ft_putstr_fd(" ( > 1000), resetting to 1", 1);
+			str [1] = ft_itoa(ft_atoi(env_search(env, "SHLVL=")->content) + 1);
+			free(env_search(env, "SHLVL=")->content);
+			env_search(env, "SHLVL=")->content = str[1];
+		}
+		else
+		{
+			free(env_search(env, "SHLVL=")->content);
+			env_search(env, "SHLVL=")->content = strdup("2");
+		}
 	}
 	else
 	{
-		free(tmp->content);
-		tmp->content = ft_itoa(ft_atoi(tmp->content) + 1);
+		str[0] = ft_strdup("OLDPWD");
+		str[1] = NULL;
+		env_lstadd_back(&env, env_lstnew(str));
 	}
+	return (env);
+}
+
+static void	env_fill(t_env *list)
+{
+	t_env	*tmp;
+
+	tmp = env_search(list, "PWD=");
+	if (!tmp)
+		list = fill_in(1, list);
+	tmp = env_search(list, "SHLVL=");
+	if (!tmp)
+		list = fill_in(2, list);
+	else
+		list = fill_in(3, list);
+	tmp = env_search(list, "OLDPWD=");
+	if (!tmp)
+		list = fill_in(4, list);
 	tmp = list;
 	while (tmp)
 	{
-		tmp->is_env = 1;
+		if (tmp->content && tmp->content[0] != '\0')
+			tmp->is_env = 1;
 		tmp->is_export = 1;
 		tmp = tmp->next;
 	}

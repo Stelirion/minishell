@@ -31,13 +31,20 @@ SRCS	=	main.c\
 			\
 			Built_in/env.c\
 			Built_in/get_pwd.c\
+			Built_in/printf_export.c\
+			Built_in/pwd.c\
+			Built_in/cd.c\
+			Built_in/echo.c\
+			\
+			ft_split_shell.c\
+
 
 
 OBJS	=	${SRCS:%.c=${DIR_OBJS}%.o}
 
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -g3 -fsanitize=address -lreadline
 #-O3 -g -pg 
 
 

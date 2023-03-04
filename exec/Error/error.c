@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/24 14:32:30 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/24 18:38:23 by mbrement         ###   ########lyon.fr   */
+/*   Created: 2023/02/24 17:17:07 by mbrement          #+#    #+#             */
+/*   Updated: 2023/03/01 14:49:43 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void pwd(t_list *env)
+void	error_handler(int name)
 {
-	(void)env;
+	g_return_value = 1;
+	exit(name);
 }

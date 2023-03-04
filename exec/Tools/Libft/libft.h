@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:30:05 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/03 22:45:02 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/02 15:49:47 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,10 @@ void	ft_lstclear(t_list **lst, void (*del)(int));
 void	ft_lstiter(t_list *lst, void (*f)(int));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(int), void (*del)(int));
 void	ft_lstfree(t_list *lst);
+
+void	free_tab(char **str);
+char	*merge_tab_char(char **str);
+char	*merge_tab_char_add(char **str, char *c);
+char	*merge_tab_char_add_minus(char **str, char *c);
 
 #endif

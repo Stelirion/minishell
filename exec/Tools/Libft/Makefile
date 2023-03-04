@@ -42,6 +42,8 @@ SRCS	= 	ft_atoi.c \
 				ft_lstclear.c \
 				ft_lstiter.c \
 				ft_lstmap.c \
+				free_tab.c \
+				merge_tab_char.c\
 
 HEADERS		=	libft.h
 OBJS		= ${SRCS:.c=.o}
