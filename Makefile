@@ -36,6 +36,11 @@ SRCS	=	main.c\
 			Built_in/cd.c\
 			Built_in/echo.c\
 			\
+			Parsing/param_lstadd_back.c\
+			Parsing/param_lstclear.c\
+			Parsing/param_lstnew.c\
+			Parsing/readline.c\
+			\
 			ft_split_shell.c\
 
 
