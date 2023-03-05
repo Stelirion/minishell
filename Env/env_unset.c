@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:40:06 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/01 19:41:17 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/05 15:43:48 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ t_env	*env_unset(t_env *env, char *str)
 		next = tmp->next;
 	env_lstdelone(tmp);
 	last->next = next;
-	g_return_value = 0;
+	g_global.return_value = 0;
 	return (env);
 }

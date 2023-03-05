@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 02:48:20 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/04 13:04:09 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/05 14:59:05 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,20 @@ static t_env	*cd_old_pwd(t_env	*env)
 
 t_env	*cd(t_env *env, char *str)
 {
-
-
-	if (chdir(str) != -1)
+	if (!str || !ft_strlen(str))
+		return (env);
+	else if (chdir(str) != -1)
 	{
 		env = cd_old_pwd(env);
 		free(env_search(env, "PWD=")->content);
 		env_search(env, "PWD=")->content = get_pwd();
-	
 	}
 	else
 	{
 		ft_putstr_fd("Minishell : cd : ", 1);
 		ft_putstr_fd(strerror(errno), 1);
 		write (1, "\n", 1);
-		g_return_value = 1;
+		g_global.return_value = 1;
 	}
 	return (env);
 }

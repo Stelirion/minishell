@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:30:05 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/02 15:49:47 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/05 11:05:01 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ void	free_tab(char **str);
 char	*merge_tab_char(char **str);
 char	*merge_tab_char_add(char **str, char *c);
 char	*merge_tab_char_add_minus(char **str, char *c);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/04 15:02:03 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/05 15:55:06 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,18 @@ typedef struct s_param
 	struct s_param	*next;
 }					t_param;
 
-int	g_return_value;
+typedef struct s_global
+{
+	int		return_value;
+	t_env	*env;
+	t_param	*param;
+}					t_global;
+
+t_global	g_global;
 
 void	end_of_prog(t_env *env, int i);
+void	end_of_prog_exit(t_global g_global, int i);
+
 
 ///ENV
 void	env_lstadd_back(t_env **lst, t_env *next);
@@ -60,15 +69,20 @@ void	env_clear(t_env *env);
 t_env	*env_search_before(t_env *list, char *str);
 t_env	*env_unset(t_env *env, char *str);
 void	print_export(t_env *list);
+t_env	*env_unset(t_env *env, char *str);
 
-
+///EXEC
+void	exec_core(t_param	*param, t_env *env);
+char	**param_to_array(t_param *param);
 
 ///BUILT_IN
-void	pwd(t_env *env);
+void	pwd(void);
 void	print_env(t_env *list);
 char	*get_pwd(void);
 t_env	*cd(t_env *env, char *str);
 void	echo(char	**str);
+void	case_of(t_env *env);
+void	export_handler(t_param *param, t_env *env);
 
 ///ERROR
 void	error_handler(int name);
@@ -77,6 +91,8 @@ void	error_handler(int name);
 void	param_lstadd_back(t_param **lst, t_param *next);
 t_param	*param_lstnew(char *content);
 void	param_lstclear(t_param **lst);
+size_t	param_lstsize(t_param *lst);
+
 
 
 //TEMPORARY

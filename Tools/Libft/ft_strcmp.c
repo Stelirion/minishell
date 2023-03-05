@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/24 14:32:30 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/05 14:52:42 by mbrement         ###   ########lyon.fr   */
+/*   Created: 2023/03/05 11:04:09 by mbrement          #+#    #+#             */
+/*   Updated: 2023/03/05 11:04:50 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-void	pwd()
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	char	*str;
+	size_t			i;
+	unsigned char	*str1;
+	unsigned char	*str2;
 
-	str = get_pwd();
-	ft_putstr_fd(str, 1);
-	write (1, "\n", 1);
-	free(str);
-	g_global.return_value = 0;
+	i = 0;
+	str1 = (unsigned char *)s1;
+	str2 = (unsigned char *)s2;
+	while ((str1[i] || str2[i]))
+	{
+		if (str1[i] == str2[i] && str2[i] && str1[i])
+			i++;
+		else
+			return (str1[i] - str2[i]);
+	}
+	return (0);
 }

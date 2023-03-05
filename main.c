@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:38:47 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/04 15:05:30 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/05 18:13:02 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_params(t_param *list)
 	}
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **envp)
 {
 	size_t	i;
 	size_t	start;
@@ -32,6 +32,7 @@ int	main(int argc, char **argv)
 	char	*new_str;
 	t_param	*param;
 	t_param	*new_lst;
+	t_env	*env;
 
 	ft_putstr_fd (" ____    ____   _             _          __             __   __   \n", 1);
 	ft_putstr_fd ("|_   \\  /   _| (_)           (_)        [  |           [  | [  |  \n", 1);
@@ -41,11 +42,12 @@ int	main(int argc, char **argv)
 	ft_putstr_fd ("|_____||_____|[___][___||__][___][\\__) )[___]|__]'.__.'[___][___] \n", 1);
 	(void)argc;
 	(void)argv;
+	env = get_env(envp);
 	while (1)
 	{
 		line = readline("Enter a line: ");
 		i = 0;
-		param = param_lstnew("NULL");
+		param = param_lstnew(NULL); //SWAP 
 		while (line[i])
 		{
 			while (line[i] == ' ')
@@ -57,7 +59,7 @@ int	main(int argc, char **argv)
 				while (line[i] && line[i] != '\'')
 					i++;
 				if (!line[i] && line[i] != '\'')
-					error_handler(0);
+					error_handler(130);
 				new_str = ft_substr(line, start + 1, i - start - 1);
 			}
 			else if (line[i] == '"')
@@ -66,14 +68,14 @@ int	main(int argc, char **argv)
 				while (line[i] && line[i] != '"')
 					i++;
 				if (!line[i] && line[i] != '"')
-					error_handler(0);
+					error_handler(130);
 				new_str = ft_substr(line, start + 1, i - start - 1);
 			}
 			else
 			{
 				while (line[i + 1] && line[i] != ' ')
 					i++;
-				new_str = ft_substr(line, start, i - start + 1);
+				new_str = ft_substr(line, start, i - start + 1); //LEAKS
 			}
 			i++;
 			new_lst = param_lstnew(new_str);
@@ -81,7 +83,7 @@ int	main(int argc, char **argv)
 		}
 		new_lst = param->next;
 		free(param);
-		print_params(new_lst);
+		exec_core(new_lst, env);
 		param_lstclear(&new_lst);
 	}
 }

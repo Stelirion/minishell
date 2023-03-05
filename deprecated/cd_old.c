@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 02:48:20 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/02 19:16:31 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/05 15:08:30 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static void	cd_slash(t_env *env, char *str)
 		ft_putstr_fd("Minishell : cd : ", 1);
 		ft_putstr_fd(strerror(errno), 1);
 		write (1, "\n", 1);
-		g_return_value = 1;
+		g_global.return_value = 1;
 		return ;
 	}
 	free(env_search(env, "PWD=")->content);
 	env_search(env, "PWD=")->content = ft_strdup(str);
-	g_return_value = 0;
+	g_global.return_value = 0;
 }
 
 char	*make_path(t_env *env, char **str)
@@ -37,7 +37,11 @@ char	*make_path(t_env *env, char **str)
 
 	i = -1;
 	tmp = malloc(1);
+	if (tmp)
+		error_handler(130);
 	pwd = ft_split(env_search(env, "PWD=")->content, '/');
+	if (pwd)
+		error_handler(130);
 	while (str[++i])
 	{
 		free(tmp);
@@ -48,17 +52,25 @@ char	*make_path(t_env *env, char **str)
 			if (str[i] != NULL)
 				rtn = merge_tab_char_add_minus(pwd, "/");
 			else
-			 	rtn = ft_strdup("\0");
+				rtn = ft_strdup("\0");
 		}
 		else
 		{
 			rtn = merge_tab_char_add(pwd, "/");
+			if (rtn)
+				error_handler(g_global, 1);
 			tmp = ft_strjoin(rtn, "/");
+			if (tmp)
+				error_handler(g_global, 1);
 			free(rtn);
 			rtn = ft_strjoin(tmp, str[i]);
 			free(tmp);
 		}
+		if (!rtn)
+			error_handler(g_global, 1);
 		tmp = ft_strjoin("/", rtn);
+		if (tmp)
+			error_handler(g_global, 1);
 		free(rtn);
 		open = opendir(tmp);
 		if (!open)

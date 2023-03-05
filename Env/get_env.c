@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/04 13:22:16 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/05 18:22:23 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,26 +63,27 @@ t_env	*fill_in(int nb, t_env *env)
 	}
 	else if (nb == 3)
 	{
-		if ((ft_atoi(env_search(env, "SHLVL=")->content) + 1) > 999)
+		if ((ft_atoi(env_search(env, "SHLVL=")->content)) > 999)
 		{
 			ft_putstr_fd("Minishell : warning: shell level too high", 1);
-			ft_putstr_fd(" ( > 1000), resetting to 1", 1);
-			str [1] = ft_itoa(ft_atoi(env_search(env, "SHLVL=")->content) + 1);
+			ft_putstr_fd(" ( > 1000), resetting to 1\n", 1);
+			str [1] = ft_strdup("1");
 			free(env_search(env, "SHLVL=")->content);
 			env_search(env, "SHLVL=")->content = str[1];
 		}
 		else
 		{
+			str[0] = ft_itoa((ft_atoi(env_search(env, "SHLVL=")->content) + 1));
 			free(env_search(env, "SHLVL=")->content);
-			env_search(env, "SHLVL=")->content = strdup("2");
+			env_search(env, "SHLVL=")->content = str[0];
 		}
 	}
-	else
-	{
-		str[0] = ft_strdup("OLDPWD");
-		str[1] = NULL;
-		env_lstadd_back(&env, env_lstnew(str));
-	}
+	// else
+	// {
+	// 	str[0] = ft_strdup("OLDPWD");
+	// 	str[1] = NULL;
+	// 	env_lstadd_back(&env, env_lstnew(str));
+	// }
 	return (env);
 }
 
@@ -122,7 +123,7 @@ char	**env_split(char **env, int nb)
 	i = 0;
 	rtn = malloc(sizeof(char *) * 2);
 	if (!rtn)
-		error_handler(0);
+		error_handler(130);
 	max = ft_strlen(env[nb]);
 	while (i < max && env[nb][i] != '=')
 		i++;
@@ -133,7 +134,7 @@ char	**env_split(char **env, int nb)
 	rtn[0] = malloc(sizeof(char) * (stop + 1));
 	rtn[1] = malloc(sizeof(char) * (max - stop + 1));
 	if (!rtn[0] || !rtn[1])
-		error_handler(1);
+		error_handler(130);
 	i = -1;
 	while (++i < stop)
 		rtn[0][i] = env[nb][i];

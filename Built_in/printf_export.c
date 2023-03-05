@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:59:48 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/04 13:21:33 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/05 14:53:36 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,5 @@ void	print_export(t_env *list)
 		i++;
 		target = find_next(list, i);
 	}
-	g_return_value = 0;
+	g_global.return_value = 0;
 }

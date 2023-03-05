@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:17:07 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/01 14:49:43 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/05 15:05:03 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	error_handler(int name)
 {
-	g_return_value = 1;
-	exit(name);
+	if (name == 130)
+		ft_putstr_fd("Error : a malloc didn't work", 2);
+	end_of_prog_exit(g_global, name);
 }
