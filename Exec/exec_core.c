@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/05 18:16:48 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/06 13:19:33 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	is_built_in(t_param	*param, t_env *env)
 	else if (!ft_strncmp(param->content, "export", 6)) //MUST CHANGE TO FT_STRCMP)
 		export_handler(param, env);
 	else if (!ft_strncmp(param->content, "unset", 5))
-			env_unset(env, param->content);
+		env = env_unset(env, param->content);
 	else
 		return (1);
 	return (g_global.return_value);

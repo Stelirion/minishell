@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:38:47 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/05 18:13:02 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/06 13:21:54 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv, char **envp)
 	t_param	*new_lst;
 	t_env	*env;
 
-	ft_putstr_fd (" ____    ____   _             _          __             __   __   \n", 1);
+	ft_putstr_fd (" ____    ____   _             _          __             _   __   \n", 1);
 	ft_putstr_fd ("|_   \\  /   _| (_)           (_)        [  |           [  | [  |  \n", 1);
 	ft_putstr_fd ("  |   \\/   |   __   _ .--.   __   .--.   | |--.  .---.  | |  | |  \n", 1);
 	ft_putstr_fd ("  | |\\  /| |  [  | [ `.-. | [  | ( (`\\]  | .-. |/ /__\\  | |  | |  \n", 1);
@@ -69,7 +69,7 @@ int	main(int argc, char **argv, char **envp)
 					i++;
 				if (!line[i] && line[i] != '"')
 					error_handler(130);
-				new_str = ft_substr(line, start + 1, i - start - 1);
+				new_str = ft_substr(line, start + 1, i - start - 1); //LEAKS
 			}
 			else
 			{
