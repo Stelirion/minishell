@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/05 15:55:06 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/07 21:02:07 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	export_handler(t_param *param, t_env *env);
 void	error_handler(int name);
 
 ///PARSING
+t_param	*parsing_core(char *line, t_param *param);
 void	param_lstadd_back(t_param **lst, t_param *next);
 t_param	*param_lstnew(char *content);
 void	param_lstclear(t_param **lst);

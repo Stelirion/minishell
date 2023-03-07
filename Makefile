@@ -38,6 +38,7 @@ SRCS	=	main.c\
 			Built_in/case_of.c\
 			Built_in/export_add.c\
 			\
+			Parsing/parsing.c\
 			Parsing/param_lstadd_back.c\
 			Parsing/param_lstclear.c\
 			Parsing/param_lstnew.c\
