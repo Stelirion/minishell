@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:38:47 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/07 14:33:00 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/07 15:05:44 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,22 @@ void	print_params(t_param *list)
 	}
 }
 
+void	header(void)
+{
+	ft_putstr_fd (" ____    ____   _             _  ", 1);
+	ft_putstr_fd ("        __             _   __   \n", 1);
+	ft_putstr_fd ("|_   \\  /   _| (_)           (_)", 1);
+	ft_putstr_fd ("        [  |           [  | [  |  \n", 1);
+	ft_putstr_fd ("  |   \\/   |   __   _ .--.   __ ", 1);
+	ft_putstr_fd ("  .--.   | |--.  .---.  | |  | |  \n", 1);
+	ft_putstr_fd ("  | |\\  /| |  [  | [ `.-. | [  |", 1);
+	ft_putstr_fd (" ( (`\\]  | .-. |/ /__\\  | |  | |  \n", 1);
+	ft_putstr_fd (" _| |_\\/_| |_  | |  | | | |  | |", 1);
+	ft_putstr_fd ("  `'.'.  | | | || \\__., | |  | |  \n", 1);
+	ft_putstr_fd ("|_____||_____|[___][___||__][___]", 1);
+	ft_putstr_fd ("[\\__) )[___]|__]'.__.'[___][___] \n", 1);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	size_t	i;
@@ -34,15 +50,10 @@ int	main(int argc, char **argv, char **envp)
 	t_param	*new_lst;
 	t_env	*env;
 
-	ft_putstr_fd (" ____    ____   _             _          __             _   __   \n", 1);
-	ft_putstr_fd ("|_   \\  /   _| (_)           (_)        [  |           [  | [  |  \n", 1);
-	ft_putstr_fd ("  |   \\/   |   __   _ .--.   __   .--.   | |--.  .---.  | |  | |  \n", 1);
-	ft_putstr_fd ("  | |\\  /| |  [  | [ `.-. | [  | ( (`\\]  | .-. |/ /__\\  | |  | |  \n", 1);
-	ft_putstr_fd (" _| |_\\/_| |_  | |  | | | |  | |  `'.'.  | | | || \\__., | |  | |  \n", 1);
-	ft_putstr_fd ("|_____||_____|[___][___||__][___][\\__) )[___]|__]'.__.'[___][___] \n", 1);
 	(void)argc;
 	(void)argv;
 	env = get_env(envp);
+	header();
 	while (1)
 	{
 		line = readline("Enter a line: ");
