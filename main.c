@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:38:47 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/06 13:21:54 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/07 14:33:00 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	main(int argc, char **argv, char **envp)
 			}
 			else
 			{
-				while (line[i + 1] && line[i] != ' ')
+				while (line[i + 1] && line[i + 1] != ' ')
 					i++;
 				new_str = ft_substr(line, start, i - start + 1); //LEAKS
 			}
