@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:34:28 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/05 14:52:28 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/07 15:01:18 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	echo(char	**str)
 	flag = 0;
 	if (!str || !str[0])
 		return ;
-	if (self_check(str[i]))
+	while (self_check(str[i]))
 	{
 		flag = 1;
 		i++;

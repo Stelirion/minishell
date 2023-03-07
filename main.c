@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:38:47 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/07 15:05:44 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/07 15:20:35 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
