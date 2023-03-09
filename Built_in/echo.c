@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:34:28 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/07 15:01:18 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/07 21:09:52 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static size_t	self_check(char	*str)
 // 	size_t	i;
 // 	size_t	tmp;
 
-// 	g_return_value = 0;
+// 	g_ g_return_value = 0;
 // 	i = -1;
 // 	check = 0;
 // 	tmp = -1;
@@ -110,5 +110,5 @@ void	echo(char	**str)
 	}
 	if (flag == 0)
 		write (1, "\n", 1);
-	g_global.return_value = 0;
+	  g_return_value = 0;
 }

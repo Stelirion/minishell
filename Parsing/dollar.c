@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export_add.c                                       :+:      :+:    :+:   */
+/*   dollar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/05 15:14:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/07 21:09:52 by mbrement         ###   ########lyon.fr   */
+/*   Created: 2023/03/07 19:18:10 by mbrement          #+#    #+#             */
+/*   Updated: 2023/03/07 19:45:00 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	export_handler(t_param *param, t_env *env)
+char	*handle_dollar(char *str, t_env *env)
 {
-	char	**str;
-	int		i;
+	char	*rtn;
 
-	str = param_to_array(param);
-	(void) env;
-	if (!str)
-		error_handler(130);
-	if (!str[1] || str[1][0] == '\0')
+	if (ft_strcmp("$?", str))
 	{
-		print_export(env);
+		ft_putnbr_fd(g_global, 2);
+		ft_putstr_fd(": command not found\n", 2);
+		g_global = 127;
+		return (ft_strdup(""));
 	}
-	else
-	{
-		i = 0;
-		while (str[++i] && str[i][0] != '\0')
-			env_add(env, str[i]);
-	}
-	free_tab(str);
-	  g_return_value = 0;
+	str++;
+	rtn = ft_strdup(env_search(env, str)->content);
+	str--;
+	return (rtn);
 }
+

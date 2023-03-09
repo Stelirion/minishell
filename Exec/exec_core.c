@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/07 15:36:01 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/07 21:18:37 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ int	is_built_in(t_param	*param, t_env *env)
 	char	**str;
 
 	if (!ft_strcmp(param->content, "exit"))
-		end_of_prog_exit(g_global, 0);
+		end_of_prog_exit(env, param, 0);
 	else if (!ft_strcmp(param->content, "echo"))
 	{
 		str = param_to_array(param->next);
 		echo(str);
 		free_tab(str);
-		return (g_global.return_value);
+		return (g_return_value);
 	}
 	else if (!ft_strcmp(param->content, "cd"))
 	{
@@ -36,7 +36,7 @@ int	is_built_in(t_param	*param, t_env *env)
 			else
 				cd(env, "");
 		}
-		return (g_global.return_value);
+		return (g_return_value);
 	}
 	else if (!ft_strcmp(param->content, "env"))
 		print_env(env);
@@ -54,11 +54,12 @@ int	is_built_in(t_param	*param, t_env *env)
 	}
 	else
 		return (1);
-	return (g_global.return_value);
+	return (g_return_value);
 }
 
 void	exec_core(t_param	*param, t_env *env)
 {
+	
 	if (param && !is_built_in(param, env))
 		return ;
 	else

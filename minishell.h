@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/07 21:02:07 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/07 21:23:56 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,10 @@ typedef struct s_param
 	struct s_param	*next;
 }					t_param;
 
-typedef struct s_global
-{
-	int		return_value;
-	t_env	*env;
-	t_param	*param;
-}					t_global;
-
-t_global	g_global;
+int	g_return_value;
 
 void	end_of_prog(t_env *env, int i);
-void	end_of_prog_exit(t_global g_global, int i);
+void	end_of_prog_exit(t_env *env, t_param *param, int i);
 
 
 ///ENV

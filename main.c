@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/07 21:10:15 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/07 23:12:29 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,11 @@ void	header(void)
 	ft_putstr_fd ("[\\__) )[___]|__]'.__.'[___][___] \n", 1);
 }
 
+#include <limits.h>
+
 int	main(int argc, char **argv, char **envp)
 {
+	// printf("%i\n", OPENMAX);
 	char	*line;
 	t_param	*param;
 	t_env	*env;

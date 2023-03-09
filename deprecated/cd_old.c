@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 02:48:20 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/05 15:08:30 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/07 21:09:52 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static void	cd_slash(t_env *env, char *str)
 		ft_putstr_fd("Minishell : cd : ", 1);
 		ft_putstr_fd(strerror(errno), 1);
 		write (1, "\n", 1);
-		g_global.return_value = 1;
+		  g_return_value = 1;
 		return ;
 	}
 	free(env_search(env, "PWD=")->content);
 	env_search(env, "PWD=")->content = ft_strdup(str);
-	g_global.return_value = 0;
+	  g_return_value = 0;
 }
 
 char	*make_path(t_env *env, char **str)
