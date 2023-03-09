@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/07 21:18:37 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/09 14:39:11 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_built_in(t_param	*param, t_env *env)
 		end_of_prog_exit(env, param, 0);
 	else if (!ft_strcmp(param->content, "echo"))
 	{
-		str = param_to_array(param->next);
+		str = param_to_array(env, param->next);
 		echo(str);
 		free_tab(str);
 		return (g_return_value);

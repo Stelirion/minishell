@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 14:26:41 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/05 15:05:12 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/09 14:28:34 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	case_of(t_env *env)
 	{
 		str = ft_strdup("/");
 		if (str)
-			error_handler(130);
+			error_handler(130, env, NULL);
 		free(env_search(env, "PWD=")->content);
 		env_search(env, "PWD=")->content = str;
 	}

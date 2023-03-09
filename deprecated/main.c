@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:38:47 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/07 19:19:33 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/09 14:31:09 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	main(int argc, char **argv, char **envp)
 				while (line[i] && line[i] != '\'')
 					i++;
 				if (!line[i] && line[i] != '\'')
-					error_handler(130);
+					error_handler(130, env, NULL);
 				new_str = ft_substr(line, start + 1, i - start - 1);
 			}
 			else if (line[i] == '"')
@@ -79,7 +79,7 @@ int	main(int argc, char **argv, char **envp)
 				while (line[i] && line[i] != '"')
 					i++;
 				if (!line[i] && line[i] != '"')
-					error_handler(130);
+					error_handler(130, env, NULL);
 				new_str = ft_substr(line, start + 1, i - start - 1); //LEAKS
 			}
 			else

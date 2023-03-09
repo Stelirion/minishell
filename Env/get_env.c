@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/05 18:22:23 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/09 14:36:32 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_env	*get_env(char **env)
 	if (!env[0])
 	{
 		list = env_lstnew(NULL);
+		if (!list)
+			error_handler(130, NULL, NULL);
 		env_fill (list);
 		tmp = list->next;
 		free(list);
@@ -34,6 +36,8 @@ t_env	*get_env(char **env)
 	i = 0;
 	str = env_split(env, 0);
 	list = env_lstnew(str);
+	if (!list)
+		error_handler(130, NULL, NULL);
 	free(str);
 	while (env[++i])
 	{
@@ -123,7 +127,7 @@ char	**env_split(char **env, int nb)
 	i = 0;
 	rtn = malloc(sizeof(char *) * 2);
 	if (!rtn)
-		error_handler(130);
+		error_handler(130, NULL, NULL);
 	max = ft_strlen(env[nb]);
 	while (i < max && env[nb][i] != '=')
 		i++;
@@ -134,7 +138,7 @@ char	**env_split(char **env, int nb)
 	rtn[0] = malloc(sizeof(char) * (stop + 1));
 	rtn[1] = malloc(sizeof(char) * (max - stop + 1));
 	if (!rtn[0] || !rtn[1])
-		error_handler(130);
+		error_handler(130, NULL, NULL);
 	i = -1;
 	while (++i < stop)
 		rtn[0][i] = env[nb][i];

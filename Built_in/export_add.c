@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/07 21:09:52 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/09 14:38:33 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void	export_handler(t_param *param, t_env *env)
 	char	**str;
 	int		i;
 
-	str = param_to_array(param);
+	str = param_to_array(env, param);
 	(void) env;
 	if (!str)
-		error_handler(130);
+		error_handler(130, env, param);
 	if (!str[1] || str[1][0] == '\0')
 	{
 		print_export(env);
@@ -32,5 +32,5 @@ void	export_handler(t_param *param, t_env *env)
 			env_add(env, str[i]);
 	}
 	free_tab(str);
-	  g_return_value = 0;
+	g_return_value = 0;
 }

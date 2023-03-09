@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/07 23:12:29 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/09 14:30:37 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	header(void)
 
 int	main(int argc, char **argv, char **envp)
 {
-	// printf("%i\n", OPENMAX);
 	char	*line;
 	t_param	*param;
 	t_env	*env;
