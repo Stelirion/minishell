@@ -47,8 +47,10 @@ SRCS	=	main.c\
 			\
 			Exec/exec_core.c\
 			Exec/param_to_string.c\
+			Exec/exec_child.c\
 			\
 			ft_split_shell.c\
+			nice_thing.c\
 
 
 
@@ -56,7 +58,7 @@ OBJS	=	${SRCS:%.c=${DIR_OBJS}%.o}
 
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g3 -fsanitize=address -lreadline
+CFLAGS	=	-Wall -Wextra -Werror -lreadline -g3 -fsanitize=address 
 #-O3 -g -pg 
 
 

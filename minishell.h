@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/09 14:47:00 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/12 15:09:51 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-
+# include <fcntl.h>
+# include <sys/wait.h>
 # include <stdio.h>
 
 typedef struct s_env
@@ -31,6 +32,15 @@ typedef struct s_env
 	struct s_env	*next;
 }					t_env;
 
+# define CMD 1
+
+# define INFILE 2
+
+# define OUTFILE 3
+
+# define ARG 4
+
+# define PIPE 5
 
 typedef struct s_param
 {
@@ -38,6 +48,12 @@ typedef struct s_param
 	int				type;
 	struct s_param	*next;
 }					t_param;
+
+typedef struct s_pipe
+{
+	int	first[2];
+	int	second[2];
+}					t_pipe;
 
 int	g_return_value;
 
@@ -67,6 +83,8 @@ t_env	*env_unset(t_env *env, char *str);
 ///EXEC
 void	exec_core(t_param	*param, t_env *env);
 char	**param_to_array(t_env *env, t_param *param);
+char	**env_to_array(t_env *env, t_param *param);
+t_param	*try_exec(t_env *env, t_param *param);
 
 ///BUILT_IN
 void	pwd(void);
@@ -91,5 +109,6 @@ size_t	param_lstsize(t_param *lst);
 
 //TEMPORARY
 char	**ft_split_shell(char const *s);
+char	*last_str(t_env *env);
 
 #endif

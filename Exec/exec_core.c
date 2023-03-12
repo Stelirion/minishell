@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/09 14:39:11 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/12 14:02:08 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,22 @@ int	is_built_in(t_param	*param, t_env *env)
 
 void	exec_core(t_param	*param, t_env *env)
 {
-	
-	if (param && !is_built_in(param, env))
-		return ;
-	else
-		ft_putstr_fd("not implemented yet,but soon ;-)\n", 1);
+	// t_param *tmp;
+
+	// tmp = param;
+	// tmp->type = CMD;
+	// tmp = tmp->next;
+	// tmp->type=ARG;
+	// tmp->next->type = PIPE;
+	while (param)
+	{
+		if (param && !is_built_in(param, env))
+			return ;
+		else
+		{
+			// ft_putstr_fd(param->content, 2);
+			param = try_exec (env, param);
+			// ft_putstr_fd("not implemented yet,but soon ;-)\n", 1);
+		}
+	}
 }

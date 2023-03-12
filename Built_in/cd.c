@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 02:48:20 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/09 14:33:33 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/09 16:11:50 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static t_env	*cd_old_pwd(t_env	*env)
 	if (env_search(env, "OLDPWD=")->content)
 		free (env_search(env, "OLDPWD=")->content);
 	tmp = env_search(env, "OLDPWD=");
-	tmp->content = strdup(env_search(env, "PWD=")->content);
+	tmp->content = ft_strdup(env_search(env, "PWD=")->content);
 	return (env);
 }
 
@@ -44,10 +44,10 @@ t_env	*cd(t_env *env, char *str)
 	}
 	else
 	{
-		ft_putstr_fd("Minishell : cd : ", 1);
-		ft_putstr_fd(strerror(errno), 1);
-		write (1, "\n", 1);
-		  g_return_value = 1;
+		ft_putstr_fd("Minishell : cd : ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		write (1, "\n", 2);
+		g_return_value = 1;
 	}
 	return (env);
 }
