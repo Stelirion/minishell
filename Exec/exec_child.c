@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:33:35 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/12 15:07:11 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/13 14:47:46 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,16 @@
 static void	child(t_env *ebv, t_param *param);
 static char	**arg_array(t_env *env, t_param *param);
 
-t_param	*try_exec(t_env *env, t_param *param)
+int	try_exec(t_env *env, t_param *param)
 {
 	int	res_fork;
 
 	res_fork = fork();
 	if (res_fork == -1)
-		return (ft_putstr_fd("fork failed\n", 2), param);
+		return (ft_putstr_fd("fork failed\n", 2), -1);
 	if (res_fork == 0)
 		child(env, param);
-	else
-		waitpid(res_fork, 0, 0);
-	return (param->next);
+	return (res_fork);
 }
 
 static void	child(t_env *env, t_param *param)
@@ -39,7 +37,7 @@ static void	child(t_env *env, t_param *param)
 
 	tmp = ft_split(env_search(env, "PATH=")->content, ':');
 	i = -1;
-	arg = arg_array(env, param->next);
+	arg = arg_array(env, param);
 	env_a = env_to_array(env, param->next);
 	while (tmp[++i])
 	{
@@ -58,16 +56,31 @@ static void	child(t_env *env, t_param *param)
 	end_of_prog_exit(env, param, 2);
 }
 
+static size_t	param_lstsize_arg(t_param *param)
+{
+	size_t	i;
+
+	i = 0;
+	while (param && (param->type == CMD || param->type == ARG))
+	{
+		i++;
+		param = param->next;
+	}
+	return (i);
+}
+
 static char	**arg_array(t_env *env, t_param *param)
 {
 	char	**str;
 	char	*tmp;
 	size_t	i;
 
-	i = 0;
-	str = malloc(sizeof(char *) * (param_lstsize(param) + 1));
+	i = 1;
+	str = malloc(sizeof(char *) * (param_lstsize_arg(param) + 1));
 	if (!str)
 		error_handler(130, env, param);
+	str[0] = ft_strdup(param->content);
+	param = param->next;
 	while (param && param->type == ARG)
 	{
 		tmp = ft_strdup(param->content);
@@ -78,5 +91,6 @@ static char	**arg_array(t_env *env, t_param *param)
 		i++;
 	}
 	str[i] = NULL;
+	i = -1;
 	return (str);
 }

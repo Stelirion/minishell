@@ -6,13 +6,11 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/12 16:11:02 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/13 13:22:19 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Tools/Libft/libft.h"
 #include "minishell.h"
-#include <readline/history.h>
 
 void	print_params(t_param *list)
 {

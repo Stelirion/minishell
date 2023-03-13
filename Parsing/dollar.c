@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:18:10 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/07 19:45:00 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/13 13:36:57 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ char	*handle_dollar(char *str, t_env *env)
 
 	if (ft_strcmp("$?", str))
 	{
-		ft_putnbr_fd(g_global, 2);
+		ft_putnbr_fd(g_return_value, 2);
 		ft_putstr_fd(": command not found\n", 2);
-		g_global = 127;
+		g_return_value = 127;
 		return (ft_strdup(""));
 	}
 	str++;
