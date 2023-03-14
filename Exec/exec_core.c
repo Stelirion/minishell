@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/13 15:06:13 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/14 13:42:10 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,19 @@ int	is_built_in(t_param	*param, t_env *env)
 void	exec_core(t_param	*param, t_env *env)
 {
 	int	res_fork;
+	int	i;
 
-	first_pipe(env, param);
-	param->type = INFILE;
-	param->next->type = CMD;
+	// first_pipe(env, param);
+	param->type = CMD;
+	param->next->type = ARG;
 	// param->next->next->type = CMD;
 	// param->next->next->next->type = ARG;
 	// param->next->next->type = CMD;
 	// param->next->next->next->type = ARG;
+	i = 0;
 	while (param)
 	{
+		ft_pipe()
 		while (param && param->type != CMD)
 			param = param->next;
 		if (!param)
@@ -84,6 +87,7 @@ void	exec_core(t_param	*param, t_env *env)
 		}
 		param = param->next;
 	}
+	i++;
 	if (res_fork != -1)
 		waitpid(res_fork, 0, 0);
 }

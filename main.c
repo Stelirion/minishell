@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/13 13:22:19 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/14 13:18:23 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,22 +52,21 @@ int	main(int argc, char **argv, char **envp)
 	header();
 	while (1)
 	{
-		ft_putstr_fd("\x1B[34;1m Minishell : ", 1);
 		tmp = last_str(env);
-		line = ft_strjoin ("\x1B[35m", tmp);
+		line = ft_strjoin ("\x1B[34;1m Minishell : \x1B[35m", tmp);
 		free(tmp);
-		ft_putstr_fd(line, 1);
-		ft_putstr_fd ("\x1B[0m :", 1);
-		free (line);
-		line = readline(" ");
+		tmp = ft_strjoin (line, "\x1B[0m : ");
+		free(line);
+		line = readline(tmp);
+		free(tmp);
 		param = NULL;
 		param = parsing_core(line, param);
+		add_history(line);
+		free(line);
 		if (param)
 			exec_core(param, env);
 		else
 			ft_putstr_fd ("Error, invalid format\n", 1);
 		param_lstclear(&param);
-		add_history(line);
-		free(line);
 	}
 }
