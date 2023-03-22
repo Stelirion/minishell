@@ -6,17 +6,62 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 21:01:11 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/07 21:19:39 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/22 04:36:37 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+size_t	split_token(char *line, size_t start)
+{
+	size_t	i;
+
+	i = start;
+	(void)line;
+	while (line[i + 1] != ' ' && line[i + 1])
+	{
+		i++;
+	}
+	return (i);
+}
+
+char	*manage_quote(char *token)
+{
+	size_t	i;
+	int		type;
+	char	*new;
+
+	i = 0;
+	type = 0;
+	new = malloc(sizeof(char));
+	new[0] = '\0';
+	while (token[i])
+	{
+		if (token[i] == '\'' && type == 1)
+			type = 0;
+		else if (token[i] == '\'' && type == 0)
+			type = 1;
+		else if (token[i] == '"' && type == 2)
+			type = 0;
+		else if (token[i] == '"' && type == 0)
+			type = 2;
+		else
+			new = ft_straddback(new, token[i]);
+		i++;
+	}
+	if (type != 0)
+	{
+		free (new);
+		new = NULL;
+	}
+	return (free (token), new);
+}
+
 t_param	*parsing_core(char *line, t_param *param)
 {
 	size_t	i;
 	size_t	start;
-	char	*new_str;
+	char	*next_token;
 	t_param	*new_lst;
 
 	i = 0;
@@ -27,40 +72,12 @@ t_param	*parsing_core(char *line, t_param *param)
 		if (!line[i])
 			break ;
 		start = i;
-		if (line[i] == '\'')
-		{
-			i++;
-			while (line[i] && line[i] != '\'')
-				i++;
-			if (!line[i] && line[i] != '\'')
-			{
-				param_lstclear(&param);
-				return (param);
-			}
-			new_str = ft_substr(line, start + 1, i - start - 1);
-		}
-		else if (line[i] == '"')
-		{
-			i++;
-			while (line[i] && line[i] != '"')
-				i++;
-			if (!line[i] && line[i] != '"')
-			{
-				param_lstclear(&param);
-				return (param);
-			}
-			new_str = ft_substr(line, start + 1, i - start - 1);
-		}
-		else
-		{
-			while (line[i + 1] && line[i + 1] != ' '
-				&& line[i + 1] != '\'' && line[i + 1] != '"')
-				i++;
-			new_str = ft_substr(line, start, i - start + 1);
-		}
-		i++;
-		new_lst = param_lstnew(new_str);
+		i = split_token(line, start);
+		next_token = ft_substr(line, start, i + 1 - start);
+		next_token = manage_quote(next_token);
+		new_lst = param_lstnew(next_token);
 		param_lstadd_back(&param, new_lst);
+		i++;
 	}
 	return (param);
 }

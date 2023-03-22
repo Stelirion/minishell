@@ -45,13 +45,14 @@ SRCS	=	main.c\
 			Parsing/readline.c\
 			Parsing/param_lstsize.c\
 			\
-			Exec/exec_core.c\
-			Exec/param_to_string.c\
-			Exec/exec_child.c\
-			Exec/pipe.c\
-			\
 			ft_split_shell.c\
 			nice_thing.c\
+			\
+			Exec/param_to_string.c\
+			#Exec/exec_core.c\
+			#Exec/exec_child.c\
+			#Exec/pipe.c\
+			
 
 
 

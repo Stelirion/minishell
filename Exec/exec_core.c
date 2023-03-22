@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_core.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/14 13:42:10 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/22 02:21:20 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	exec_core(t_param	*param, t_env *env)
 	i = 0;
 	while (param)
 	{
-		ft_pipe()
+		ft_pipe();
 		while (param && param->type != CMD)
 			param = param->next;
 		if (!param)
