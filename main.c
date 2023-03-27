@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/28 00:27:16 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 01:27:31 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ int	main(int argc, char **argv, char **envp)
 		free(line);
 		if (param)
 		{
-			// print_params(param);
-			exec_core(param, env);
+			print_params(param);
+			// exec_core(param, env);
 		}
 		else
 			ft_putstr_fd ("Error, invalid format\n", 1);
