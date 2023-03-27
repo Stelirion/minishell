@@ -49,9 +49,9 @@ SRCS	=	main.c\
 			nice_thing.c\
 			\
 			Exec/param_to_string.c\
-			#Exec/exec_core.c\
-			#Exec/exec_child.c\
-			#Exec/pipe.c\
+			Exec/exec_core.c\
+			Exec/exec_child.c\
+			Exec/pipe.c\
 			
 
 
