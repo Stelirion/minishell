@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 21:01:11 by ngennaro          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/03/28 08:41:28 by ngennaro         ###   ########lyon.fr   */
-=======
-/*   Updated: 2023/03/28 01:48:19 by mbrement         ###   ########lyon.fr   */
->>>>>>> e2d9faf795537c78a3f128be87895034120bf6b2
+/*   Created: 2023/03/28 08:51:30 by ngennaro          #+#    #+#             */
+/*   Updated: 2023/03/28 08:51:37 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

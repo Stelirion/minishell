@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param_lstnew.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:55:33 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/09 14:38:13 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 08:52:12 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ t_param	*param_lstnew(char *content)
 		new->content = NULL;
 	}
 	new->next = NULL;
+
 	return (new);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param_lstsize.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:33:22 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/04 16:34:16 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 08:52:05 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ size_t	param_lstsize(t_param *lst)
 		if (index->next == NULL)
 			return (i + 1);
 	}
+
 	return (1);
 }
