@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 13:21:26 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/22 04:35:33 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 07:55:25 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 	j = 0;
 	if (!s1 || !s2)
 		return (NULL);
-	str = malloc(sizeof(char) * (ft_strlen(s1) + 2));
+	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!str)
 		return (NULL);
 	while (s1[i])
@@ -30,8 +30,12 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 		str[i] = s1[i];
 		i ++;
 	}
-	str[i] = s2;
-	i++;
+	while (s2[j])
+	{
+		str[i] = s2[j];
+		i++;
+		j++;
+	}
 	str[i] = '\0';
 	free((void *)s1);
 	return (str);

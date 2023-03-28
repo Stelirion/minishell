@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 21:01:11 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/22 04:36:37 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 08:41:28 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,7 @@ char	*manage_quote(char *token)
 		i++;
 	}
 	if (type != 0)
-	{
-		free (new);
-		new = NULL;
-	}
+		return (free (new),free (token), NULL);
 	return (free (token), new);
 }
 
@@ -75,6 +72,8 @@ t_param	*parsing_core(char *line, t_param *param)
 		i = split_token(line, start);
 		next_token = ft_substr(line, start, i + 1 - start);
 		next_token = manage_quote(next_token);
+		if (!next_token)
+			return (free(param), NULL);
 		new_lst = param_lstnew(next_token);
 		param_lstadd_back(&param, new_lst);
 		i++;
