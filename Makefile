@@ -44,6 +44,7 @@ SRCS	=	main.c\
 			Parsing/param_lstnew.c\
 			Parsing/readline.c\
 			Parsing/param_lstsize.c\
+			Parsing/type.c\
 			\
 			ft_split_shell.c\
 			nice_thing.c\
