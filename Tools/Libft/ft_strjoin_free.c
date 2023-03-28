@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 08:53:22 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/28 08:53:25 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 09:04:17 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,8 @@ char	*ft_strjoin_free(char const *s1, char const *s2)
 	while (s2[j])
 	{
 		str[i] = s2[j];
-<<<<<<< HEAD
 		i++;
 		j++;
-=======
-		j ++;
-		i ++;
->>>>>>> e2d9faf795537c78a3f128be87895034120bf6b2
 	}
 	str[i] = '\0';
 	free((void *)s1);
