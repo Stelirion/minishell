@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/28 09:30:13 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 11:46:34 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	**param_to_array(t_env *env, t_param *param);
 char	**env_to_array(t_env *env, t_param *param);
 int		try_exec(t_env *env, t_param *param);
 int		*first_pipe(t_env *env, t_param *param);
-int		*ft_pipe(t_param param, t_env env);
+t_pipe *ft_pipe(t_param *param, int nb, t_pipe *pipe);
 
 ///BUILT_IN
 void	pwd(void);
@@ -107,7 +107,7 @@ t_param	*param_lstnew(char *content);
 void	param_lstclear(t_param **lst);
 size_t	param_lstsize(t_param *lst);
 void	type_setting(t_param *param);
-
+size_t	param_lstsize_nb_arg(t_param *lst);
 
 
 //TEMPORARY

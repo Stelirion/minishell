@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:30:05 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/22 04:16:35 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 11:07:43 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ int		ft_strcmp(const char *s1, const char *s2);
 
 char	*ft_strjoin_free(char const *s1, char const *s2);
 char	*ft_straddback(char const *s1, char const s2);
+void	ft_print_tab(char **str);
 
 #endif

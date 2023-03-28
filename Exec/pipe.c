@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:45:13 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/14 15:21:24 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 13:53:15 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,25 @@ void	ft_piped(int arg_nb, int *pipefd, int *fd)
 	}
 }
 
-int *ft_pipe(t_param param, t_env env)
+t_pipe	*ft_pipe(t_param *param, int nb, t_pipe *pipe)
 {
-	(void) param;
-	(void) env;
-	return 0;
+	int		i;
+	// char	*infile;
+	// char	*outfile;
+	t_param	*tmp;
+
+	i = 0;
+	tmp = param;
+	while (i != nb)
+	{
+		if (tmp->type == PIPE)
+			i++;
+		if (!tmp)
+			return (pipe);
+		tmp = tmp->next;
+	}
+
+	return (pipe);
 }
 /*
 int	pipex_core(char **argv, int arg_nb, char **envp, int *fd)

@@ -1,31 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   nice_thing.c                                       :+:      :+:    :+:   */
+/*   ft_print_tab.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/07 14:15:46 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/28 14:04:35 by mbrement         ###   ########lyon.fr   */
+/*   Created: 2023/03/28 11:07:00 by mbrement          #+#    #+#             */
+/*   Updated: 2023/03/28 11:09:17 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-#include "Tools/Libft/libft.h"
+#include "libft.h"
 
-char	*last_str(t_env *env)
+void	ft_print_tab(char **str)
 {
-	char	**tmp;
-	char	*str;
 	size_t	i;
 
-	i = 0;
-	tmp = ft_split(env_search(env, "PWD=")->content, '/');
-	if (!tmp)
-		return ("");
-	while (tmp[i])
-		i++;
-	str = ft_strdup(tmp[i - 1]);
-	free_tab(tmp);
-	return (str);
+	i = -1;
+	while (str[++i])
+		ft_putstr_fd(str[i], 1);
 }

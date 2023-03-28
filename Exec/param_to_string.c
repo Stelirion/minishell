@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 11:14:28 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/12 11:51:20 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 11:11:12 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	**env_to_array(t_env *env, t_param *param)
 		error_handler(130, env, param);
 	while (env)
 	{
-		tmp = ft_strdup(env->content);
+		tmp = ft_strjoin(env->name, env->content);
 		if (!tmp)
 			error_handler(130, env, param);
 		str[i] = tmp;

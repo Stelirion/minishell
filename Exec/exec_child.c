@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:33:35 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/13 14:47:46 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 11:21:56 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	try_exec(t_env *env, t_param *param)
 	res_fork = fork();
 	if (res_fork == -1)
 		return (ft_putstr_fd("fork failed\n", 2), -1);
-	if (res_fork == 0)
+	else if (res_fork == 0)
 		child(env, param);
 	return (res_fork);
 }
@@ -39,11 +39,20 @@ static void	child(t_env *env, t_param *param)
 	i = -1;
 	arg = arg_array(env, param);
 	env_a = env_to_array(env, param->next);
-	while (tmp[++i])
+	if (ft_strchr(param->content, '/'))
 	{
-		cmd[0] = ft_strjoin(tmp[i], "/");
+		cmd[0] = ft_strjoin(env_search(env, "PWD=")->content, "/");
 		cmd[1] = ft_strjoin(cmd[0], param->content);
 		execve(cmd[1], arg, env_a);
+	}
+	else
+	{
+		while (tmp[++i])
+		{
+			cmd[0] = ft_strjoin(tmp[i], "/");
+			cmd[1] = ft_strjoin(cmd[0], param->content);
+			execve(cmd[1], arg, env_a);
+		}
 		free(cmd[0]);
 		free(cmd[1]);
 	}
