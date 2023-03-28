@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/14 13:43:12 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 00:49:14 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	**param_to_array(t_env *env, t_param *param);
 char	**env_to_array(t_env *env, t_param *param);
 int		try_exec(t_env *env, t_param *param);
 int		*first_pipe(t_env *env, t_param *param);
-int		*ft_pipe (t_param *param, t_env *env);
+int		*ft_pipe(t_param param, t_env env);
 
 ///BUILT_IN
 void	pwd(void);

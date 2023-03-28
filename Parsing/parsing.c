@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 21:01:11 by ngennaro          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/03/28 08:41:28 by ngennaro         ###   ########lyon.fr   */
+=======
+/*   Updated: 2023/03/28 01:48:19 by mbrement         ###   ########lyon.fr   */
+>>>>>>> e2d9faf795537c78a3f128be87895034120bf6b2
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +21,6 @@ size_t	split_token(char *line, size_t start)
 	size_t	i;
 
 	i = start;
-	(void)line;
 	while (line[i + 1] != ' ' && line[i + 1])
 	{
 		i++;

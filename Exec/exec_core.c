@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_core.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/22 02:21:20 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/28 01:14:56 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,29 +62,20 @@ void	exec_core(t_param	*param, t_env *env)
 	int	res_fork;
 	int	i;
 
-	// first_pipe(env, param);
-	param->type = CMD;
-	param->next->type = ARG;
-	// param->next->next->type = CMD;
-	// param->next->next->next->type = ARG;
-	// param->next->next->type = CMD;
-	// param->next->next->next->type = ARG;
 	i = 0;
 	while (param)
 	{
-		ft_pipe();
 		while (param && param->type != CMD)
 			param = param->next;
 		if (!param)
-			break;
+		{
+			ft_putstr_fd("No command find\n", 2);
+			break ;
+		}
 		if (param && !is_built_in(param, env))
 			return ;
 		else
-		{
-			// ft_putstr_fd(param->content, 2);
 			res_fork = try_exec (env, param);
-			// ft_putstr_fd("not implemented yet,but soon ;-)\n", 1);
-		}
 		param = param->next;
 	}
 	i++;

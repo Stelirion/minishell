@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/09 14:36:32 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/14 15:24:11 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ char	**env_split(char **env, int nb)
 	char			**rtn;
 	size_t			max;
 	size_t			stop;
-	char 			*tmp;
+	char			*tmp;
 
 	i = 0;
 	rtn = malloc(sizeof(char *) * 2);
