@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/28 11:11:55 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 14:20:53 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,17 @@ int	main(int argc, char **argv, char **envp)
 		free(tmp);
 		param = NULL;
 		param = parsing_core(line, param);
-		add_history(line);
-		free(line);
+		if (line[0] != '\0')
+			add_history(line);
 		if (param)
 		{
 			type_setting(param);
 			print_params(param);
 			exec_core(param, env);
 		}
-		else
+		else if (line[0] != '\0')
 			ft_putstr_fd ("Error, invalid format\n", 1);
+		free(line);
 		param_lstclear(&param);
 	}
 }
