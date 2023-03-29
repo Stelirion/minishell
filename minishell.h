@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/28 11:46:34 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 13:38:28 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <stdio.h>
+# include <sys/stat.h>
 
 typedef struct s_env
 {
@@ -86,7 +87,7 @@ char	**param_to_array(t_env *env, t_param *param);
 char	**env_to_array(t_env *env, t_param *param);
 int		try_exec(t_env *env, t_param *param);
 int		*first_pipe(t_env *env, t_param *param);
-t_pipe *ft_pipe(t_param *param, int nb, t_pipe *pipe);
+t_pipe *ft_pipe(t_param *param,t_pipe *pipe);
 
 ///BUILT_IN
 void	pwd(void);
