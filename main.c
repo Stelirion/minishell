@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/29 14:20:53 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 14:29:30 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 void	print_params(t_param *list)
 {
+	printf("_____Debug_____\n");
 	while (list)
 	{
 		printf("%s | %i\n", list->content, list->type);
 		list = list->next;
 	}
+	printf("_______________\n\n");
 }
 
 void	header(void)
