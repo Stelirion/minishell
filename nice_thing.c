@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:15:46 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/28 14:04:35 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 13:06:15 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ char	*last_str(t_env *env)
 	size_t	i;
 
 	i = 0;
-	tmp = ft_split(env_search(env, "PWD=")->content, '/');
-	if (!tmp)
+	if (env_search(env, "PWD=")->content)
+		tmp = ft_split(env_search(env, "PWD=")->content, '/');
+	if (!tmp || tmp[0][0] == '\0')
 		return ("");
 	while (tmp[i])
 		i++;

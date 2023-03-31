@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/29 13:38:42 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 13:18:07 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,26 +60,53 @@ int	is_built_in(t_param	*param, t_env *env)
 void	exec_core(t_param	*param, t_env *env)
 {
 	int		res_fork;
-	t_pipe	*pipe;
+	int		pipe_fnd;
+	t_param	*tmp;
+	// t_pipe	*spipe;
 
+	// pipe(spipe->second);
+	// spipe->first[0] = 0;
+	// spipe->first[1] = 1;
+	// spipe->counter = 0;
 	while (param)
 	{
+		pipe_fnd = -1;
+		// pipe->first[0] = 0;
+		// pipe->first[1] = 1;
+		// pipe->counter++;
 		while (param && param->type != CMD)
 			param = param->next;
-		pipe = ft_pipe(param, pipe);
-		if (!param)
+		tmp = param;
+		while (tmp)
 		{
-			ft_putstr_fd("No command find\n", 2);
-			break ;
+			if (tmp->type == PIPE)
+			{
+				pipe_fnd = fork();
+				break ;
+			}
+			tmp = tmp->next;
+			pipe_fnd = -2;
 		}
-		if (param && !is_built_in(param, env))
-			return ;
-		else
-			res_fork = try_exec (env, param);
+		if (pipe_fnd == 0 || pipe_fnd == -2)
+		{
+			// pipe = ft_pipe(param, env, pipe);
+			if (!param)
+			{
+				if (!res_fork)
+					ft_putstr_fd("No command found\n", 2);
+				break ;
+			}
+			if (param && !is_built_in(param, env))
+				;
+			else
+				res_fork = try_exec (env, param);
+		}
+		if (pipe_fnd == 0)
+			end_of_prog_exit(env, param, g_return_value);
 		param = param->next;
 	}
+	if (pipe_fnd)
+		waitpid(pipe_fnd, 0, 0);
 	if (res_fork != -1)
 		waitpid(res_fork, 0, 0);
-	else if (res_fork == 0)
-		end_of_prog_exit(env, param, g_return_value);
 }

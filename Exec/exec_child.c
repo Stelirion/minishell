@@ -6,14 +6,11 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:33:35 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/29 12:53:32 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/29 14:56:43 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <string.h>
-#include <sys/stat.h>
-#include <unistd.h>
 
 static void	child(t_env *ebv, t_param *param);
 static char	**arg_array(t_env *env, t_param *param);
@@ -65,7 +62,6 @@ static void	child(t_env *env, t_param *param)
 	}
 	else
 	{
-
 		cmd[0] = ft_strjoin(env_search(env, "PWD=")->content, "/");
 		cmd[1] = ft_strjoin(cmd[0], param->content);
 		if (access(cmd[1], X_OK))

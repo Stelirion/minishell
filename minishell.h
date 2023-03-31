@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/29 13:38:28 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 11:55:42 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_pipe
 {
 	int	first[2];
 	int	second[2];
+	int	counter;
 }					t_pipe;
 
 int	g_return_value;
@@ -87,7 +88,7 @@ char	**param_to_array(t_env *env, t_param *param);
 char	**env_to_array(t_env *env, t_param *param);
 int		try_exec(t_env *env, t_param *param);
 int		*first_pipe(t_env *env, t_param *param);
-t_pipe *ft_pipe(t_param *param,t_pipe *pipe);
+t_pipe *ft_pipe(t_param *param, t_env *env, t_pipe *pipe);
 
 ///BUILT_IN
 void	pwd(void);

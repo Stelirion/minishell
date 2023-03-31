@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 09:14:11 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/28 14:08:53 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 17:39:46 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,7 @@ void	type_setting(t_param *param)
 	param = param->next;
 	while (param)
 	{
-		if (next == 1)
-		{
-			param->type = CMD;
-			next = 0;
-		}
-		else if (param->content[0] == '|')
+		if (param->content[0] == '|')
 		{
 			param->type = PIPE;
 			next = 1;
@@ -45,9 +40,13 @@ void	type_setting(t_param *param)
 			param->type = OUTFILE;
 			next = 1;
 		}
+		else if (next == 1)
+		{
+			param->type = CMD;
+			next = 0;
+		}
 		else
 			param->type = ARG;
 		param = param->next;
-		
 	}
 }

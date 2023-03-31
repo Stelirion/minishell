@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:45:13 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/29 13:42:33 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 13:18:21 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,48 @@ void	ft_piped(int arg_nb, int *pipefd, int *fd)
 	}
 }
 
-t_pipe	*ft_pipe(t_param *param, t_pipe *pipe)
+t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *s_pipe)
 {
-	int		i;
-	// char	*infile;
-	// char	*outfile;
+	
+	if (pipe(s_pipe->second) == -1)
+	{
+		printf("Pipe failed\n");
+		end_of_prog_exit(env, param, 130);
+	}
+	return (NULL);
+}
+
+t_pipe	*ft_pipe2(t_param *param, t_env *env, t_pipe *pipe)
+{
+	char	*str;
 	t_param	*tmp;
 
-	i = 0;
 	tmp = param;
-	while (tmp)
+	pipe->second[0] = 1;
+	pipe->second[1] = 0;
+	while (tmp && tmp->type != PIPE)
 	{
-		if (tmp->type == PIPE)
-			i++;
+		if (tmp->type == INFILE)
+		{
+			str = ft_strjoin(env_search(env, "PWD=")->content, param->content);
+			if (!str)
+				error_handler(130, env, param);
+			pipe->first[0] = open(str, O_RDONLY);
+			free(str);
+		}
+		if (tmp->type == OUTFILE)
+		{
+			str = ft_strjoin(env_search(env, "PWD=")->content, param->content);
+			if (!str)
+				error_handler(130, env, param);
+			pipe->first[1] = open (str, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+			free(str);
+		}
 		tmp = tmp->next;
 	}
-	// if ()
+	ft_piped(pipe->counter, pipe->first, pipe->second);
+	pipe->second[0] = pipe->first[0];
+	pipe->second[1] = pipe->first [1];
 	return (pipe);
 }
 /*

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 08:51:30 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/28 08:51:37 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/03/30 16:04:45 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_param	*parsing_core(char *line, t_param *param)
 	t_param	*new_lst;
 
 	i = 0;
-	while (line[i])
+	while (line && line[i])
 	{
 		while (line[i] == ' ')
 			i++;
