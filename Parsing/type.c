@@ -3,20 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   type.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 09:14:11 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/30 17:39:46 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 17:02:14 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	type_setting(t_param *param)
+t_param	*type_setting(t_param *param)
 {
 	int		next;
+	t_param *init;
 
 	next = 0;
+	init = param;
 	param->type = CMD;
 	param = param->next;
 	while (param)
@@ -29,16 +31,24 @@ void	type_setting(t_param *param)
 		else if (param->content[0] == '<')
 		{
 			param->type = 9;
+			if (!param->next)
+			{
+				param_lstclear(&init);
+				return(NULL);
+			}
 			param = param->next;
 			param->type = INFILE;
-			next = 1;
 		}
 		else if (param->content[0] == '>')
 		{
 			param->type = 9;
+			if (!param->next)
+			{
+				param_lstclear(&init);
+				return(NULL);
+			}
 			param = param->next;
 			param->type = OUTFILE;
-			next = 1;
 		}
 		else if (next == 1)
 		{
@@ -49,4 +59,5 @@ void	type_setting(t_param *param)
 			param->type = ARG;
 		param = param->next;
 	}
+	return(init);
 }

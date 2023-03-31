@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/30 16:05:57 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/03/31 17:00:02 by ngennaro         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	print_params(t_param *list)
 	printf("_____Debug_____\n");
 	while (list)
 	{
-		printf("%s | %i\n", list->content, list->type);
+		printf("%s|%i\n", list->content, list->type);
 		list = list->next;
 	}
 	printf("_______________\n\n");
@@ -66,13 +66,14 @@ int	main(int argc, char **argv, char **envp)
 		if (line && line[0] != '\0')
 			add_history(line);
 		if (param)
-		{
-			type_setting(param);
-			print_params(param);
-			exec_core(param, env);
-		}
+			param = type_setting(param);
 		else if (line && line[0] != '\0')
 			ft_putstr_fd ("Error, invalid format\n", 1);
+		if (param)	
+			print_params(param);
+			//exec_core(param, env);
+		else if (line && line[0] != '\0')
+			ft_putstr_fd ("Error, missing infile/outfile\n", 1);
 		free(line);
 		param_lstclear(&param);
 	}
