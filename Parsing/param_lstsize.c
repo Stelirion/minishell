@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:33:22 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/28 10:43:52 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 16:39:26 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ size_t	param_lstsize_nb_arg(t_param *lst)
 	{
 		if (index->type == ARG)
 			i++;
-		if (index->next == NULL)
+		if (index->next == NULL || index->next->type == PIPE)
 			return (i);
 		index = index->next;
 	}

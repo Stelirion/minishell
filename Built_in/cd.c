@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 02:48:20 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/09 16:11:50 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 16:33:30 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,13 @@ static t_env	*cd_old_pwd(t_env	*env)
 
 t_env	*cd(t_env *env, char *str)
 {
-	if (!str || !ft_strlen(str))
+	if (!str)
 		return (env);
+	if (ft_strlen(str) == 0)
+	{
+		free(env_search(env, "PWD=")->content);
+		env_search(env, "PWD=")->content = ft_strdup("/");
+	}
 	else if (chdir(str) != -1)
 	{
 		env = cd_old_pwd(env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_straddback.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 13:21:26 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/22 04:33:19 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/04/04 15:47:44 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_straddback(char const *s1, char const s2)
 	if (!s1)
 	{
 		s1 = malloc(sizeof(char));
-		s1 = '\0';
+		s1 = "\0";
 	}
 	str = malloc(sizeof(char) * (ft_strlen(s1) + 2));
 	if (!str)

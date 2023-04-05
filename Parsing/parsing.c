@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 08:51:30 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/31 16:51:43 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/04/05 19:41:17 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ size_t	split_token(char *line, size_t start)
 	i = start;
 	status = 0;
 	if (line[i] == '|' || line[i] == '>' || line[i] == '<')
-		return(i + 1);
+		return (i + 1);
 	while (line[i])
 	{
 		status = get_status(line[i], status);
 		if (status == 0 && line[i] == ' ')
-			return(i);
+			return (i);
 		if (status == 0 && line[i] == '|')
-			return(i);
+			return (i);
 		if (status == 0 && line[i] == '>')
-			return(i);
+			return (i);
 		if (status == 0 && line[i] == '<')
-			return(i);
+			return (i);
 		i++;
 	}
 	return (i);
@@ -71,12 +71,14 @@ char	*manage_quote(char *token)
 			type = 0;
 		else if (token[i] == '"' && type == 0)
 			type = 2;
+		//else if (token[i] == '$' && type != 1)
+		//	new = new + value dans l'env (si pas d'env free all et return error)
 		else
 			new = ft_straddback(new, token[i]);
 		i++;
 	}
 	if (type != 0)
-		return (free (new),free (token), NULL);
+		return (free (new), free (token), NULL);
 	return (free (token), new);
 }
 

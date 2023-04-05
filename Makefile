@@ -47,7 +47,7 @@ SRCS	=	main.c\
 			Parsing/type.c\
 			\
 			ft_split_shell.c\
-			nice_thing.c\
+			misc.c\
 			\
 			Exec/param_to_string.c\
 			Exec/exec_core.c\

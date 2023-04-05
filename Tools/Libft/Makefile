@@ -48,6 +48,7 @@ SRCS	= 	ft_atoi.c \
 				ft_strjoin_free.c\
 				ft_straddback.c\
 				ft_print_tab.c\
+				ft_lstfree.c\
 
 HEADERS		=	libft.h
 OBJS		= ${SRCS:.c=.o}
