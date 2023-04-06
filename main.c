@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/05 19:29:13 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 18:15:24 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,9 @@ int	main(int argc, char **argv, char **envp)
 			add_history(line);
 		if (param)
 			param = type_setting(param);
-		else if (line && line[0] != '\0')
-			ft_putstr_fd ("Error, invalid format\n", 1);
-		if (param)	
+		if (param)
 			// print_params(param);
-			exec_core(param, env);
-		else if (line && line[0] != '\0')
-			ft_putstr_fd ("Error, missing infile/outfile\n", 1);
-		
+			exec_core(param, env);		
 		free(line);
 		param_lstclear(&param);
 	}

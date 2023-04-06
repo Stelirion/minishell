@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 08:51:30 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/05 19:41:17 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 18:17:52 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,17 @@ size_t replace_value(size_t i, char **new, char *token, t_env *env)
 			break;
 		to_change = ft_straddback(to_change, token[i]);
 		if (!to_change)
-			return(free(*new), 0);
+			return(parsing_error(0), free(*new), 0);
 	}
 	to_change = ft_straddback(to_change, '=');
 	if (!to_change)
-		return(free(*new), 0);
+		return(parsing_error(0), free(*new), 0);
 	env_value = env_search(env, to_change);
 	if (!env_value)
 	{
 		free(*new);
 		*new = NULL;
-		return(0);
+		return(parsing_error(1), 0);
 	}
 	*new = ft_strjoin_free(*new, env_value->content);
 	return (i - 1);
@@ -112,7 +112,7 @@ char	*manage_quote(char *token, t_env *env)
 		i++;
 	}
 	if (type != 0)
-		return (free (new), free (token), NULL);
+		return (parsing_error(3), free (new), free (token), NULL);
 	return (free (token), new);
 }
 
@@ -135,7 +135,8 @@ t_param	*parsing_core(char *line, t_param *param, t_env	*env)
 		start = i;
 		i = split_token(line, start);
 		next_token = ft_substr(line, start, i - start);
-		printf("%s, split\n\n", next_token);
+		if (!next_token)
+			return (parsing_error(0), free(param), NULL);
 		next_token = manage_quote(next_token, env);
 		if (!next_token)
 			return (free(param), NULL);

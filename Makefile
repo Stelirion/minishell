@@ -42,9 +42,9 @@ SRCS	=	main.c\
 			Parsing/param_lstadd_back.c\
 			Parsing/param_lstclear.c\
 			Parsing/param_lstnew.c\
-			Parsing/readline.c\
 			Parsing/param_lstsize.c\
 			Parsing/type.c\
+			Parsing/parsing_error.c\
 			\
 			ft_split_shell.c\
 			misc.c\

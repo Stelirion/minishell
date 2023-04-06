@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 09:14:11 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/03/31 17:02:14 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 18:44:45 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@ t_param	*type_setting(t_param *param)
 		if (param->content[0] == '|')
 		{
 			param->type = PIPE;
+			if (!param->next)
+				return(parsing_error(2), param_lstclear(&init), NULL);
 			next = 1;
 		}
 		else if (param->content[0] == '<')
 		{
 			param->type = 9;
 			if (!param->next)
-			{
-				param_lstclear(&init);
-				return(NULL);
-			}
+				return(parsing_error(4), param_lstclear(&init), NULL);
 			param = param->next;
 			param->type = INFILE;
 		}
@@ -43,10 +42,7 @@ t_param	*type_setting(t_param *param)
 		{
 			param->type = 9;
 			if (!param->next)
-			{
-				param_lstclear(&init);
-				return(NULL);
-			}
+				return(parsing_error(5), param_lstclear(&init), NULL);
 			param = param->next;
 			param->type = OUTFILE;
 		}
