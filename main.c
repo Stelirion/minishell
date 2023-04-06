@@ -28,7 +28,7 @@ void	print_params(t_param *list)
 void	header(void)
 {
 	ft_putstr_fd ("\x1B[32;1m  ____    ____   _             _  ", 1);
-	ft_putstr_fd ("         __             _   __   \n", 1);
+	ft_putstr_fd ("         __             __   __   \n", 1);
 	ft_putstr_fd (" |_   \\  /   _| (_)           (_)", 1);
 	ft_putstr_fd ("         [  |           [  | [  |  \n", 1);
 	ft_putstr_fd ("   |   \\/   |   __   _ .--.   __ ", 1);
