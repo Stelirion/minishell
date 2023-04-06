@@ -65,7 +65,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!line)
 			return (end_of_prog_exit(env, param, 0), 0);
 		param = NULL;
-		param = parsing_core(line, param);
+		param = parsing_core(line, param, env);
 		if (line && line[0] != '\0')
 			add_history(line);
 		if (param)

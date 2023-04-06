@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_straddback(char const *s1, char const s2)
+char	*ft_straddback(char *s1, char const s2)
 {
 	int		i;
 	char	*str;
@@ -21,11 +21,13 @@ char	*ft_straddback(char const *s1, char const s2)
 	if (!s1)
 	{
 		s1 = malloc(sizeof(char));
-		s1 = "\0";
+		if (!s1)
+			return (NULL);
+		*s1 = 0;
 	}
 	str = malloc(sizeof(char) * (ft_strlen(s1) + 2));
 	if (!str)
-		return (NULL);
+		return (free(s1), NULL);
 	while (s1[i])
 	{
 		str[i] = s1[i];

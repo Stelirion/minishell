@@ -77,7 +77,7 @@ char	*merge_tab_char_add_minus(char **str, char *c);
 int		ft_strcmp(const char *s1, const char *s2);
 
 char	*ft_strjoin_free(char const *s1, char const *s2);
-char	*ft_straddback(char const *s1, char const s2);
+char	*ft_straddback(char *s1, char const s2);
 void	ft_print_tab(char **str);
 
 #endif

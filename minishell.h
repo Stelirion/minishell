@@ -103,7 +103,7 @@ void	export_handler(t_param *param, t_env *env);
 void	error_handler(int name, t_env *env, t_param *param);
 
 ///PARSING
-t_param	*parsing_core(char *line, t_param *param);
+t_param	*parsing_core(char *line, t_param *param, t_env *env);
 void	param_lstadd_back(t_param **lst, t_param *next);
 t_param	*param_lstnew(char *content);
 void	param_lstclear(t_param **lst);

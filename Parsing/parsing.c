@@ -51,7 +51,37 @@ size_t	split_token(char *line, size_t start)
 	return (i);
 }
 
-char	*manage_quote(char *token)
+size_t replace_value(size_t i, char **new, char *token, t_env *env)
+{
+	char *to_change;
+	t_env *env_value;
+
+	to_change = 0;
+	env_value = NULL;
+	while (token[i])
+	{
+		i++;
+		if (token[i] == '"' || token[i] == ' ' || token[i] == '<' || token[i] == '>' || token[i] == '|')
+			break;
+		to_change = ft_straddback(to_change, token[i]);
+		if (!to_change)
+			return(free(*new), 0);
+	}
+	to_change = ft_straddback(to_change, '=');
+	if (!to_change)
+		return(free(*new), 0);
+	env_value = env_search(env, to_change);
+	if (!env_value)
+	{
+		free(*new);
+		*new = NULL;
+		return(0);
+	}
+	*new = ft_strjoin_free(*new, env_value->content);
+	return (i - 1);
+}
+
+char	*manage_quote(char *token, t_env *env)
 {
 	size_t	i;
 	int		type;
@@ -71,8 +101,12 @@ char	*manage_quote(char *token)
 			type = 0;
 		else if (token[i] == '"' && type == 0)
 			type = 2;
-		//else if (token[i] == '$' && type != 1)
-		//	new = new + value dans l'env (si pas d'env free all et return error)
+		else if (token[i] == '$' && type != 1)
+		{
+			i = replace_value(i, &new, token, env);
+			if (!new)
+				return(free (token), NULL);
+		}
 		else
 			new = ft_straddback(new, token[i]);
 		i++;
@@ -82,7 +116,7 @@ char	*manage_quote(char *token)
 	return (free (token), new);
 }
 
-t_param	*parsing_core(char *line, t_param *param)
+t_param	*parsing_core(char *line, t_param *param, t_env	*env)
 {
 	size_t	i;
 	size_t	start;
@@ -102,7 +136,7 @@ t_param	*parsing_core(char *line, t_param *param)
 		i = split_token(line, start);
 		next_token = ft_substr(line, start, i - start);
 		printf("%s, split\n\n", next_token);
-		next_token = manage_quote(next_token);
+		next_token = manage_quote(next_token, env);
 		if (!next_token)
 			return (free(param), NULL);
 		new_lst = param_lstnew(next_token);
