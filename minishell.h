@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/06 17:10:27 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 17:51:41 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	param_lstclear(t_param **lst);
 size_t	param_lstsize(t_param *lst);
 t_param	*type_setting(t_param *param);
 size_t	param_lstsize_nb_arg(t_param *lst);
+void    parsing_error(int type);
 
 
 //TEMPORARY
