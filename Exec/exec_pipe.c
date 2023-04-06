@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/06 17:48:06 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 18:17:47 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,14 @@ void	exec_pipe(t_env *env, t_param *param)
 		{
 			while (param && param->type != CMD)
 				param = param->next;
+			if (!param)
+				break ;
 			if (param && is_built_in(param, env) != 1)
 				;
 			else
 				res_fork[0] = try_exec (env, param);
 			param = param->next;
 		}
-		if (res_fork[0] == -2)
-			;
-		else if (res_fork[0] != -1)
-			waitpid(res_fork[0], 0, 0);
 		end_of_prog_exit(env, param, 0);
 	}
 	else if (res_fork[1] == -1)
