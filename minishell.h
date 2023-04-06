@@ -57,7 +57,7 @@ typedef struct s_pipe
 	int	counter;
 }					t_pipe;
 
-int	g_return_value;
+extern int	g_return_value;
 
 void	end_of_prog(t_env *env, int i);
 void	end_of_prog_exit(t_env *env, t_param *param, int i);

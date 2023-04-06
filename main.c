@@ -12,6 +12,7 @@
 
 #include "Tools/Libft/libft.h"
 #include "minishell.h"
+int	g_return_value;
 
 void	print_params(t_param *list)
 {
