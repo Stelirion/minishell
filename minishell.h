@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/31 16:58:50 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/04/06 17:10:27 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,10 @@ char	**param_to_array(t_env *env, t_param *param);
 char	**env_to_array(t_env *env, t_param *param);
 int		try_exec(t_env *env, t_param *param);
 int		*first_pipe(t_env *env, t_param *param);
-t_pipe *ft_pipe(t_param *param, t_env *env, t_pipe *pipe);
+t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *pipe);
+void	exec_pipe(t_env *env, t_param *param);
+void	exec_pure(t_env *env, t_param *param);
+int		is_built_in(t_param	*param, t_env *env);
 
 ///BUILT_IN
 void	pwd(void);

@@ -53,6 +53,8 @@ SRCS	=	main.c\
 			Exec/exec_core.c\
 			Exec/exec_child.c\
 			Exec/pipe.c\
+			Exec/exec_pure.c\
+			Exec/exec_pipe.c\
 			
 
 
