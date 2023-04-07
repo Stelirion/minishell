@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/06 18:15:24 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/07 13:46:04 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,10 @@ int	main(int argc, char **argv, char **envp)
 		if (param)
 			param = type_setting(param);
 		if (param)
-			// print_params(param);
-			exec_core(param, env);		
+		{	// print_params(param);
+			printf("_____________\n");
+			exec_core(param, env);
+		}		
 		free(line);
 		param_lstclear(&param);
 	}

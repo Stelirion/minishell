@@ -6,37 +6,11 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:34:28 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/07 21:09:52 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/07 13:54:20 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-// static size_t	self_check_old(char	*str)
-// {
-// 	size_t	i;
-// 	size_t	j;
-
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		j = 0;
-// 		while (str[i + j] && str[i + j] == ' ')
-// 			j++;
-// 		if (str[i + j] != '-')
-// 			return (i + j);
-// 		else
-// 			j++;
-// 		if (str[i + j] != 'n')
-// 			return (i);
-// 		while (str[i + j] && str[i + j] == 'n')
-// 			j++;
-// 		if (str[i + j] && str[i + j] != ' ')
-// 			return (i);
-// 		i += j;
-// 	}	
-// 	return (i);
-// }
 
 static size_t	self_check(char	*str)
 {
@@ -44,7 +18,7 @@ static size_t	self_check(char	*str)
 	size_t	j;
 
 	i = 0;
-	if (!str[i])
+	if (!str || !str[i])
 		return (0);
 	while (str[i])
 	{
@@ -64,30 +38,6 @@ static size_t	self_check(char	*str)
 	return (1);
 }
 
-// void	echo_old(char	*str)
-// {
-// 	size_t	check;
-// 	size_t	i;
-// 	size_t	tmp;
-
-// 	g_ g_return_value = 0;
-// 	i = -1;
-// 	check = 0;
-// 	tmp = -1;
-// 	if (!str)
-// 		return ((void)write (1, "\n", 1));
-// 	while (str[++tmp] == ' ')
-// 		check = tmp;
-// 	check += self_check_old(str);
-// 	if (check > 0)
-// 		i = check - 1;
-// 	while (str[++i] != '\0')
-// 		ft_putchar_fd(str[i], 1);
-// 	if (check != tmp)
-// 		return ;
-// 	write (1, "\n", 1);
-// }
-
 void	echo(char	**str)
 {
 	int		flag;
@@ -96,7 +46,10 @@ void	echo(char	**str)
 	i = 0;
 	flag = 0;
 	if (!str || !str[0])
+	{
+		write (1, "\n", 1);
 		return ;
+	}
 	while (self_check(str[i]))
 	{
 		flag = 1;
@@ -110,5 +63,5 @@ void	echo(char	**str)
 	}
 	if (flag == 0)
 		write (1, "\n", 1);
-	  g_return_value = 0;
+	g_return_value = 0;
 }
