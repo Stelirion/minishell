@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/07 13:44:08 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/08 16:23:49 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *pipe);
 void	exec_pipe(t_env *env, t_param *param);
 void	exec_pure(t_env *env, t_param *param);
 int		is_built_in(t_param	*param, t_env *env);
+void	ft_redirect(t_param *param, int *i);
+void	ft_undup(int *i);
+
 
 ///BUILT_IN
 void	pwd(void);

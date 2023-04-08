@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:33:35 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/29 14:56:43 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/08 16:15:30 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,10 @@ static size_t	param_lstsize_arg(t_param *param)
 	size_t	i;
 
 	i = 0;
-	while (param && (param->type == CMD || param->type == ARG))
+	while (param && param->type != PIPE)
 	{
-		i++;
+		if (param->type == ARG)
+			i++;
 		param = param->next;
 	}
 	return (i);
@@ -103,22 +104,22 @@ static char	**arg_array(t_env *env, t_param *param)
 	char	*tmp;
 	size_t	i;
 
-	i = 1;
-	str = malloc(sizeof(char *) * (param_lstsize_arg(param) + 1));
+	i = 0;
+	str = malloc(sizeof(char *) * (param_lstsize_arg(param) + 2));
 	if (!str)
 		error_handler(130, env, param);
-	str[0] = ft_strdup(param->content);
-	param = param->next;
-	while (param && param->type == ARG)
+	while (param && param->type != PIPE)
 	{
-		tmp = ft_strdup(param->content);
-		if (!tmp)
-			error_handler(130, env, param);
-		str[i] = tmp;
+		if (param->type == ARG || param->type == CMD)
+		{
+			tmp = ft_strdup(param->content);
+			if (!tmp)
+				error_handler(130, env, param);
+			str[i] = tmp;
+			i++;
+		}
 		param = param->next;
-		i++;
 	}
 	str[i] = NULL;
-	i = -1;
 	return (str);
 }

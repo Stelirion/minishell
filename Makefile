@@ -55,6 +55,7 @@ SRCS	=	main.c\
 			Exec/pipe.c\
 			Exec/exec_pure.c\
 			Exec/exec_pipe.c\
+			Exec/redirect.c\
 			
 
 

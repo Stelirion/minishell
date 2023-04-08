@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/07 13:45:22 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/08 15:16:44 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	exec_pipe(t_env *env, t_param *param)
 		end_of_prog_exit(env, param, 0);
 	}
 	else if (res_fork[1] == -1)
-		ft_putstr_fd("Pipe didn't work", 2);
+		ft_putstr_fd("Fork didn't work", 2);
 	else
 		waitpid(res_fork[1], 0, 0);
 }
