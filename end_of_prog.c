@@ -6,12 +6,11 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:30:06 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/12 14:54:38 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/11 14:30:23 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-#include <readline/readline.h>
 
 void	end_of_prog(t_env *env, int i)
 {

@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/08 16:23:49 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/11 11:47:35 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ extern int	g_return_value;
 void	end_of_prog(t_env *env, int i);
 void	end_of_prog_exit(t_env *env, t_param *param, int i);
 
-
 ///ENV
 void	env_lstadd_back(t_env **lst, t_env *next);
 void	env_lstadd_front(t_env **lst, t_env *next);
@@ -83,19 +82,19 @@ void	print_export(t_env *list);
 t_env	*env_unset(t_env *env, char *str);
 
 ///EXEC
-void	exec_core(t_param	*param, t_env *env);
+void	exec_core(t_param	*param, t_env *env, int *fd_org);
 char	**param_to_array(t_env *env, t_param *param);
 char	**param_to_arg(t_env *env, t_param *param);
 char	**env_to_array(t_env *env, t_param *param);
 int		try_exec(t_env *env, t_param *param);
 int		*first_pipe(t_env *env, t_param *param);
 t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *pipe);
-void	exec_pipe(t_env *env, t_param *param);
-void	exec_pure(t_env *env, t_param *param);
+void	exec_pipe(t_env *env, t_param *param, int *fd, int *fd_org);
+void	exec_pure(t_env *env, t_param *param, int *fd_org);
 int		is_built_in(t_param	*param, t_env *env);
 void	ft_redirect(t_param *param, int *i);
 void	ft_undup(int *i);
-
+void	handle_pipe(t_env *env, t_param *param, int *fd_org);
 
 ///BUILT_IN
 void	pwd(void);
@@ -117,8 +116,7 @@ void	param_lstclear(t_param **lst);
 size_t	param_lstsize(t_param *lst);
 t_param	*type_setting(t_param *param);
 size_t	param_lstsize_nb_arg(t_param *lst);
-void    parsing_error(int type);
-
+void	parsing_error(int type);
 
 //TEMPORARY
 char	**ft_split_shell(char const *s);

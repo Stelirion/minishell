@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:33:35 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/08 16:15:30 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/09 13:24:32 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static void	child(t_env *env, t_param *param)
 	char	**env_a;
 	char	*cmd[2];
 	size_t	i;
-	struct	stat *whydoiexist;
+	// struct	stat *whydoiexist;
 
-	whydoiexist = malloc(sizeof (struct stat));
+	// whydoiexist = malloc(sizeof (struct stat));
 	tmp = ft_split(env_search(env, "PATH=")->content, ':');
 	i = -1;
 	arg = arg_array(env, param);
@@ -57,7 +57,7 @@ static void	child(t_env *env, t_param *param)
 		// ft_putstr_fd(strerror(errno), 2);
 		// write (2, "\n", 1);
 		ft_putstr_fd("Minishell : command not found : ", 2);
-		ft_putstr_fd( param->content, 2);
+		ft_putstr_fd(param->content, 2);
 		write (1, "\n", 1);
 	}
 	else
@@ -80,7 +80,7 @@ static void	child(t_env *env, t_param *param)
 	free_tab(arg);
 	free_tab(tmp);
 	free_tab (env_a);
-	free(whydoiexist);
+	// free(whydoiexist);
 	end_of_prog_exit(env, param, 2);
 }
 

@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/07 13:46:04 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/11 14:33:13 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,12 @@ int	main(int argc, char **argv, char **envp)
 	char	*tmp;
 	t_param	*param;
 	t_env	*env;
+	int		fd_org[2];
 
 	(void)argc;
 	(void)argv;
+	fd_org[0] = dup(0);
+	fd_org[1] = dup(1);
 	env = get_env(envp);
 	header();
 	while (1)
@@ -68,14 +71,14 @@ int	main(int argc, char **argv, char **envp)
 		param = parsing_core(line, param, env);
 		if (line && line[0] != '\0')
 			add_history(line);
+		free(line);
 		if (param)
 			param = type_setting(param);
 		if (param)
 		{	// print_params(param);
 			printf("_____________\n");
-			exec_core(param, env);
+			exec_core(param, env, fd_org);
 		}		
-		free(line);
 		param_lstclear(&param);
 	}
 }

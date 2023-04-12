@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:18:10 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/13 13:36:57 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/11 11:09:26 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,3 @@ char	*handle_dollar(char *str, t_env *env)
 	str--;
 	return (rtn);
 }
-

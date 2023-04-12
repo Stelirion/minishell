@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:45:13 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/05 16:18:26 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/09 16:55:54 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *s_pipe)
 	{
 		if (tmp->type == INFILE)
 		{
-			write (1, "in\n", 3);
 			str = ft_strjoin(env_search(env, "PWD=")->content, param->content);
 			if (!str)
 				error_handler(130, env, param);
@@ -86,7 +85,6 @@ t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *s_pipe)
 		}
 		if (tmp->type == OUTFILE)
 		{
-			write (1, "out\n", 4);
 			str = ft_strjoin(env_search(env, "PWD=")->content, param->content);
 			if (!str)
 				error_handler(130, env, param);
@@ -99,39 +97,7 @@ t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *s_pipe)
 	return (s_pipe);
 }
 
-t_pipe	*ft_pipe2(t_param *param, t_env *env, t_pipe *pipe)
-{
-	char	*str;
-	t_param	*tmp;
 
-	tmp = param;
-	pipe->second[0] = 1;
-	pipe->second[1] = 0;
-	while (tmp && tmp->type != PIPE)
-	{
-		if (tmp->type == INFILE)
-		{
-			str = ft_strjoin(env_search(env, "PWD=")->content, param->content);
-			if (!str)
-				error_handler(130, env, param);
-			pipe->first[0] = open(str, O_RDONLY);
-			free(str);
-		}
-		if (tmp->type == OUTFILE)
-		{
-			str = ft_strjoin(env_search(env, "PWD=")->content, param->content);
-			if (!str)
-				error_handler(130, env, param);
-			pipe->first[1] = open (str, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-			free(str);
-		}
-		tmp = tmp->next;
-	}
-	ft_piped(pipe->counter, pipe->first, pipe->second);
-	pipe->second[0] = pipe->first[0];
-	pipe->second[1] = pipe->first [1];
-	return (pipe);
-}
 /*
 int	pipex_core(char **argv, int arg_nb, char **envp, int *fd)
 {

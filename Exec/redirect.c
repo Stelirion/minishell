@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 11:09:48 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/08 16:25:07 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/11 11:59:31 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ void	ft_redirect(t_param *param, int *i)
 	t_param	*tmp;
 
 	tmp = param;
-	i[2] = dup(0);
-	i[3] = dup(1);
-	while (tmp)
+	while (tmp && tmp->type != PIPE)
 	{
 		if (tmp->type == INFILE)
 		{
@@ -47,7 +45,7 @@ void	ft_redirect(t_param *param, int *i)
 void	ft_undup(int *i)
 {
 	if (i[0] && i[0] != -2)
-		dup2(i[2], 0 );
+		dup2(i[2], 0);
 	if (i[1] && i[1] != -2)
 		dup2(i[3], 1);
 }

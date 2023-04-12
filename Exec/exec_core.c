@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/07 13:51:07 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/11 11:59:44 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,17 @@ int	is_built_in(t_param	*param, t_env *env)
 	return (-2);
 }
 
-void	exec_core(t_param	*param, t_env *env)
+void	exec_core(t_param	*param, t_env *env, int *fd_org)
 {
 	int		pipe_fnd;
 	t_param	*tmp;
+	// int		fd_org[2];
 
 	tmp = param;
+	// fd_org[0] = dup(0);
+	// fd_org[1] = dup(1);
+	if (fd_org [0] == -1 || fd_org[1] == -1)
+		return (end_of_prog_exit(env, param, 130));
 	pipe_fnd = 0;
 	while (tmp)
 	{
@@ -73,7 +78,9 @@ void	exec_core(t_param	*param, t_env *env)
 		tmp = tmp->next;
 	}
 	if (pipe_fnd != 0)
-		exec_pipe(env, param);
+		handle_pipe(env, param, fd_org);
 	else
-		exec_pure(env, param);
+		exec_pure(env, param, fd_org);
+	dup2(fd_org[0], 0);
+	dup2(fd_org[1], 1);
 }
