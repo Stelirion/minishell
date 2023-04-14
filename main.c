@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/11 14:33:13 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 11:39:17 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_params(t_param *list)
 		printf("%s|%i\n", list->content, list->type);
 		list = list->next;
 	}
-	printf("_______________\n\n");
+	// printf("_______________\n\n");
 }
 
 void	header(void)
@@ -75,7 +75,8 @@ int	main(int argc, char **argv, char **envp)
 		if (param)
 			param = type_setting(param);
 		if (param)
-		{	// print_params(param);
+		{	
+			print_params(param);
 			printf("_____________\n");
 			exec_core(param, env, fd_org);
 		}		

@@ -6,18 +6,22 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/11 11:59:44 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 11:11:25 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	is_built_in(t_param	*param, t_env *env)
+int	is_built_in(t_param	*param, t_env *env, int *fd)
 {
 	char	**str;
 
 	if (!ft_strcmp(param->content, "exit"))
-		end_of_prog_exit(env, param, 0);
+	{
+		close (0);
+		close (1);
+		end_of_prog_exit_fd(env, param, 0, fd);
+	}
 	else if (!ft_strcmp(param->content, "echo"))
 	{
 		str = param_to_arg(env, param->next);
@@ -63,11 +67,8 @@ void	exec_core(t_param	*param, t_env *env, int *fd_org)
 {
 	int		pipe_fnd;
 	t_param	*tmp;
-	// int		fd_org[2];
 
 	tmp = param;
-	// fd_org[0] = dup(0);
-	// fd_org[1] = dup(1);
 	if (fd_org [0] == -1 || fd_org[1] == -1)
 		return (end_of_prog_exit(env, param, 130));
 	pipe_fnd = 0;
@@ -77,10 +78,12 @@ void	exec_core(t_param	*param, t_env *env, int *fd_org)
 			pipe_fnd++;
 		tmp = tmp->next;
 	}
+	close(0);
 	if (pipe_fnd != 0)
 		handle_pipe(env, param, fd_org);
 	else
 		exec_pure(env, param, fd_org);
 	dup2(fd_org[0], 0);
 	dup2(fd_org[1], 1);
+	// close (1);
 }

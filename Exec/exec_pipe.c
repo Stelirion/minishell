@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/11 11:40:26 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 10:11:48 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,13 @@ void	handle_pipe(t_env *env, t_param *param, int *fd_org)
 		if (check_pipe(param))
 			exec_pipe(env, param, fd, fd_org);
 		else
-		{
 			exec_pure(env, param, fd_org);
-		}
 		param = param->next;
 	}
 }
 
 void	exec_pipe(t_env *env, t_param *param, int *fd, int *fd_org)
 {
-	// int		redirection[2];
 
 	pipe(fd);
 	if (!fork())
@@ -50,7 +47,7 @@ void	exec_pipe(t_env *env, t_param *param, int *fd, int *fd_org)
 		close(fd[0]);
 		close(fd_org[0]);
 		close(fd_org[1]);
-		if (param && is_built_in(param, env) != 1)
+		if (param && is_built_in(param, env, fd) != 1)
 			;
 		else
 			(void)try_exec (env, param);

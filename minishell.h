@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/11 11:47:35 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 15:22:18 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct s_env
 
 # define PIPE 5
 
+# define APPEND 6
+
 typedef struct s_param
 {
 	char			*content;
@@ -61,6 +63,7 @@ extern int	g_return_value;
 
 void	end_of_prog(t_env *env, int i);
 void	end_of_prog_exit(t_env *env, t_param *param, int i);
+void	end_of_prog_exit_fd(t_env *env, t_param *param, int i, int *fd);
 
 ///ENV
 void	env_lstadd_back(t_env **lst, t_env *next);
@@ -91,7 +94,7 @@ int		*first_pipe(t_env *env, t_param *param);
 t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *pipe);
 void	exec_pipe(t_env *env, t_param *param, int *fd, int *fd_org);
 void	exec_pure(t_env *env, t_param *param, int *fd_org);
-int		is_built_in(t_param	*param, t_env *env);
+int		is_built_in(t_param	*param, t_env *env, int *fd);
 void	ft_redirect(t_param *param, int *i);
 void	ft_undup(int *i);
 void	handle_pipe(t_env *env, t_param *param, int *fd_org);

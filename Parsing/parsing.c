@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 08:51:30 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/06 18:17:52 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/14 11:38:41 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	get_status(char token, int type)
 {
-	printf("%c|%i\n", token, type);
+	// printf("%c|%i\n", token, type);
 	if (token == '\'' && type == 1)
 		type = 0;
 	else if (token == '\'' && type == 0)
@@ -69,7 +69,7 @@ size_t replace_value(size_t i, char **new, char *token, t_env *env)
 	}
 	to_change = ft_straddback(to_change, '=');
 	if (!to_change)
-		return(parsing_error(0), free(*new), 0);
+		return (parsing_error(0), free(*new), 0);
 	env_value = env_search(env, to_change);
 	if (!env_value)
 	{

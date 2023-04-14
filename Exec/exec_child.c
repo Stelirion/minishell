@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:33:35 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/09 13:24:32 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/14 10:39:30 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	child(t_env *env, t_param *param)
 		// write (2, "\n", 1);
 		ft_putstr_fd("Minishell : command not found : ", 2);
 		ft_putstr_fd(param->content, 2);
-		write (1, "\n", 1);
+		write (2, "\n", 1);
 	}
 	else
 	{
@@ -75,13 +75,14 @@ static void	child(t_env *env, t_param *param)
 		// }
 		ft_putstr_fd("Minishell : command not found : ", 2);
 		ft_putstr_fd(param->content, 2);
-		write (1, "\n", 1);
+		write (2, "\n", 1);
 	}
 	free_tab(arg);
 	free_tab(tmp);
 	free_tab (env_a);
 	// free(whydoiexist);
-	end_of_prog_exit(env, param, 2);
+	// end_of_prog_exit(env, param, 2);
+	return ;
 }
 
 static size_t	param_lstsize_arg(t_param *param)

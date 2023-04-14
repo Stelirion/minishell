@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 11:09:48 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/11 11:59:31 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/13 15:17:30 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ void	ft_redirect(t_param *param, int *i)
 		else if (tmp->type == OUTFILE)
 		{
 			i[1] = open (tmp->content, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+			if (i[1] == -1)
+				ft_putstr_fd(strerror(errno), 2);
+			else
+				dup2(i[1], 1);
+			close (i[1]);
+		}
+		else if (tmp->type == APPEND)
+		{
+			i[1] = open (tmp->content, O_WRONLY | O_APPEND | O_CREAT, 0644);
 			if (i[1] == -1)
 				ft_putstr_fd(strerror(errno), 2);
 			else
