@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:46:51 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/06 18:45:09 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/16 15:26:41 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,6 @@ void    parsing_error(int type)
         ft_putstr_fd ("Error, invalide infile\n", 1);
     else if (type == 5)
         ft_putstr_fd ("Error, invalide outfile\n", 1);
+    else if (type == 6)
+        ft_putstr_fd ("Error, invalide format\n", 1);
 }

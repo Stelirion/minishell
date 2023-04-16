@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 08:51:30 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/16 15:18:57 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/16 15:48:23 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,28 @@ int	get_status(char token, int type)
 	else if (token == '"' && type == 0)
 		type = 2;
 	return (type);
+}
+
+int	token_format(char *line)
+{
+	int	i;
+	int	type;
+	int symbol;
+	
+	i = 0;
+	type = 0;
+	while (line[i])
+	{
+		type = get_status(line[i], type);
+		if (symbol > 0)
+			return(0);
+		else if ((line[i] == '>' || line[i] == '<' || line[i] == '|') && type == 0)
+			symbol ++;
+		else if (ft_isalpha(line[i]))
+			symbol = 0;
+		i++;
+	}
+	return(1);
 }
 
 size_t	split_token(char *line, size_t start)
@@ -127,6 +149,8 @@ t_param	*parsing_core(char *line, t_param *param, t_env	*env)
 
 	i = 0;
 	len = ft_strlen(line);
+	if (token_format(line) == 0)
+		return (parsing_error(6), free(param), NULL);
 	while (i <= len)
 	{
 		while (line[i] == ' ')
