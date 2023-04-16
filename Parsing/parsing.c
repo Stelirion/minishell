@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 08:51:30 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/16 15:48:23 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/16 16:23:22 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int	token_format(char *line)
 	int	i;
 	int	type;
 	int symbol;
-	
+
 	i = 0;
 	type = 0;
+	symbol = 0;
 	while (line[i])
 	{
 		type = get_status(line[i], type);
