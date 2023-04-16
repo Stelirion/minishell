@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/16 14:38:53 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/16 15:31:54 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ typedef struct s_env
 # define PIPE 5
 
 # define APPEND 6
+
+# define HEREDOC 7
 
 typedef struct s_param
 {
