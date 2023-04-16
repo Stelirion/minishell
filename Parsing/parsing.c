@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 08:51:30 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/14 11:46:33 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/16 15:18:57 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ size_t replace_value(size_t i, char **new, char *token, t_env *env)
 	if (!to_change)
 		return (parsing_error(0), free(*new), 0);
 	env_value = env_search(env, to_change);
+	free(to_change);
 	if (!env_value)
 	{
 		free(*new);
@@ -78,7 +79,6 @@ size_t replace_value(size_t i, char **new, char *token, t_env *env)
 		return(parsing_error(1), 0);
 	}
 	*new = ft_strjoin_free(*new, env_value->content);
-	free(env_value);
 	return (i - 1);
 }
 
