@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/13 15:22:18 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/16 14:38:53 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ typedef struct s_pipe
 	int	counter;
 }					t_pipe;
 
+typedef struct s_pid
+{
+	int				*pid;
+	struct s_pid	*next;
+}					t_pid;
+
 extern int	g_return_value;
 
 void	end_of_prog(t_env *env, int i);
@@ -84,6 +90,7 @@ t_env	*env_unset(t_env *env, char *str);
 void	print_export(t_env *list);
 t_env	*env_unset(t_env *env, char *str);
 
+
 ///EXEC
 void	exec_core(t_param	*param, t_env *env, int *fd_org);
 char	**param_to_array(t_env *env, t_param *param);
@@ -92,12 +99,17 @@ char	**env_to_array(t_env *env, t_param *param);
 int		try_exec(t_env *env, t_param *param);
 int		*first_pipe(t_env *env, t_param *param);
 t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *pipe);
-void	exec_pipe(t_env *env, t_param *param, int *fd, int *fd_org);
-void	exec_pure(t_env *env, t_param *param, int *fd_org);
-int		is_built_in(t_param	*param, t_env *env, int *fd);
+int		exec_pipe(t_env *env, t_param *param, t_pipe spipe, t_pid	*pid);
+int		exec_pure(t_env *env, t_param *param, int *fd_org, t_pid *pid);
+int		is_built_in(t_param	*param, t_env *env, int *fd,  t_pid *pid);
 void	ft_redirect(t_param *param, int *i);
 void	ft_undup(int *i);
-void	handle_pipe(t_env *env, t_param *param, int *fd_org);
+void	handle_pipe(t_env *env, t_param *param, int *fd_org, t_pid	*pid);
+t_pid	*pid_lstnew(int pid);
+void	pid_lstadd_back(t_pid **pid, t_pid *next);
+void	pid_clear(t_pid *pid);
+void	waiting(t_pid *pid);
+
 
 ///BUILT_IN
 void	pwd(void);

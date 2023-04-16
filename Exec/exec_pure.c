@@ -6,13 +6,13 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:04:58 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/14 10:54:14 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/16 14:38:28 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	exec_pure(t_env *env, t_param *param, int *fd_org)
+int	exec_pure(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 {
 	int	res_fork;
 	int	fd[2];
@@ -28,7 +28,7 @@ void	exec_pure(t_env *env, t_param *param, int *fd_org)
 	ft_redirect(param, fd);
 	while (param && param->type != CMD)
 		param = param->next;
-	if (param && is_built_in(param, env, give) != 1)
+	if (param && is_built_in(param, env, give, pid) != 1)
 		;
 	else
 	{
@@ -37,13 +37,10 @@ void	exec_pure(t_env *env, t_param *param, int *fd_org)
 		if (res_fork == 0)
 			end_of_prog_exit_fd(env, param, 0, give);
 	}
-	if (res_fork == -2)
-		;
-	else if (res_fork != -1)
-		waitpid(res_fork, 0, 0);
-	ft_undup(fd);
+	ft_undup(give);
 	close (fd[0]);
 	close(fd_org[1]);
+	return (res_fork);
 }
 
 

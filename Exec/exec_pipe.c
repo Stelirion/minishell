@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/14 10:11:48 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/16 14:39:34 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 #include <unistd.h>
 
 
-int	*ft_pipe3(t_param *param, int *i, int j);
-int	check_pipe(t_param *param);
+int				*ft_pipe3(t_param *param, int *i, int j);
+int				check_pipe(t_param *param);
+static	t_pipe	fill(t_pipe pipe, int i[2], int j[2]);
 
-void	handle_pipe(t_env *env, t_param *param, int *fd_org)
+void	handle_pipe(t_env *env, t_param *param, int *fd_org, t_pid	*pid)
 {
 	int		fd[2];
+	t_pipe	pipe;
 
+	pipe = fill(pipe, fd, fd_org);
 	while (param)
 	{
 		while (param && param->type != CMD)
@@ -28,18 +31,25 @@ void	handle_pipe(t_env *env, t_param *param, int *fd_org)
 		if (!param)
 			break ;
 		if (check_pipe(param))
-			exec_pipe(env, param, fd, fd_org);
+			pid_lstadd_back(&pid, pid_lstnew
+				(exec_pipe(env, param, pipe, pid)));
 		else
-			exec_pure(env, param, fd_org);
+			pid_lstadd_back(&pid, pid_lstnew(exec_pure(env, param, fd_org, pid)));
 		param = param->next;
 	}
 }
 
-void	exec_pipe(t_env *env, t_param *param, int *fd, int *fd_org)
+int	exec_pipe(t_env *env, t_param *param, t_pipe spipe, t_pid	*pid)
 {
+	int	res_fork;
+	int	*fd;
+	int	*fd_org;
 
+	fd = spipe.first;
+	fd_org = spipe.second;
 	pipe(fd);
-	if (!fork())
+	res_fork = fork();
+	if (res_fork == 0)
 	{
 		dup2(fd[1], 1);
 		ft_redirect(param, fd);
@@ -47,17 +57,29 @@ void	exec_pipe(t_env *env, t_param *param, int *fd, int *fd_org)
 		close(fd[0]);
 		close(fd_org[0]);
 		close(fd_org[1]);
-		if (param && is_built_in(param, env, fd) != 1)
+		if (param && is_built_in(param, env, fd, pid) != 1)
 			;
 		else
-			(void)try_exec (env, param);
+			res_fork = try_exec (env, param);
 		close (1);
+		waitpid(res_fork, 0, 0);
+		pid_clear(pid);
 		end_of_prog_exit(env, param, 0);
 	}
 	dup2(fd[0], 0);
 	close(fd[1]);
 	close(fd[0]);
 	close(fd_org[1]);
+	return (res_fork);
+}
+
+static t_pipe	fill(t_pipe pipe, int i[2], int j[2])
+{
+	pipe.first[0] = i[0];
+	pipe.first[1] = i[1];
+	pipe.second[0] = j[0];
+	pipe.second[1] = j[1];
+	return (pipe);
 }
 // void	exec_pipe3(t_env *env, t_param *param)
 // {

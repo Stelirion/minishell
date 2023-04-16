@@ -6,11 +6,11 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/14 11:39:17 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/16 13:09:43 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Tools/Libft/libft.h"
+// #include "Tools/Libft/libft.h"
 #include "minishell.h"
 int	g_return_value;
 
@@ -22,7 +22,6 @@ void	print_params(t_param *list)
 		printf("%s|%i\n", list->content, list->type);
 		list = list->next;
 	}
-	// printf("_______________\n\n");
 }
 
 void	header(void)
@@ -54,6 +53,8 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	fd_org[0] = dup(0);
 	fd_org[1] = dup(1);
+	if (fd_org[1] == -1 || fd_org[0] == -1)
+		return (1);
 	env = get_env(envp);
 	header();
 	while (1)
