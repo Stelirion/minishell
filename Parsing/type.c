@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 09:14:11 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/19 18:50:21 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/19 20:23:46 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_param	*type_setting(t_param *param)
 				param->type = APPEND;
 			}
 			else
-				param->type = INFILE;
+				param->type = OUTFILE;
 		}
 		else if (next == 1)
 		{

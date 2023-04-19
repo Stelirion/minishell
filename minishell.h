@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/16 15:31:54 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/19 19:54:24 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ size_t	param_lstsize(t_param *lst);
 t_param	*type_setting(t_param *param);
 size_t	param_lstsize_nb_arg(t_param *lst);
 void	parsing_error(int type);
+t_param *manage_dock(t_param *param);
 
 //TEMPORARY
 char	**ft_split_shell(char const *s);

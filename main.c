@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/19 16:24:55 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/19 20:17:08 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,13 @@ int	display(t_env *env, int	*fd_org)
 	free(tmp);
 	tmp = ft_strjoin (line, "\x1B[0m : ");
 	free(line);
-	
 	signal(SIGINT, new_prompt);
 	signal(SIGQUIT, SIG_IGN);
-
 	line = readline(tmp);
 	signal(SIGINT, cancel_commande);
 	free(tmp);
 	if (!line)
 		return (end_of_prog_exit(env, param, 0), 0);
-	
 	param = parsing_core(line, param, env);
 	if (line && line[0] != '\0')
 		add_history(line);
@@ -84,7 +81,9 @@ int	display(t_env *env, int	*fd_org)
 	if (param)
 		param = type_setting(param);
 	if (param)
-	{	
+		param = manage_dock(param);
+	if (param)
+	{
 		print_params(param);
 		printf("_____________\n");
 		exec_core(param, env, fd_org);
