@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/19 23:03:43 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 00:54:04 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,18 @@ int	is_built_in(t_param	*param, t_env *env, int *fd, t_pid *pid)
 	}
 	else if (!ft_strcmp(param->content, "cd"))
 	{
-		if (param_lstsize_nb_arg(param) != 1)
+		if (param_lstsize_nb_arg(param) > 1)
 			ft_putstr_fd("Minishell : cd take only 1 argument\n", 1);
+		else if (param_lstsize_nb_arg(param) == 0)
+		{
+			if (env_search(env, "HOME=") == 0 || !env_search(env, "HOME=")->content)
+				ft_putstr_fd("HOME unset\n", 2);
+			else
+				cd(env, env_search(env, "HOME=")->content);
+		}
 		else
 		{
+			ft_putstr_fd("hi\n", 2);
 			if (param->next && param->next->content)
 				cd(env, param->next->content);
 			else
@@ -85,6 +93,5 @@ void	exec_core(t_param	*param, t_env *env, int *fd_org)
 		pid_lstadd_back(&pid, pid_lstnew(exec_pure(env, param, fd_org, pid)));
 	dup2(fd_org[0], 0);
 	dup2(fd_org[1], 1);
-	printf("%s\n", env_search(env, "?=")->content);
 	waiting(pid);
 }

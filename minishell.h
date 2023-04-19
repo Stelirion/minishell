@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/19 22:59:53 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/20 00:04:18 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ t_pid	*pid_lstnew(int pid);
 void	pid_lstadd_back(t_pid **pid, t_pid *next);
 void	pid_clear(t_pid *pid);
 void	waiting(t_pid *pid);
+int	exec_pure_p(t_env *env, t_param *param, int *fd_org, t_pid *pid);
 
 
 ///BUILT_IN

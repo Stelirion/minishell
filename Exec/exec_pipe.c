@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/16 14:39:34 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 00:09:04 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	handle_pipe(t_env *env, t_param *param, int *fd_org, t_pid	*pid)
 			pid_lstadd_back(&pid, pid_lstnew
 				(exec_pipe(env, param, pipe, pid)));
 		else
-			pid_lstadd_back(&pid, pid_lstnew(exec_pure(env, param, fd_org, pid)));
+			pid_lstadd_back(&pid, pid_lstnew(exec_pure_p(env, \
+				param, fd_org, pid)));
 		param = param->next;
 	}
 }
