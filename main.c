@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/16 13:09:43 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/19 16:24:55 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,61 @@ void	header(void)
 	ft_putstr_fd ("\x1B[0m \n", 1);
 }
 
-int	main(int argc, char **argv, char **envp)
+void new_prompt()
+{
+	ft_putstr_fd("\n", 1);
+    rl_on_new_line();
+    rl_replace_line("", 0);
+    rl_redisplay();
+}
+
+void cancel_commande()
+{
+	ft_putstr_fd("\n", 1);
+	return;
+}
+
+int	display(t_env *env, int	*fd_org)
 {
 	char	*line;
 	char	*tmp;
 	t_param	*param;
+	
+	param = NULL;
+	tmp = last_str(env);
+	line = ft_strjoin ("\x1B[34;1m Minishell : \x1B[35m", tmp);
+	free(tmp);
+	tmp = ft_strjoin (line, "\x1B[0m : ");
+	free(line);
+	
+	signal(SIGINT, new_prompt);
+	signal(SIGQUIT, SIG_IGN);
+
+	line = readline(tmp);
+	signal(SIGINT, cancel_commande);
+	free(tmp);
+	if (!line)
+		return (end_of_prog_exit(env, param, 0), 0);
+	
+	param = parsing_core(line, param, env);
+	if (line && line[0] != '\0')
+		add_history(line);
+	free(line);
+	if (param)
+		param = type_setting(param);
+	if (param)
+	{	
+		print_params(param);
+		printf("_____________\n");
+		exec_core(param, env, fd_org);
+	}		
+	param_lstclear(&param);
+	return (1);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	int retry;
 	t_env	*env;
 	int		fd_org[2];
 
@@ -57,30 +107,10 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	env = get_env(envp);
 	header();
-	while (1)
+	retry = 1;
+	
+	while (retry)
 	{
-		tmp = last_str(env);
-		line = ft_strjoin ("\x1B[34;1m Minishell : \x1B[35m", tmp);
-		free(tmp);
-		tmp = ft_strjoin (line, "\x1B[0m : ");
-		free(line);
-		line = readline(tmp);
-		free(tmp);
-		if (!line)
-			return (end_of_prog_exit(env, param, 0), 0);
-		param = NULL;
-		param = parsing_core(line, param, env);
-		if (line && line[0] != '\0')
-			add_history(line);
-		free(line);
-		if (param)
-			param = type_setting(param);
-		if (param)
-		{	
-			print_params(param);
-			printf("_____________\n");
-			exec_core(param, env, fd_org);
-		}		
-		param_lstclear(&param);
+		retry = display(env, fd_org);
 	}
 }
