@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 08:51:30 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/19 17:07:04 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/19 18:31:59 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	get_status(char token, int type)
 {
-	// printf("%c|%i\n", token, type);
 	if (token == '\'' && type == 1)
 		type = 0;
 	else if (token == '\'' && type == 0)
@@ -28,6 +27,7 @@ int	get_status(char token, int type)
 
 int	token_format(char *line)
 {
+	return(1);
 	int	i;
 	int	type;
 	int symbol;
