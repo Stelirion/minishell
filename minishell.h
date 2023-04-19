@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/19 19:54:24 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/19 22:59:53 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_param
 {
 	char			*content;
 	int				type;
+	int				heredoc_fd;
 	struct s_param	*next;
 }					t_param;
 

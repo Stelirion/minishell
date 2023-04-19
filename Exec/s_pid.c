@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:31:02 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/16 14:33:03 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/19 23:19:40 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,19 @@ void	waiting(t_pid *pid)
 	while (tmp)
 	{
 		if (tmp->pid && tmp->pid [0] && tmp->pid[0] > 0)
-			waitpid(tmp->pid[0], 0, 0);
+		{
+			waitpid(tmp->pid[0], &g_return_value, 0);
+			if (WIFEXITED(g_return_value))
+				g_return_value = WEXITSTATUS(g_return_value);
+			else if (WIFSIGNALED(g_return_value))
+			{
+				if (WTERMSIG(g_return_value) == 13)
+					g_return_value = 0;
+				else
+					g_return_value = 128 + WTERMSIG(g_return_value);
+			}			
+
+		}
 		tmp = tmp->next;
 	}
 	pid_clear(pid);
