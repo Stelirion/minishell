@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/19 19:50:36 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/19 20:19:46 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/19 23:02:25 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,24 @@
 int heredoc(char *limiter)
 {
 	char	*line;
-	char	*tmp;
 	int		fd[2];
 
 	line = NULL;
-	tmp = "heredoc> ";
-	if (pipe(fd) == -1)
-		exit(1);
+    fd[1] =  open("/var/tmp/minishell.tmp", O_CREAT | O_WRONLY, 0644);
 	while (1)
 	{
-		line = readline(tmp);
+		line = readline("> ");
+        if (!line)
+        {
+            ft_putstr_fd ("heredoc exit\n", 1);
+            break;
+        }
 		if (ft_strcmp(line, limiter) == 0)
 			break ;
-		write(fd[1], line, ft_strlen(line));
-		write(fd[1], "\n", 1);
+		ft_putstr_fd(line, fd[1]);
+        ft_putstr_fd("\n", fd[1]);
 		free(line);
 	}
-	//manage the infile here
-    free(limiter);
 	close(fd[1]);
     return(fd[1]);
 }
@@ -40,16 +40,12 @@ int heredoc(char *limiter)
 t_param *manage_dock(t_param *param)
 {
 	t_param	*init;
-    char    *limiter;
 
 	init = param;
 	while (param)
 	{
-        if (param->type == 6 || param->type == 7)
-        {
-            limiter = param->content;
-            param->content = ft_itoa(heredoc(limiter));
-        }
+        if (param->type == HEREDOC)
+            param->heredoc_fd = heredoc(param->content);
         param = param->next;
     }
     return(init);

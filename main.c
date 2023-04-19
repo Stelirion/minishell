@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/19 20:26:18 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/19 23:11:24 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@ void	print_params(t_param *list)
 	printf("_____Debug_____\n");
 	while (list)
 	{
-		printf("%s|%i\n", list->content, list->type);
+		printf("%s|%i", list->content, list->type);
+		if (list->type == 7)
+			printf("|%i", list->heredoc_fd);
+		printf("\n");
 		list = list->next;
 	}
+	printf("_______________\n");
 }
 
 void	header(void)
@@ -85,7 +89,6 @@ int	display(t_env *env, int	*fd_org)
 	if (param)
 	{
 		print_params(param);
-		printf("_____________\n");
 		exec_core(param, env, fd_org);
 	}		
 	param_lstclear(&param);
