@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 09:14:11 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/13 11:57:19 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/19 18:50:21 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,28 +36,33 @@ t_param	*type_setting(t_param *param)
 			if (!param->next)
 				return (parsing_error(4), param_lstclear(&init), NULL);
 			param = param->next;
-			param->type = INFILE;
+			if (param->content[0] == '<')
+			{
+				param->type = 9;
+				if (!param->next)
+					return (parsing_error(7), param_lstclear(&init), NULL);
+				param = param->next;
+				param->type = HEREDOC;
+			}
+			else
+				param->type = INFILE;
 		}
 		else if (param->content[0] == '>')
 		{
-			///added by M
-			if (param->content[1] && param->content[1] == '>')
+			param->type = 9;
+			if (!param->next)
+				return (parsing_error(4), param_lstclear(&init), NULL);
+			param = param->next;
+			if (param->content[0] == '>')
 			{
 				param->type = 9;
 				if (!param->next)
-					return (parsing_error(5), param_lstclear(&init), NULL);
+					return (parsing_error(8), param_lstclear(&init), NULL);
 				param = param->next;
-				param->type = OUTFILE;
+				param->type = APPEND;
 			}
-			///end of added by M
-			else 
-			{
-				param->type = 9;
-				if (!param->next)
-					return (parsing_error(5), param_lstclear(&init), NULL);
-				param = param->next;
-				param->type = OUTFILE;
-			}
+			else
+				param->type = INFILE;
 		}
 		else if (next == 1)
 		{
