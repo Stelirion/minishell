@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/19 20:26:18 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/19 23:09:32 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	display(t_env *env, int	*fd_org)
 	char	*line;
 	char	*tmp;
 	t_param	*param;
-	
+
 	param = NULL;
 	tmp = last_str(env);
 	line = ft_strjoin ("\x1B[34;1m Minishell : \x1B[35m", tmp);
@@ -89,7 +89,9 @@ int	display(t_env *env, int	*fd_org)
 		exec_core(param, env, fd_org);
 	}		
 	param_lstclear(&param);
-	env_change("?", ft_itoa(g_return_value), env);
+	tmp = ft_itoa(g_return_value);
+	env_change("?", tmp, env);
+	free(tmp);
 	return (1);
 }
 

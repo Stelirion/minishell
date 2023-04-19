@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/19 19:28:34 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/19 23:03:43 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,6 @@ void	exec_core(t_param	*param, t_env *env, int *fd_org)
 		pid_lstadd_back(&pid, pid_lstnew(exec_pure(env, param, fd_org, pid)));
 	dup2(fd_org[0], 0);
 	dup2(fd_org[1], 1);
+	printf("%s\n", env_search(env, "?=")->content);
 	waiting(pid);
 }

@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:33:35 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/14 10:39:30 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/19 22:57:34 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,17 @@ static void	child(t_env *env, t_param *param)
 			cmd[1] = ft_strjoin(cmd[0], param->content);
 			if (!access(cmd[1], X_OK))
 				execve(cmd[1], arg, env_a);
+			if (!access(cmd[1], F_OK))
+			{
+				g_return_value = 126;
+				break;
+			}
 			free(cmd[0]);
 			free(cmd[1]);
 		}
 		// ft_putstr_fd(strerror(errno), 2);
 		// write (2, "\n", 1);
+		g_return_value = 127;
 		ft_putstr_fd("Minishell : command not found : ", 2);
 		ft_putstr_fd(param->content, 2);
 		write (2, "\n", 1);
@@ -66,6 +72,8 @@ static void	child(t_env *env, t_param *param)
 		cmd[1] = ft_strjoin(cmd[0], param->content);
 		if (access(cmd[1], X_OK))
 			execve(cmd[1], arg, env_a);
+		if (!access(cmd[1], F_OK))
+			g_return_value = 126;
 		free(cmd[0]);
 		free(cmd[1]);
 		// if (stat(cmd[1], whydoiexist))
@@ -73,6 +81,7 @@ static void	child(t_env *env, t_param *param)
 		// 	ft_putstr_fd(strerror(errno), 2);
 		// 	write (2, "\n", 1);
 		// }
+		g_return_value = 127;
 		ft_putstr_fd("Minishell : command not found : ", 2);
 		ft_putstr_fd(param->content, 2);
 		write (2, "\n", 1);
