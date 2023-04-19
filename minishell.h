@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 00:04:18 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 01:17:49 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ typedef struct s_pid
 
 extern int	g_return_value;
 
+void	new_prompt(void);
+void	cancel_commande(void);
 void	end_of_prog(t_env *env, int i);
 void	end_of_prog_exit(t_env *env, t_param *param, int i);
 void	end_of_prog_exit_fd(t_env *env, t_param *param, int i, int *fd);
@@ -93,7 +95,6 @@ t_env	*env_unset(t_env *env, char *str);
 void	print_export(t_env *list);
 t_env	*env_unset(t_env *env, char *str);
 
-
 ///EXEC
 void	exec_core(t_param	*param, t_env *env, int *fd_org);
 char	**param_to_array(t_env *env, t_param *param);
@@ -112,8 +113,7 @@ t_pid	*pid_lstnew(int pid);
 void	pid_lstadd_back(t_pid **pid, t_pid *next);
 void	pid_clear(t_pid *pid);
 void	waiting(t_pid *pid);
-int	exec_pure_p(t_env *env, t_param *param, int *fd_org, t_pid *pid);
-
+int		exec_pure_p(t_env *env, t_param *param, int *fd_org, t_pid *pid);
 
 ///BUILT_IN
 void	pwd(void);
@@ -136,7 +136,7 @@ size_t	param_lstsize(t_param *lst);
 t_param	*type_setting(t_param *param);
 size_t	param_lstsize_nb_arg(t_param *lst);
 void	parsing_error(int type);
-t_param *manage_dock(t_param *param);
+t_param	*manage_dock(t_param *param);
 
 //TEMPORARY
 char	**ft_split_shell(char const *s);

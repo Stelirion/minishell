@@ -12,6 +12,7 @@ HEAD	=	minishell.h
 
 SRCS	=	main.c\
 			end_of_prog.c\
+			signal.c\
 			\
 			Error/error.c\
 			\

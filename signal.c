@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   param_lstnew.c                                     :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/16 13:55:33 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 01:13:09 by ngennaro         ###   ########.fr       */
+/*   Created: 2023/04/20 01:15:13 by ngennaro          #+#    #+#             */
+/*   Updated: 2023/04/20 01:15:42 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-t_param	*param_lstnew(char *content)
+void	new_prompt(void)
 {
-	t_param	*new;
+	ft_putstr_fd("\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
+}
 
-	new = malloc(sizeof(t_env));
-	if (!new)
-		error_handler(130, NULL, NULL);
-	if (content)
-	{
-		new->content = content;
-	}
-	else
-	{
-		new->content = NULL;
-	}
-	new->next = NULL;
-	return (new);
+void	cancel_commande(void)
+{
+	ft_putstr_fd("\n", 1);
+	return ;
 }

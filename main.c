@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/19 23:35:50 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 01:18:33 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "Tools/Libft/libft.h"
 #include "minishell.h"
+
 int	g_return_value;
 
 void	print_params(t_param *list)
@@ -45,20 +46,6 @@ void	header(void)
 	ft_putstr_fd ("\x1B[0m \n", 1);
 }
 
-void new_prompt()
-{
-	ft_putstr_fd("\n", 1);
-    rl_on_new_line();
-    rl_replace_line("", 0);
-    rl_redisplay();
-}
-
-void cancel_commande()
-{
-	ft_putstr_fd("\n", 1);
-	return;
-}
-
 int	display(t_env *env, int	*fd_org)
 {
 	char	*line;
@@ -90,7 +77,7 @@ int	display(t_env *env, int	*fd_org)
 	{
 		print_params(param);
 		exec_core(param, env, fd_org);
-	}		
+	}	
 	param_lstclear(&param);
 	tmp = ft_itoa(g_return_value);
 	env_change("?", tmp, env);

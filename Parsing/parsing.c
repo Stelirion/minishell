@@ -29,7 +29,7 @@ int	token_format(char *line)
 {
 	int	i;
 	int	type;
-	int symbol;
+	int	symbol;
 
 	i = 0;
 	symbol = 0;
@@ -37,7 +37,7 @@ int	token_format(char *line)
 	{
 		type = get_status(line[i], type);
 		if (symbol > 1)
-			return(0);
+			return (0);
 		else if (line[i] == '|')
 			symbol++;
 		else if (line[i] == '<')
@@ -56,7 +56,7 @@ int	token_format(char *line)
 			symbol = 0;
 		i++;
 	}
-	return(1);
+	return (1);
 }
 
 size_t	split_token(char *line, size_t start)
@@ -84,21 +84,22 @@ size_t	split_token(char *line, size_t start)
 	return (i);
 }
 
-size_t replace_value(size_t i, char **new, char *token, t_env *env)
+size_t	replace_value(size_t i, char **new, char *token, t_env *env)
 {
-	char *to_change;
-	t_env *env_value;
+	char	*to_change;
+	t_env	*env_value;
 
 	to_change = 0;
 	env_value = NULL;
 	while (token[i])
 	{
 		i++;
-		if (token[i] == '"' || token[i] == ' ' || token[i] == '<' || token[i] == '>' || token[i] == '|')
-			break;
+		if (token[i] == '"' || token[i] == ' '
+			|| token[i] == '<' || token[i] == '>' || token[i] == '|')
+			break ;
 		to_change = ft_straddback(to_change, token[i]);
 		if (!to_change)
-			return(parsing_error(0), free(*new), 0);
+			return (parsing_error(0), free(*new), 0);
 	}
 	to_change = ft_straddback(to_change, '=');
 	if (!to_change)
@@ -109,7 +110,7 @@ size_t replace_value(size_t i, char **new, char *token, t_env *env)
 	{
 		free(*new);
 		*new = NULL;
-		return(parsing_error(1), 0);
+		return (parsing_error(1), 0);
 	}
 	*new = ft_strjoin_free(*new, env_value->content);
 	return (i - 1);
@@ -139,7 +140,7 @@ char	*manage_quote(char *token, t_env *env)
 		{
 			i = replace_value(i, &new, token, env);
 			if (!new)
-				return(free (token), NULL);
+				return (free (token), NULL);
 		}
 		else
 			new = ft_straddback(new, token[i]);
