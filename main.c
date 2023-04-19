@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/20 01:18:33 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/20 01:41:12 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,6 @@ void	print_params(t_param *list)
 		list = list->next;
 	}
 	printf("_______________\n");
-}
-
-void	header(void)
-{
-	ft_putstr_fd ("\x1B[32;1m  ____    ____   _             _  ", 1);
-	ft_putstr_fd ("         __             __   __   \n", 1);
-	ft_putstr_fd (" |_   \\  /   _| (_)           (_)", 1);
-	ft_putstr_fd ("         [  |           [  | [  |  \n", 1);
-	ft_putstr_fd ("   |   \\/   |   __   _ .--.   __ ", 1);
-	ft_putstr_fd ("   .--.   | |--.  .---.  | |  | |  \n", 1);
-	ft_putstr_fd ("   | |\\  /| |  [  | [ `.-. | [  |", 1);
-	ft_putstr_fd ("  ( (`\\]  | .-. |/ /__\\  | |  | |  \n", 1);
-	ft_putstr_fd ("  _| |_\\/_| |_  | |  | | | |  | |", 1);
-	ft_putstr_fd ("   `'.'.  | | | || \\__., | |  | |  \n", 1);
-	ft_putstr_fd (" |_____||_____|[___][___||__][___]", 1);
-	ft_putstr_fd (" [\\__) )[___]|__]'.__.'[___][___] \n", 1);
-	ft_putstr_fd ("\x1B[0m \n", 1);
 }
 
 int	display(t_env *env, int	*fd_org)

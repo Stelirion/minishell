@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 01:17:49 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/20 01:41:34 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <sys/wait.h>
 # include <stdio.h>
 # include <sys/stat.h>
+# include <signal.h>
 
 typedef struct s_env
 {
@@ -70,8 +71,9 @@ typedef struct s_pid
 
 extern int	g_return_value;
 
-void	new_prompt(void);
-void	cancel_commande(void);
+void	header(void);
+void	new_prompt(int tmp);
+void	cancel_commande(int tmp);
 void	end_of_prog(t_env *env, int i);
 void	end_of_prog_exit(t_env *env, t_param *param, int i);
 void	end_of_prog_exit_fd(t_env *env, t_param *param, int i, int *fd);
