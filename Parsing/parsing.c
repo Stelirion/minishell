@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 08:51:30 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/19 19:49:10 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 00:04:27 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,31 @@ int	get_status(char token, int type)
 
 int	token_format(char *line)
 {
-	return(1);
 	int	i;
 	int	type;
 	int symbol;
 
 	i = 0;
-	type = 0;
 	symbol = 0;
 	while (line[i])
 	{
 		type = get_status(line[i], type);
 		if (symbol > 1)
 			return(0);
-		else if ((line[i] == '>' || line[i] == '<' || line[i] == '|') && type == 0)
-			symbol ++;
+		else if (line[i] == '|')
+			symbol++;
+		else if (line[i] == '<')
+		{
+			if (line[i + 1] && line[i + 1] == '<')
+				i++;
+			symbol++;
+		}
+		else if (line[i] == '>')
+		{
+			if (line[i + 1] && line[i + 1] == '>')
+				i++;
+			symbol++;
+		}
 		else if (ft_isalpha(line[i]))
 			symbol = 0;
 		i++;
