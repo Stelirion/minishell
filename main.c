@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/19 16:24:55 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/19 20:05:44 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,16 @@ int	display(t_env *env, int	*fd_org)
 		exec_core(param, env, fd_org);
 	}		
 	param_lstclear(&param);
+	env_change("?", ft_itoa(g_return_value), env);
 	return (1);
 }
 
 int	main(int argc, char **argv, char **envp)
 {
-	int retry;
+	int		retry;
 	t_env	*env;
 	int		fd_org[2];
+	char	**tmp;
 
 	(void)argc;
 	(void)argv;
@@ -106,11 +108,12 @@ int	main(int argc, char **argv, char **envp)
 	if (fd_org[1] == -1 || fd_org[0] == -1)
 		return (1);
 	env = get_env(envp);
+	tmp = malloc(sizeof(char *) * 2);
+	tmp[0] = ft_strdup("?=");
+	tmp[1] = ft_strdup("0");
+	env_lstadd_back(&env, env_lstnew(tmp));
 	header();
 	retry = 1;
-	
 	while (retry)
-	{
 		retry = display(env, fd_org);
-	}
 }

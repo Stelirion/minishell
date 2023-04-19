@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/16 14:39:41 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/19 19:28:34 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	exec_core(t_param	*param, t_env *env, int *fd_org)
 			pipe_fnd++;
 		tmp = tmp->next;
 	}
-	close(0);
 	if (pipe_fnd != 0)
 		handle_pipe(env, param, fd_org, pid);
 	else

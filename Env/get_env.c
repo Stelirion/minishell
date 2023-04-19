@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/14 15:24:11 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/19 19:50:30 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,6 @@ t_env	*fill_in(int nb, t_env *env)
 			env_search(env, "SHLVL=")->content = str[0];
 		}
 	}
-	// else
-	// {
-	// 	str[0] = ft_strdup("OLDPWD");
-	// 	str[1] = NULL;
-	// 	env_lstadd_back(&env, env_lstnew(str));
-	// }
 	return (env);
 }
 
