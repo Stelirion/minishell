@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/20 01:41:12 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/20 02:40:56 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ int	display(t_env *env, int	*fd_org)
 	}	
 	param_lstclear(&param);
 	tmp = ft_itoa(g_return_value);
-	env_change("?", tmp, env);
-	free(tmp);
+	env_change("?=", tmp, env);
 	return (1);
 }
 

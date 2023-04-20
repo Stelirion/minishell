@@ -6,13 +6,11 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 00:09:04 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 02:35:03 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <unistd.h>
-
 
 int				*ft_pipe3(t_param *param, int *i, int j);
 int				check_pipe(t_param *param);
@@ -51,7 +49,7 @@ int	exec_pipe(t_env *env, t_param *param, t_pipe spipe, t_pid	*pid)
 	pipe(fd);
 	res_fork = fork();
 	if (res_fork == 0)
-	{
+	{	
 		dup2(fd[1], 1);
 		ft_redirect(param, fd);
 		close(fd[1]);
@@ -65,6 +63,7 @@ int	exec_pipe(t_env *env, t_param *param, t_pipe spipe, t_pid	*pid)
 		close (1);
 		waitpid(res_fork, 0, 0);
 		pid_clear(pid);
+		g_return_value = res_fork;
 		end_of_prog_exit(env, param, 0);
 	}
 	dup2(fd[0], 0);

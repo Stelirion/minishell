@@ -6,11 +6,12 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 11:09:48 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/16 13:12:25 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 02:55:24 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdlib.h>
 
 
 void	ft_redirect(t_param *param, int *i)
@@ -41,6 +42,16 @@ void	ft_redirect(t_param *param, int *i)
 		else if (tmp->type == APPEND)
 		{
 			i[1] = open (tmp->content, O_WRONLY | O_APPEND | O_CREAT, 0644);
+			if (i[1] == -1)
+				ft_putstr_fd(strerror(errno), 2);
+			else
+				dup2(i[1], 1);
+			close (i[1]);
+		}
+		else if (tmp->type == HEREDOC)
+		{
+			printf("%i\n", tmp->heredoc_fd);
+			i[1] = tmp->heredoc_fd;
 			if (i[1] == -1)
 				ft_putstr_fd(strerror(errno), 2);
 			else

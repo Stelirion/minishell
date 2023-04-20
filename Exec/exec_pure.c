@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:04:58 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 00:58:45 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 01:06:00 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,9 @@ static int	is_built_in_p(t_param	*param, t_env *env, int *fd, t_pid *pid)
 	else if (!ft_strcmp(param->content, "pwd"))
 		pwd();
 	else if (!ft_strcmp(param->content, "export"))
-		export_handler(param, env);
-	else if (!ft_strcmp(param->content, "unset"))
-	{
 		return (-2);
-	}
+	else if (!ft_strcmp(param->content, "unset"))
+		return (-2);
 	else
 		return (1);
 	return (-2);

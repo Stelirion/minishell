@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:33:35 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/19 23:49:22 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 02:08:07 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,7 @@ static void	child(t_env *env, t_param *param)
 	free_tab(tmp);
 	free_tab (env_a);
 	// free(whydoiexist);
-	end_of_prog_exit(env, param, 0);
-	return ;
+	end_of_prog_exit(env, param, g_return_value);
 }
 
 static size_t	param_lstsize_arg(t_param *param)
