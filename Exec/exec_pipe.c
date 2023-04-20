@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 15:19:34 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 17:16:34 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	exec_pipe(t_env *env, t_param *param, t_pipe spipe, t_pid	*pid)
 	{	
 		dup2(fd[1], 1);
 		if (!ft_redirect(param, fd))
-			return (0);
+			return (end_of_prog_exit(env, param, 0), 1);
 		close(fd[1]);
 		close(fd[0]);
 		close(fd_org[0]);
