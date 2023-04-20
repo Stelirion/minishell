@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 17:16:34 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 18:43:50 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	handle_pipe(t_env *env, t_param *param, int *fd_org, t_pid	*pid)
 			param = param->next;
 		if (!param)
 			break ;
+		signal(SIGINT, cancel_commande);
+		inception(param->content);
 		if (check_pipe(param))
 			pid_lstadd_back(&pid, pid_lstnew
 				(exec_pipe(env, param, pipe, pid)));

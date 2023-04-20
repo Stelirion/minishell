@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:40:53 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/20 15:17:10 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/20 18:37:33 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Tools/Libft/libft.h"
 #include "minishell.h"
 
 void	new_prompt(int tmp)
@@ -31,20 +32,17 @@ void	cancel_commande(int tmp)
 void	inception(char *token)
 {
 	size_t	i;
-	int		check;
 	char	*to_check;
 
 	i = 0;
-	check = 0;
-	to_check = "llehsinim/";
+	to_check = "/minishell";
 	while (token[i])
 		i++;
-	while (to_check[check])
+	if (i > 10)
 	{
-		i--;
-		if (to_check[check] != token[i])
+		i -= 10;
+		if (ft_strcmp(token + i, to_check))
 			return ;
-		check++;
+		signal(SIGINT, SIG_IGN);
 	}
-	signal(SIGINT, SIG_IGN);
 }

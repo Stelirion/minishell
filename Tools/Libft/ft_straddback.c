@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 13:21:26 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/11 11:09:07 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 19:01:59 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,5 @@ char	*ft_straddback(char *s1, char const s2)
 	str[i] = s2;
 	i++;
 	str[i] = '\0';
-	free((void *)s1);
-	return (str);
+	return (free(s1), str);
 }

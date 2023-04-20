@@ -6,11 +6,12 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:04:58 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 15:19:40 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 18:50:04 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <signal.h>
 
 static int	is_built_in_p(t_param	*param, t_env *env, int *fd, t_pid *pid);
 
@@ -35,6 +36,8 @@ int	exec_pure(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 		;
 	else
 	{
+		signal(SIGINT, cancel_commande);
+		inception(param->content);
 		res_fork = try_exec (env, param);
 		close(fd[1]);
 		if (res_fork == 0)
