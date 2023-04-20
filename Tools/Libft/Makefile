@@ -37,13 +37,13 @@ SRCS	= 	ft_atoi.c \
 				ft_lstadd_front.c \
 				ft_lstsize.c \
 				ft_lstlast.c \
+				merge_tab_char.c\
 				ft_lstadd_back.c \
 				ft_lstdelone.c \
 				ft_lstclear.c \
 				ft_lstiter.c \
 				ft_lstmap.c \
 				free_tab.c \
-				merge_tab_char.c\
 				ft_strcmp.c\
 				ft_strjoin_free.c\
 				ft_straddback.c\
@@ -53,7 +53,7 @@ SRCS	= 	ft_atoi.c \
 HEADERS		=	libft.h
 OBJS		= ${SRCS:.c=.o}
 CC			= cc
-CCWFLAGS	= -Wall -Werror -Wextra
+CCWFLAGS	= -Wall -Werror -Wextra -g3 -fsanitize=address
 RM 			= rm -f
 AR 			= ar
 ARFLAGS		= -rcs

@@ -6,11 +6,10 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:40:53 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/20 18:37:33 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 19:17:24 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Tools/Libft/libft.h"
 #include "minishell.h"
 
 void	new_prompt(int tmp)
