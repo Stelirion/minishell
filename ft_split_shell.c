@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 13:24:59 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/04 14:26:53 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 13:43:24 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,24 +75,17 @@ char	*before(const char *s)
 	size_t	i;
 	size_t	j;
 	char	*str;
-	int		flag;
 
 	i = -1;
 	j = 0;
-	flag = 0;
 	while (s[++i] != '\0')
 		if (s[i] == '"')
-			flag++;
-	if (flag % 2 != 0)
+			j++;
+	if (j % 2 != 0)
 		return (NULL);
-	// i = -1;
-	// while (s[++i]  != '\0')
-	// 	if (s[i] == 39)
-	// 		flag++;
-	// if (flag % 2 != 0)
-	// 	return (NULL);
 	i = 0;
-	str = malloc(sizeof(char) * (ft_strlen(s) - flag + 1));
+	j = 0;
+	str = malloc(sizeof(char) * (ft_strlen(s) - j + 1));
 	while (s[i + j] && s[i + j] != '\0')
 	{
 		if (str[i + j] != '"')
@@ -128,13 +121,9 @@ char	**ft_split_shell(char const *s)
 	{
 		dst[index] = ft_spliter(str, index, ' ');
 		if (!dst[index])
-		{
-			dst = ft_free_split(dst, index);
-			return (NULL);
-		}
+			return (dst = ft_free_split(dst, index), NULL);
 		index++;
 	}
 	dst[cut] = NULL;
-	free(str);
-	return (dst);
+	return (free(str), dst);
 }

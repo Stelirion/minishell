@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 02:07:14 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:11:31 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ int		*first_pipe(t_env *env, t_param *param);
 t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *pipe);
 int		exec_pipe(t_env *env, t_param *param, t_pipe spipe, t_pid	*pid);
 int		exec_pure(t_env *env, t_param *param, int *fd_org, t_pid *pid);
-int		is_built_in(t_param	*param, t_env *env, int *fd,  t_pid *pid);
-void	ft_redirect(t_param *param, int *i);
+int		is_built_in(t_param	*param, t_env *env, int *fd, t_pid *pid);
+int		ft_redirect(t_param *param, int *i);
 void	ft_undup(int *i);
 void	handle_pipe(t_env *env, t_param *param, int *fd_org, t_pid	*pid);
 t_pid	*pid_lstnew(int pid);

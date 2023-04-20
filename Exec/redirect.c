@@ -6,15 +6,14 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 11:09:48 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 02:55:24 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 15:21:08 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <stdlib.h>
 
 
-void	ft_redirect(t_param *param, int *i)
+int	ft_redirect(t_param *param, int *i)
 {
 	t_param	*tmp;
 
@@ -25,7 +24,7 @@ void	ft_redirect(t_param *param, int *i)
 		{
 			i[0] = open(tmp->content, O_RDONLY);
 			if (i[0] == -1)
-				ft_putstr_fd(strerror(errno), 2);
+				return (ft_putstr_fd(strerror(errno), 2), write(2, "\n", 1), 0);
 			else
 				dup2(i[0], 0);
 			close (i[0]);
@@ -34,7 +33,7 @@ void	ft_redirect(t_param *param, int *i)
 		{
 			i[1] = open (tmp->content, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 			if (i[1] == -1)
-				ft_putstr_fd(strerror(errno), 2);
+				return (ft_putstr_fd(strerror(errno), 2), write(2, "\n", 1), 0);
 			else
 				dup2(i[1], 1);
 			close (i[1]);
@@ -43,7 +42,7 @@ void	ft_redirect(t_param *param, int *i)
 		{
 			i[1] = open (tmp->content, O_WRONLY | O_APPEND | O_CREAT, 0644);
 			if (i[1] == -1)
-				ft_putstr_fd(strerror(errno), 2);
+				return (ft_putstr_fd(strerror(errno), 2), write(2, "\n", 1), 0);
 			else
 				dup2(i[1], 1);
 			close (i[1]);
@@ -53,13 +52,14 @@ void	ft_redirect(t_param *param, int *i)
 			printf("%i\n", tmp->heredoc_fd);
 			i[1] = tmp->heredoc_fd;
 			if (i[1] == -1)
-				ft_putstr_fd(strerror(errno), 2);
+				return (ft_putstr_fd(strerror(errno), 2), 0);
 			else
 				dup2(i[1], 1);
 			close (i[1]);
 		}
 		tmp = tmp->next;
 	}
+	return(1);
 }
 
 void	ft_undup(int *i)
