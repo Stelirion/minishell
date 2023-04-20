@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 02:07:14 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/20 15:18:36 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int		*first_pipe(t_env *env, t_param *param);
 t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *pipe);
 int		exec_pipe(t_env *env, t_param *param, t_pipe spipe, t_pid	*pid);
 int		exec_pure(t_env *env, t_param *param, int *fd_org, t_pid *pid);
-int		is_built_in(t_param	*param, t_env *env, int *fd,  t_pid *pid);
+int		is_built_in(t_param	*param, t_env *env, int *fd, t_pid *pid);
 void	ft_redirect(t_param *param, int *i);
 void	ft_undup(int *i);
 void	handle_pipe(t_env *env, t_param *param, int *fd_org, t_pid	*pid);
@@ -116,6 +116,7 @@ void	pid_lstadd_back(t_pid **pid, t_pid *next);
 void	pid_clear(t_pid *pid);
 void	waiting(t_pid *pid);
 int		exec_pure_p(t_env *env, t_param *param, int *fd_org, t_pid *pid);
+void	inception(char *token);
 
 ///BUILT_IN
 void	pwd(void);
