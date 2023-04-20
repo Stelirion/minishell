@@ -46,11 +46,11 @@ int	heredoc(char *limiter, t_param *param, t_env *env)
 {
 	int		res_fork;
 	char	*line;
-	int		fd[2];
+	int		fd;
 	int		status;
 
 	line = NULL;
-	fd[1] = open("/var/tmp/minishell.tmp", O_CREAT | O_WRONLY, 0644);
+	fd = open("/var/tmp/minishell.tmp", O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	get_heredoc_param(param);
 	get_heredoc_env(env);
 	res_fork = fork();
@@ -67,11 +67,11 @@ int	heredoc(char *limiter, t_param *param, t_env *env)
 			}
 			if (ft_strcmp(line, limiter) == 0)
 				break ;
-			ft_putstr_fd(line, fd[1]);
-			ft_putstr_fd("\n", fd[1]);
+			ft_putstr_fd(line, fd);
+			ft_putstr_fd("\n", fd);
 			free(line);
 		}
-		close(fd[1]);
+		close(fd);
 		return (end_of_prog_exit(env, param, 0), 0);
 	}
 	else
@@ -79,8 +79,8 @@ int	heredoc(char *limiter, t_param *param, t_env *env)
 		waitpid(res_fork, &status, 0);
 		if (WEXITSTATUS(status) == 255)
 			return (-1);
-		close(fd[1]);
-		return (fd[1]);
+		close(fd);
+		return (fd);
 	}
 }
 
