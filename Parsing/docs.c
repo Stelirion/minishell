@@ -38,8 +38,8 @@ void	signal_heredoc(int tmp)
 	(void)tmp;
 	env = get_heredoc_env(NULL);
 	param = get_heredoc_param(NULL);
-	printf("pouet");
-	end_of_prog_exit(env, param, -1);
+	g_return_value = -1;
+	end_of_prog_exit(env, param, 0);
 }
 
 int	heredoc(char *limiter, t_param *param, t_env *env)
@@ -47,6 +47,7 @@ int	heredoc(char *limiter, t_param *param, t_env *env)
 	int		res_fork;
 	char	*line;
 	int		fd[2];
+	int		status;
 
 	line = NULL;
 	fd[1] = open("/var/tmp/minishell.tmp", O_CREAT | O_WRONLY, 0644);
@@ -75,12 +76,10 @@ int	heredoc(char *limiter, t_param *param, t_env *env)
 	}
 	else
 	{
-		while (waitpid(-1, NULL, WUNTRACED) != -1)
-			;
-		close(fd[1]);
-		printf("%d", g_return_value);
-		if (g_return_value == -1)
+		waitpid(res_fork, &status, 0);
+		if (WEXITSTATUS(status) == 255)
 			return (-1);
+		close(fd[1]);
 		return (fd[1]);
 	}
 }
