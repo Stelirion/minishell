@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/20 01:41:12 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/20 02:03:14 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	display(t_env *env, int	*fd_org)
 	if (param)
 		param = type_setting(param);
 	if (param)
-		param = manage_dock(param);
+		param = manage_dock(param, env);
 	if (param)
 	{
 		print_params(param);

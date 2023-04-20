@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 01:41:34 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/20 02:07:14 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ size_t	param_lstsize(t_param *lst);
 t_param	*type_setting(t_param *param);
 size_t	param_lstsize_nb_arg(t_param *lst);
 void	parsing_error(int type);
-t_param	*manage_dock(t_param *param);
+t_param	*manage_dock(t_param *param, t_env *env);
 
 //TEMPORARY
 char	**ft_split_shell(char const *s);

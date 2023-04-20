@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   end_of_prog.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:30:06 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/13 16:15:14 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 03:29:39 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,13 @@ void	end_of_prog_exit(t_env *env, t_param *param, int i)
 {
 	env_clear(env);
 	param_lstclear(&param);
+	printf("%d", g_return_value);
 	if (i != 0)
+	{
+		printf("%d", g_return_value);
 		g_return_value = i;
+	}
+	printf("%d", g_return_value);
 	rl_clear_history();
 	exit (g_return_value);
 }
