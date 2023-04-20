@@ -67,7 +67,7 @@ OBJS	=	${SRCS:%.c=${DIR_OBJS}%.o}
 
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -g3 -fsanitize=address 
+CFLAGS	=	-Wall -Wextra -Werror -g3 #-fsanitize=address 
 #-O3 -g -pg 
 
 

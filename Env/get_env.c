@@ -6,13 +6,14 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/19 19:50:30 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 04:30:01 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 char		**env_split(char **env, int nb);
+
 static void	env_fill(t_env *list);
 
 t_env	*get_env(char **env)
@@ -21,7 +22,6 @@ t_env	*get_env(char **env)
 	t_env	*tmp;
 	size_t	i;
 	char	**str;
-
 
 	if (!env[0])
 	{

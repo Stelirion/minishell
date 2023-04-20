@@ -6,11 +6,12 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:04:58 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 01:06:00 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 04:23:33 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
 static int	is_built_in_p(t_param	*param, t_env *env, int *fd, t_pid *pid);
 
 int	exec_pure(t_env *env, t_param *param, int *fd_org, t_pid *pid)
@@ -39,9 +40,7 @@ int	exec_pure(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 			end_of_prog_exit_fd(env, param, 0, give);
 	}
 	ft_undup(give);
-	close (fd[0]);
-	close(fd_org[1]);
-	return (res_fork);
+	return (close (fd[0]), close(fd_org[1]), res_fork);
 }
 
 int	exec_pure_p(t_env *env, t_param *param, int *fd_org, t_pid *pid)
@@ -70,11 +69,8 @@ int	exec_pure_p(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 			end_of_prog_exit_fd(env, param, 0, give);
 	}
 	ft_undup(give);
-	close (fd[0]);
-	close(fd_org[1]);
-	return (res_fork);
+	return (close (fd[0]), close(fd_org[1]), res_fork);
 }
-
 
 static int	is_built_in_p(t_param	*param, t_env *env, int *fd, t_pid *pid)
 {

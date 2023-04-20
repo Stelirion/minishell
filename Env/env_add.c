@@ -6,12 +6,11 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:11:43 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 01:44:42 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 03:30:14 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 static	int	find_equal(char *str)
 {

@@ -6,13 +6,11 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:45:13 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/09 16:55:54 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/20 04:30:33 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-
 
 void	ft_piped(int arg_nb, int *pipefd, int *fd);
 
@@ -96,7 +94,6 @@ t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *s_pipe)
 	ft_piped(s_pipe->counter, s_pipe->second, s_pipe->first);
 	return (s_pipe);
 }
-
 
 /*
 int	pipex_core(char **argv, int arg_nb, char **envp, int *fd)
