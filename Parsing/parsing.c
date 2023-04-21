@@ -173,7 +173,7 @@ t_param	*parsing_core(char *line, t_param *param, t_env	*env)
 			return (parsing_error(0), free(param), NULL);
 		next_token = manage_quote(next_token, env);
 		if (!next_token)
-			return (param_lstclear(&	param), NULL);
+			return (param_lstclear(&param), NULL);
 		new_lst = param_lstnew(next_token);
 		param_lstadd_back(&param, new_lst);
 	}
