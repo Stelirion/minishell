@@ -197,7 +197,7 @@ t_param	*parsing_core(char *line, t_param *param, t_env	*env)
 		if (!next_token)
 		{
 			printf("next_token == NULL\n");
-			return (param_lstclear(&param), NULL);
+			return (param_lstclear(&	param), NULL);
 		}
 		new_lst = param_lstnew(next_token);
 		param_lstadd_back(&param, new_lst);
