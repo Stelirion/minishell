@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:04:58 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 18:50:04 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 15:51:10 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	exec_pure(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 	while (param && param->type != CMD)
 		param = param->next;
 	if (param && is_built_in(param, env, give, pid) != 1)
-		;
+		write (2, "done\n", 5);
 	else
 	{
 		signal(SIGINT, cancel_commande);
