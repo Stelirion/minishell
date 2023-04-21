@@ -94,25 +94,17 @@ size_t	replace_value(size_t i, char **new, char *token, t_env *env)
 	while (token[i])
 	{
 		i++;
-		if (token[i] == '"' || token[i] == ' '
-			|| token[i] == '<' || token[i] == '>' || token[i] == '|')
+		if (!ft_isalnum(token[i]) && token[i] != '_')
 			break ;
 		to_change = ft_straddback(to_change, token[i]);
 		if (!to_change)
 			return (parsing_error(0), free(*new), 0);
 	}
 	to_change = ft_straddback(to_change, '=');
-	
-	
 	if (!to_change)
 		return (parsing_error(0), free(*new), 0);
-	
-	
 	env_value = env_search(env, to_change);
-	
 	free(to_change);
-	
-	
 	if (!env_value)
 		return (parsing_error(1), free(*new), 0);
 	*new = ft_strjoin_free(*new, env_value->content);
