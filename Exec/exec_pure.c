@@ -6,12 +6,11 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:04:58 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/21 15:51:10 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 21:12:45 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <signal.h>
 
 static int	is_built_in_p(t_param	*param, t_env *env, int *fd, t_pid *pid);
 
@@ -32,9 +31,7 @@ int	exec_pure(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 		return (0);
 	while (param && param->type != CMD)
 		param = param->next;
-	if (param && is_built_in(param, env, give, pid) != 1)
-		write (2, "done\n", 5);
-	else
+	if (!(param && is_built_in(param, env, give, pid) != 1))
 	{
 		signal(SIGINT, cancel_commande);
 		inception(param->content);
@@ -64,9 +61,7 @@ int	exec_pure_p(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 		return (0);
 	while (param && param->type != CMD)
 		param = param->next;
-	if (param && is_built_in_p(param, env, give, pid) != 1)
-		;
-	else
+	if (!(param && is_built_in_p(param, env, give, pid) != 1))
 	{
 		res_fork = try_exec (env, param);
 		close(fd[1]);

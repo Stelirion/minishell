@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 02:48:20 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/05 16:33:30 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 19:59:18 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_env	*cd(t_env *env, char *str)
 	{
 		env = cd_old_pwd(env);
 		free(env_search(env, "PWD=")->content);
-		env_search(env, "PWD=")->content = get_pwd();
+		env_search(env, "PWD=")->content = get_pwd(env);
 	}
 	else
 	{

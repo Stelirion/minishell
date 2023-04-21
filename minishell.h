@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 21:39:41 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 19:59:09 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	inception(char *token);
 ///BUILT_IN
 void	pwd(void);
 void	print_env(t_env *list);
-char	*get_pwd(void);
+char	*get_pwd(t_env *env);
 t_env	*cd(t_env *env, char *str);
 void	echo(char	**str);
 void	case_of(t_env *env);

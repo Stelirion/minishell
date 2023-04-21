@@ -6,18 +6,25 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:56:05 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/09 14:29:35 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 20:27:59 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*get_pwd(void)
+char	*get_pwd(t_env *env)
 {
 	int		i;
 	char	*str;
 
+	(void)env;
 	i = 0;
+	str = malloc(sizeof(char) * 4096);
+	if (!str)
+		error_handler(130, NULL, NULL);
+	if (!getcwd(str, 4096))
+		return (free(str), ft_putstr_fd("PWD unreachable", 1), NULL);
+	free(str);
 	str = malloc(sizeof(char) * 2);
 	if (!str)
 		error_handler(130, NULL, NULL);
@@ -28,7 +35,7 @@ char	*get_pwd(void)
 		i++;
 		str = malloc(sizeof(char) * (i + 1));
 		if (!str)
-			error_handler(130, NULL, NULL);
+			return (free(str), error_handler(130, NULL, NULL), str);
 		str[i] = '\0';
 	}
 	return (str);

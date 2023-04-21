@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 04:30:01 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 20:00:32 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ t_env	*fill_in(int nb, t_env *env)
 	if (nb == 1)
 	{
 		str[0] = ft_strdup("PWD=");
-		str[1] = get_pwd();
+		str[1] = get_pwd(NULL);
 		env_lstadd_back(&env, env_lstnew(str));
 	}
 	else if (nb == 2)

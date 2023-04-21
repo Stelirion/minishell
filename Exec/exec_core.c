@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/21 16:03:31 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 21:11:00 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	is_built_in(t_param	*param, t_env *env, int *fd, t_pid *pid)
 		}
 		else
 		{
-			ft_putstr_fd("hi\n", 2);
 			if (param->next && param->next->content)
 				cd(env, param->next->content);
 			else
