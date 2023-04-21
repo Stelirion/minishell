@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/20 21:44:02 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 13:53:22 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,6 @@
 #include "minishell.h"
 
 int	g_return_value;
-
-void	print_params(t_param *list)
-{
-	printf("_____Debug_____\n");
-	while (list)
-	{
-		printf("%s|%i", list->content, list->type);
-		if (list->type == 7)
-			printf("|%i", list->heredoc_fd);
-		printf("\n");
-		list = list->next;
-	}
-	printf("_______________\n");
-}
 
 int	display(t_env *env, int	*fd_org)
 {
@@ -49,14 +35,6 @@ int	display(t_env *env, int	*fd_org)
 	if (!line)
 		return (end_of_prog_exit(env, param, 0), 0);
 	param = parsing_core(line, param, env);
-	if (param == NULL)  {
-		printf("param == NULL\n");
-	}
-	int	i = 0;
-	for (t_param *test = param; test != NULL; test = test->next) {
-		printf("param %i == %s\n", i, test->content);
-		i++;
-	}
 	if (line && line[0] != '\0')
 		add_history(line);
 	free(line);
@@ -65,10 +43,7 @@ int	display(t_env *env, int	*fd_org)
 	if (param)
 		param = manage_dock(param, env);
 	if (param)
-	{
-		print_params(param);
 		exec_core(param, env, fd_org);
-	}	
 	param_lstclear(&param);
 	tmp = ft_itoa(g_return_value);
 	env_change("?=", tmp, env);

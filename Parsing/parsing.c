@@ -98,18 +98,14 @@ size_t	replace_value(size_t i, char **new, char *token, t_env *env)
 			|| token[i] == '<' || token[i] == '>' || token[i] == '|')
 			break ;
 		to_change = ft_straddback(to_change, token[i]);
-		if (!to_change) {
-			printf("Entered !to_change 1\n");
+		if (!to_change)
 			return (parsing_error(0), free(*new), 0);
-		}
 	}
 	to_change = ft_straddback(to_change, '=');
 	
 	
-	if (!to_change) {
-		printf("Entered !to_change 2\n");
+	if (!to_change)
 		return (parsing_error(0), free(*new), 0);
-	}
 	
 	
 	env_value = env_search(env, to_change);
@@ -118,18 +114,9 @@ size_t	replace_value(size_t i, char **new, char *token, t_env *env)
 	
 	
 	if (!env_value)
-	{
-		printf("Entered !env_value\n");
 		return (parsing_error(1), free(*new), 0);
-	}
-	printf("Passed replace value\n");
 	*new = ft_strjoin_free(*new, env_value->content);
 	return (i - 1);
-}
-
-void salut(char *test)
-{
-	printf("%s\n", test);
 }
 
 char	*manage_quote(char *token, t_env *env)
@@ -163,11 +150,10 @@ char	*manage_quote(char *token, t_env *env)
 		else
 			new = ft_straddback(new, token[i]);
 		i++;
-		printf("new in loop == %s\n", new);
 	}
 	if (type != 0)
-		return (write(2, "1\n", 2), salut(new), parsing_error(3), free(new), free(token), NULL);
-	return (write(2, "2\n", 2), free(token), new);
+		return (parsing_error(3), free(new), free(token), NULL);
+	return (free(token), new);
 }
 
 t_param	*parsing_core(char *line, t_param *param, t_env	*env)
@@ -195,10 +181,7 @@ t_param	*parsing_core(char *line, t_param *param, t_env	*env)
 			return (parsing_error(0), free(param), NULL);
 		next_token = manage_quote(next_token, env);
 		if (!next_token)
-		{
-			printf("next_token == NULL\n");
 			return (param_lstclear(&	param), NULL);
-		}
 		new_lst = param_lstnew(next_token);
 		param_lstadd_back(&param, new_lst);
 	}

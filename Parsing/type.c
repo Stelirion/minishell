@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 09:14:11 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/19 20:29:37 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 14:09:17 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ t_param	*type_setting(t_param *param)
 {
 	int		next;
 	t_param	*init;
+	size_t	pipe;
+	size_t	command;
 
-	next = 0;
+	next = 1;
 	init = param;
-	param->type = CMD;
-	param = param->next;
 	while (param)
 	{
 		if (param->content[0] == '|')
@@ -73,5 +73,20 @@ t_param	*type_setting(t_param *param)
 			param->type = ARG;
 		param = param->next;
 	}
+	param = init;
+	command = 0;
+	pipe = 0;
+	while (param)
+	{
+		if (param->type == CMD)
+			command++;
+		else if (param->type == PIPE)
+			pipe++; 
+		param = param->next;
+	}
+	if (command == 0)
+		return (parsing_error(6), param_lstclear(&init), NULL);
+	if (command - 1 != pipe)
+		return (parsing_error(6), param_lstclear(&init), NULL);
 	return (init);
 }
