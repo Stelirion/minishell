@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:33:35 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 18:28:02 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 18:16:19 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ static void	child(t_env *env, t_param *param)
 	// struct	stat *whydoiexist;
 
 	// whydoiexist = malloc(sizeof (struct stat));
-	tmp = ft_split(env_search(env, "PATH=")->content, ':');
+	if (env_search(env, "PATH=") == 0 || env_search(env, "PATH=")->content == 0)
+		tmp = ft_split("", ':');
+	else
+		tmp = ft_split(env_search(env, "PATH=")->content, ':');
 	i = -1;
 	arg = arg_array(env, param);
 	env_a = env_to_array(env, param->next);
@@ -54,7 +57,7 @@ static void	child(t_env *env, t_param *param)
 			if (!access(cmd[1], F_OK))
 			{
 				g_return_value = 126;
-				break;
+				break ;
 			}
 			free(cmd[0]);
 			free(cmd[1]);
