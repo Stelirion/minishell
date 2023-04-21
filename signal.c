@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:40:53 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/20 19:17:24 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 21:42:26 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ void	cancel_commande(int tmp)
 {
 	(void)tmp;
 	ft_putstr_fd("\n", 1);
+	return ;
+}
+
+void	command_back(int tmp)
+{
+	(void)tmp;
+	ft_putstr_fd("Quit\n", 1);
 	return ;
 }
 

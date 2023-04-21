@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/21 13:53:22 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/21 21:39:08 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	display(t_env *env, int	*fd_org)
 	signal(SIGQUIT, SIG_IGN);
 	line = readline(tmp);
 	signal(SIGINT, cancel_commande);
+	signal(SIGQUIT, command_back);
 	free(tmp);
 	if (!line)
 		return (end_of_prog_exit(env, param, 0), 0);
