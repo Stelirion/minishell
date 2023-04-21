@@ -6,11 +6,13 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 00:54:04 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 16:03:31 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	arg_exit(t_param *param, t_env *env, int *fd, t_pid *pid);
 
 int	is_built_in(t_param	*param, t_env *env, int *fd, t_pid *pid)
 {
@@ -20,8 +22,7 @@ int	is_built_in(t_param	*param, t_env *env, int *fd, t_pid *pid)
 	{
 		close (0);
 		close (1);
-		pid_clear(pid);
-		end_of_prog_exit_fd(env, param, 0, fd);
+		return (arg_exit(param, env, fd, pid), -2);
 	}
 	else if (!ft_strcmp(param->content, "echo"))
 	{
@@ -94,4 +95,38 @@ void	exec_core(t_param	*param, t_env *env, int *fd_org)
 	dup2(fd_org[0], 0);
 	dup2(fd_org[1], 1);
 	waiting(pid);
+}
+
+void	arg_exit (t_param *param, t_env *env, int *fd, t_pid *pid)
+{
+	size_t	i;
+	t_param	*tmp;
+
+	i = 0;
+	tmp = param;
+	write(2, "exit\n", 5);
+	while (tmp && tmp->type != PIPE)
+	{
+		if (tmp->type == ARG)
+			i++;
+		tmp = tmp->next;
+	}
+	if (i > 1)
+	{
+		ft_putstr_fd("exit : Too many arguments\n", 2);
+		return ;
+	}
+	pid_clear(pid);
+	tmp = param;
+	while (i == 1 && tmp->type != ARG)
+		tmp = tmp->next;
+	i = 0;
+	if (tmp->content && ft_isdigit_str(tmp->content))
+		end_of_prog_exit_fd(env, param, ft_atoi(tmp->content) % 256, fd);
+	if (tmp->content && tmp->type == 4)
+	{
+		ft_putstr_fd("exit take only numerical argument\n", 2);
+		end_of_prog_exit_fd(env, param, 0, fd);
+	}
+	end_of_prog_exit_fd(env, param, g_return_value, fd);
 }
