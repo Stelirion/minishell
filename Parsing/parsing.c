@@ -94,7 +94,9 @@ size_t	replace_value(size_t i, char **new, char *token, t_env *env)
 	while (token[i])
 	{
 		i++;
-		if (!ft_isalnum(token[i]) && token[i] != '_')
+		if (i == 1 && token[i] == '?' && !token[i + 1])
+			;
+		else if (!ft_isalnum(token[i]) && token[i] != '_')
 			break ;
 		to_change = ft_straddback(to_change, token[i]);
 		if (!to_change)
@@ -136,7 +138,7 @@ char	*manage_quote(char *token, t_env *env)
 		else if (token[i] == '$' && type != 1)
 		{
 			i = replace_value(i, &new, token, env);
-			if (!i)
+			if (!i || !new)
 				return (free(token), NULL);
 		}
 		else
