@@ -6,11 +6,14 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 15:11:43 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 03:30:14 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 19:39:59 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void	try(t_env *env, char *str, char **add);
+static	void	ft_tmp_env(t_env *tmp_env,	char **add);
 
 static	int	find_equal(char *str)
 {
@@ -44,8 +47,6 @@ void	env_add(t_env *env, char *str)
 	size_t	i;
 
 	i = 0;
-	if (!str || !*str)
-		return ;
 	tmp[0] = str;
 	add = env_split(tmp, 0);
 	tmp_env = env_search(env, add[0]);
@@ -60,20 +61,26 @@ void	env_add(t_env *env, char *str)
 			return (export_error(add));
 	}
 	if (tmp_env)
-	{
-		free(tmp_env->content);
-		tmp_env->content = add[1];
-		free(add[0]);
-	}
+		ft_tmp_env(tmp_env, add);
 	else
-	{
-		env_lstadd_back(&env, env_lstnew(add));
-		if (find_equal(str))
-			env_lstlast(env)->is_env = 1;
-		else
-			env_lstlast(env)->is_env = 0;
-		env_lstlast(env)->is_export = 1;
-	}
+		try(env, str, add);
 	free(add);
 	g_return_value = 0;
+}
+
+static void	try(t_env *env, char *str, char **add)
+{
+	env_lstadd_back(&env, env_lstnew(add));
+	if (find_equal(str))
+		env_lstlast(env)->is_env = 1;
+	else
+		env_lstlast(env)->is_env = 0;
+	env_lstlast(env)->is_export = 1;
+}
+
+static	void	ft_tmp_env(t_env *tmp_env,	char **add)
+{
+	free(tmp_env->content);
+	tmp_env->content = add[1];
+	free(add[0]);
 }

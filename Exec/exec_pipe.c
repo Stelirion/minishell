@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 18:59:57 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 19:26:25 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int				check_pipe(t_param *param);
 static	t_pipe	fill(t_pipe pipe, int i[2], int j[2]);
 static void		pipe_child(t_env *env, t_param *param, t_pid *pid, \
 			int **fd_tmp);
-
 
 void	handle_pipe(t_env *env, t_param *param, int *fd_org, t_pid	*pid)
 {

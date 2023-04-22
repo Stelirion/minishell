@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 19:48:46 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/22 19:53:07 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ t_env	*env_search_before(t_env *list, char *str);
 t_env	*env_unset(t_env *env, char *str);
 void	print_export(t_env *list);
 t_env	*env_unset(t_env *env, char *str);
+t_env	*shlvl(t_env *env);
+int		echo_built_int(t_param	*param, t_env *env);
 
 ///EXEC
 void	exec_core(t_param	*param, t_env *env, int *fd_org);
@@ -127,6 +129,10 @@ void	pid_clear(t_pid *pid);
 void	waiting(t_pid *pid);
 int		exec_pure_p(t_env *env, t_param *param, int *fd_org, t_pid *pid);
 void	inception(char *token);
+size_t	param_lstsize_arg(t_param *param);
+char	**arg_array(t_env *env, t_param *param);
+void	exec_test(char **tmp, t_param *param, char **arg, char **env_a);
+void	exec_test2(t_env *env, t_param *param, char **arg, char **env_a);
 
 ///BUILT_IN
 void	pwd(void);

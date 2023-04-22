@@ -29,6 +29,7 @@ SRCS	=	main.c\
 			Env/env_add.c\
 			Env/env_clear.c\
 			Env/env_unset.c\
+			Env/shlvl.c\
 			\
 			Built_in/env.c\
 			Built_in/get_pwd.c\
@@ -62,6 +63,7 @@ SRCS	=	main.c\
 			Exec/exec_pipe.c\
 			Exec/redirect.c\
 			Exec/s_pid.c\
+			Exec/exec_child2.c\
 			
 
 

@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 17:44:54 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 19:42:02 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char		**env_split(char **env, int nb);
 char		**env_split2(char **env, int nb, size_t *i, char **rtn);
 static void	env_fill(t_env *list);
-t_env		*shlvl(t_env *env);
 
 t_env	*get_env(char **env)
 {
@@ -135,24 +134,4 @@ char	**env_split2(char **env, int nb, size_t *i, char **rtn)
 		rtn[1][i[0]] = env[nb][i[2] + i[0]];
 	rtn[1][i[0]] = '\0';
 	return (rtn);
-}
-
-t_env	*shlvl(t_env *env)
-{
-	char	*str[2];
-
-	if ((ft_atoi(env_search(env, "SHLVL=")->content)) > 999)
-	{
-		ft_putstr_fd("Minishell : warning: shell level too high", 1);
-		ft_putstr_fd(" ( > 1000), resetting to 1\n", 1);
-		free(env_search(env, "SHLVL=")->content);
-		env_search(env, "SHLVL=")->content = ft_strdup("1");
-	}
-	else
-	{
-		str[0] = ft_itoa((ft_atoi(env_search(env, "SHLVL=")->content) + 1));
-		free(env_search(env, "SHLVL=")->content);
-		env_search(env, "SHLVL=")->content = str[0];
-	}
-	return (env);
 }
