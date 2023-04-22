@@ -78,7 +78,7 @@ size_t	split_token(char *line, size_t start)
 	return (i);
 }
 
-size_t	replace_value(size_t i, char **new, char *token, t_env *env)
+ssize_t	replace_value(size_t i, char **new, char *token, t_env *env)
 {
 	char	*to_change;
 	t_env	*env_value;
@@ -102,14 +102,14 @@ size_t	replace_value(size_t i, char **new, char *token, t_env *env)
 	env_value = env_search(env, to_change);
 	free(to_change);
 	if (!env_value)
-		return (parsing_error(1), free(*new), 0);
+		return (parsing_error(1), free(*new), -1);
 	*new = ft_strjoin_free(*new, env_value->content);
 	return (i - 1);
 }
 
 char	*manage_quote(char *token, t_env *env)
 {
-	size_t	i;
+	ssize_t	i;
 	int		type;
 	char	*new;
 
@@ -120,12 +120,10 @@ char	*manage_quote(char *token, t_env *env)
 		return (NULL);
 	while (token[i])
 	{
-		if (token[i] == '\'' && type == 1)
+		if ((token[i] == '\'' && type == 1) || (token[i] == '"' && type == 2))
 			type = 0;
 		else if (token[i] == '\'' && type == 0)
 			type = 1;
-		else if (token[i] == '"' && type == 2)
-			type = 0;
 		else if (token[i] == '"' && type == 0)
 			type = 2;
 		else if (token[i] == '$' && type != 1)
@@ -134,41 +132,11 @@ char	*manage_quote(char *token, t_env *env)
 			new = ft_straddback(new, token[i]);
 		if (!new)
 			return (parsing_error(0), free(token), NULL);
+		else if (i == -1)
+			return (free(token), NULL);
 		i++;
 	}
 	if (type != 0)
 		return (parsing_error(3), free(new), free(token), NULL);
 	return (free(token), new);
-}
-
-t_param	*parsing_core(char *line, t_param *param, t_env	*env)
-{
-	size_t	i;
-	size_t	start;
-	size_t	len;
-	char	*next_token;
-	t_param	*new_lst;
-
-	i = 0;
-	len = ft_strlen(line);
-	if (token_format(line) == 0)
-		return (parsing_error(6), free(param), NULL);
-	while (i <= len)
-	{
-		while (line[i] == ' ')
-			i++;
-		if (!line[i])
-			break ;
-		start = i;
-		i = split_token(line, start);
-		next_token = ft_substr(line, start, i - start);
-		if (!next_token)
-			return (parsing_error(0), free(param), NULL);
-		next_token = manage_quote(next_token, env);
-		if (!next_token)
-			return (param_lstclear(&param), NULL);
-		new_lst = param_lstnew(next_token);
-		param_lstadd_back(&param, new_lst);
-	}
-	return (param);
 }
