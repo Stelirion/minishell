@@ -6,13 +6,13 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:45:13 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 18:47:15 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 18:51:47 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_piped(int arg_nb, int *pipefd, int *fd);
+void		ft_piped(int arg_nb, int *pipefd, int *fd);
 static	void	ft_infile(t_param *param, t_env *env, t_pipe *s_pipe);
 
 int	*first_pipe(t_env *env, t_param *param)

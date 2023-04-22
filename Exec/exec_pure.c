@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:04:58 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 18:43:23 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 18:52:05 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ static int	is_built_in_p(t_param	*param, t_env *env, int *fd, t_pid *pid)
 		return (1);
 	return (-2);
 }
-static int	echo_built_in (t_param	*param, t_env *env)
+
+static int	echo_built_in(t_param	*param, t_env *env)
 {
 	char	**str;
 
