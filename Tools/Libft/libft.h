@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 15:30:05 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/21 15:22:13 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 16:26:09 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 char	**ft_split(char const *s, char c);
 int		ft_isdigit_str(char *str);
+void	free_tab_size_t(size_t *target);
+
 
 t_list	*ft_lstnew(int content);
 void	ft_lstadd_front(t_list **lst, t_list *next);

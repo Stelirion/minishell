@@ -6,13 +6,11 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:13:39 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/05 16:49:16 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 16:34:04 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-#include <stdio.h>
+#include "libft.h"
 
 void	free_tab(char **str)
 {
@@ -29,3 +27,20 @@ void	free_tab(char **str)
 	}
 	free(str);
 }
+
+void	free_tab_size_t(size_t *target)
+{
+	size_t	i;
+
+	i = 0;
+	if (!target)
+		return ;
+	while (target[i])
+	{
+		if (target[i])
+			free(&target[i]);
+		i++;
+	}
+	free(target);
+}
+
