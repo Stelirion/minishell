@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:33:35 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 17:27:51 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 19:46:58 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 #include <stddef.h>
 
 static void	child(t_env *ebv, t_param *param);
-static char	**arg_array(t_env *env, t_param *param);
 static	void	free_tabs(char **a, char **b, char **c);
-void		print_cmd_not_found(char *str);
-void		exec_test(char **tmp, t_param *param, char **arg, char **env_a);
-void		exec_test2(t_env *env, t_param *param, char **arg, char **env_a);
 
 int	try_exec(t_env *env, t_param *param)
 {
@@ -56,13 +52,6 @@ static void	child(t_env *env, t_param *param)
 	end_of_prog_exit(env, param, g_return_value);
 }
 
-void	print_cmd_not_found(char *str)
-{
-	ft_putstr_fd("Minishell : command not found : ", 2);
-	ft_putstr_fd(str, 2);
-	write (2, "\n", 1);
-}
-
 static	void	free_tabs(char **a, char **b, char **c)
 {
 	free_tab(a);
@@ -70,7 +59,7 @@ static	void	free_tabs(char **a, char **b, char **c)
 	free_tab(c);
 }
 
-static size_t	param_lstsize_arg(t_param *param)
+size_t	param_lstsize_arg(t_param *param)
 {
 	size_t	i;
 
@@ -82,68 +71,4 @@ static size_t	param_lstsize_arg(t_param *param)
 		param = param->next;
 	}
 	return (i);
-}
-
-static char	**arg_array(t_env *env, t_param *param)
-{
-	char	**str;
-	char	*tmp;
-	size_t	i;
-
-	i = 0;
-	str = malloc(sizeof(char *) * (param_lstsize_arg(param) + 2));
-	if (!str)
-		error_handler(130, env, param);
-	while (param && param->type != PIPE)
-	{
-		if (param->type == ARG || param->type == CMD)
-		{
-			tmp = ft_strdup(param->content);
-			if (!tmp)
-				error_handler(130, env, param);
-			str[i] = tmp;
-			i++;
-		}
-		param = param->next;
-	}
-	str[i] = NULL;
-	return (str);
-}
-
-void	exec_test(char **tmp, t_param *param, char **arg, char **env_a)
-{
-	size_t	i;
-	char	*cmd;
-
-	i = -1;
-	while (tmp && tmp[++i])
-	{
-		cmd = ft_strjoin(tmp[i], "/");
-		cmd = ft_strjoin_free(cmd, param->content);
-		if (!access(cmd, X_OK))
-			execve(cmd, arg, env_a);
-		if (!access(cmd, F_OK))
-		{
-			g_return_value = 126;
-			break ;
-		}
-		free(cmd);
-	}
-	g_return_value = 127;
-	print_cmd_not_found(param->content);
-}
-
-void	exec_test2(t_env *env, t_param *param, char **arg, char **env_a)
-{
-	char	*cmd;
-
-	cmd = ft_strjoin(env_search(env, "PWD=")->content, "/");
-	cmd = ft_strjoin_free(cmd, param->content);
-	if (access(cmd, X_OK))
-		execve(cmd, arg, env_a);
-	if (!access(cmd, F_OK))
-		g_return_value = 126;
-	free(cmd);
-	g_return_value = 127;
-	print_cmd_not_found(param->content);
 }
