@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 18:44:12 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/22 19:48:46 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,15 @@ typedef struct s_pid
 	int				*pid;
 	struct s_pid	*next;
 }					t_pid;
+
+typedef struct s_parsing_core
+{
+	size_t	i;
+	size_t	len;
+	size_t	start;
+	char	*next_token;
+	t_param	*new_lst;
+}					t_parsing_core;
 
 extern int	g_return_value;
 

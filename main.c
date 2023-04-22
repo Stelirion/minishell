@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/22 18:48:11 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 19:41:14 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,17 @@
 
 int	g_return_value;
 
-int	display(t_env *env, int	*fd_org)
+int	launchpad(char *line, t_env *env, char *tmp, int *fd_org)
 {
-	char	*line;
-	char	*tmp;
 	t_param	*param;
 
 	param = NULL;
-	tmp = last_str(env);
-	line = ft_strjoin ("\x1B[34;1m Minishell : \x1B[35m", tmp);
-	free(tmp);
-	tmp = ft_strjoin (line, "\x1B[0m : ");
-	free(line);
-	signal(SIGINT, new_prompt);
-	signal(SIGQUIT, SIG_IGN);
-	line = readline(tmp);
 	signal(SIGINT, cancel_commande);
 	signal(SIGQUIT, command_back);
-	free(tmp);
 	if (!line)
-		return (end_of_prog_exit(env, param, 0), 0);
+		return (end_of_prog_exit(env, param, 0), 1);
+	if (!token_format(line))
+		return (parsing_error(6), free(line), 1);
 	param = parsing_core(line, param, env);
 	if (line && line[0] != '\0')
 		add_history(line);
@@ -47,6 +38,24 @@ int	display(t_env *env, int	*fd_org)
 	param_lstclear(&param);
 	tmp = ft_itoa(g_return_value);
 	env_change("?=", tmp, env);
+	return (1);
+}
+
+int	display(t_env *env, int	*fd_org)
+{
+	char	*line;
+	char	*tmp;
+
+	tmp = last_str(env);
+	line = ft_strjoin ("\x1B[34;1m Minishell : \x1B[35m", tmp);
+	free(tmp);
+	tmp = ft_strjoin (line, "\x1B[0m : ");
+	free(line);
+	signal(SIGINT, new_prompt);
+	signal(SIGQUIT, SIG_IGN);
+	line = readline(tmp);
+	free(tmp);
+	launchpad(line, env, tmp, fd_org);
 	return (1);
 }
 
