@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 16:15:19 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/22 19:50:06 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/22 22:08:05 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ size_t	split_token(char *line, size_t start)
 t_param	*parsing_core(char *line, t_param *param, t_env	*env)
 {
 	t_parsing_core	var;
+	t_param			*new_lst;
 
 	var.i = 0;
 	var.len = ft_strlen(line);
@@ -57,10 +58,10 @@ t_param	*parsing_core(char *line, t_param *param, t_env	*env)
 		var.next_token = manage_quote(var.next_token, env);
 		if (!var.next_token)
 			return (param_lstclear(&param), NULL);
-		var.new_lst = param_lstnew(var.next_token);
-		if (!var.new_lst)
+		new_lst = param_lstnew(var.next_token);
+		if (!new_lst)
 			return (parsing_error(0), param_lstclear(&param), NULL);
-		param_lstadd_back(&param, var.new_lst);
+		param_lstadd_back(&param, new_lst);
 	}
 	return (param);
 }
