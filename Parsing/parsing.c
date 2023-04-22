@@ -33,24 +33,18 @@ int	token_format(char *line)
 
 	i = 0;
 	symbol = 0;
-	while (line[i])
+	while (line[i] && symbol <= 1)
 	{
 		type = get_status(line[i], type);
 		if (symbol > 1)
 			return (0);
-		else if (line[i] == '|')
-			symbol++;
-		else if (line[i] == '<')
+		else if (line[i] == '|' || line[i] == '<' || line[i] == '>')
 		{
-			if (line[i + 1] && line[i + 1] == '<')
+			if ((line[i] == '<' && line[i + 1] == '<')
+				|| (line[i] == '>' && line[i + 1] == '>'))
 				i++;
-			symbol++;
-		}
-		else if (line[i] == '>')
-		{
-			if (line[i + 1] && line[i + 1] == '>')
-				i++;
-			symbol++;
+			if (++symbol > 1)
+				return (0);
 		}
 		else if (ft_isalpha(line[i]))
 			symbol = 0;
@@ -121,10 +115,9 @@ char	*manage_quote(char *token, t_env *env)
 
 	i = 0;
 	type = 0;
-	new = malloc(sizeof(char));
+	new = ft_calloc(1, sizeof(char));
 	if (!new)
 		return (NULL);
-	new[0] = '\0';
 	while (token[i])
 	{
 		if (token[i] == '\'' && type == 1)
@@ -136,13 +129,11 @@ char	*manage_quote(char *token, t_env *env)
 		else if (token[i] == '"' && type == 0)
 			type = 2;
 		else if (token[i] == '$' && type != 1)
-		{
 			i = replace_value(i, &new, token, env);
-			if (!i || !new)
-				return (free(token), NULL);
-		}
-		else
+		else if (!(type == 1 && token[i] == '\\'))
 			new = ft_straddback(new, token[i]);
+		if (!new)
+			return (parsing_error(0), free(token), NULL);
 		i++;
 	}
 	if (type != 0)
