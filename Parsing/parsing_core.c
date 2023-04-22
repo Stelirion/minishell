@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 16:15:19 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/22 17:22:01 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/22 19:50:06 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,35 +39,28 @@ size_t	split_token(char *line, size_t start)
 
 t_param	*parsing_core(char *line, t_param *param, t_env	*env)
 {
-	size_t	i;
-	size_t	len;
-	size_t	start;
-	char	*next_token;
-	t_param	*new_lst;
+	t_parsing_core	var;
 
-	i = 0;
-	len = ft_strlen(line);
-	if (!token_format(line))
-		return (parsing_error(6), free(param), NULL);
-	while (i <= len)
+	var.i = 0;
+	var.len = ft_strlen(line);
+	while (var.i <= var.len)
 	{
-		while (line[i] == ' ')
-			i++;
-		if (!line[i])
+		while (line[var.i] == ' ')
+			var.i++;
+		if (!line[var.i])
 			break ;
-		start = i;
-		i = split_token(line, start);
-		next_token = ft_substr(line, start, i - start);
-		if (!next_token)
+		var.start = var.i;
+		var.i = split_token(line, var.start);
+		var.next_token = ft_substr(line, var.start, var.i - var.start);
+		if (!var.next_token)
 			return (parsing_error(0), free(param), NULL);
-		next_token = manage_quote(next_token, env);
-		if (!next_token)
+		var.next_token = manage_quote(var.next_token, env);
+		if (!var.next_token)
 			return (param_lstclear(&param), NULL);
-		new_lst = param_lstnew(next_token);
-		if (!new_lst)
+		var.new_lst = param_lstnew(var.next_token);
+		if (!var.new_lst)
 			return (parsing_error(0), param_lstclear(&param), NULL);
-		param_lstadd_back(&param, new_lst);
+		param_lstadd_back(&param, var.new_lst);
 	}
 	return (param);
 }
-
