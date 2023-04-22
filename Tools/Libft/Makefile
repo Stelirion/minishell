@@ -54,7 +54,7 @@ SRCS	= 	ft_atoi.c \
 HEADERS		=	libft.h
 OBJS		= ${SRCS:.c=.o}
 CC			= cc
-CCWFLAGS	= -Wall -Werror -Wextra -g3 -fsanitize=address
+CCWFLAGS	= -Wall -Werror -Wextra #-g3 -fsanitize=address
 RM 			= rm -f
 AR 			= ar
 ARFLAGS		= -rcs

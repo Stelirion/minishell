@@ -6,17 +6,16 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:33:35 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 19:46:58 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 21:43:27 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-#include <stddef.h>
 
 static void	child(t_env *ebv, t_param *param);
 static	void	free_tabs(char **a, char **b, char **c);
 
-int	try_exec(t_env *env, t_param *param)
+int	try_exec(t_env *env, t_param *param, t_pid	*pid)
 {
 	int	res_fork;
 
@@ -24,7 +23,10 @@ int	try_exec(t_env *env, t_param *param)
 	if (res_fork == -1)
 		return (ft_putstr_fd("fork failed\n", 2), -1);
 	else if (res_fork == 0)
+	{
+		pid_clear(pid);
 		child(env, param);
+	}
 	return (res_fork);
 }
 

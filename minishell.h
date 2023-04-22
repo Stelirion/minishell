@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 19:47:54 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 21:41:44 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	exec_core(t_param	*param, t_env *env, int *fd_org);
 char	**param_to_array(t_env *env, t_param *param);
 char	**param_to_arg(t_env *env, t_param *param);
 char	**env_to_array(t_env *env, t_param *param);
-int		try_exec(t_env *env, t_param *param);
+int		try_exec(t_env *env, t_param *param, t_pid *pid);
 int		*first_pipe(t_env *env, t_param *param);
 t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *pipe);
 int		exec_pipe(t_env *env, t_param *param, t_pipe spipe, t_pid	*pid);

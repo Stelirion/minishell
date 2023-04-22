@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 19:26:25 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 21:41:56 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static void	pipe_child(t_env *env, t_param *param, t_pid	*pid, int **fd_tmp)
 	if (param && is_built_in(param, env, fd_tmp[0], pid) != 1)
 		;
 	else
-		res_fork = try_exec (env, param);
+		res_fork = try_exec (env, param, pid);
 	close (1);
 	waitpid(res_fork, 0, 0);
 	pid_clear(pid);
