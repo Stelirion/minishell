@@ -6,13 +6,14 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:04:58 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/21 23:04:08 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 18:43:23 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 static int	is_built_in_p(t_param	*param, t_env *env, int *fd, t_pid *pid);
+static int	echo_built_in(t_param	*param, t_env *env);
 
 int	exec_pure(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 {
@@ -40,8 +41,7 @@ int	exec_pure(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 		if (res_fork == 0)
 			end_of_prog_exit_fd(env, param, 0, give);
 	}
-	ft_undup(give);
-	return (close (fd[0]), close(fd_org[1]), res_fork);
+	return (ft_undup(give), close (fd[0]), close(fd_org[1]), res_fork);
 }
 
 int	exec_pure_p(t_env *env, t_param *param, int *fd_org, t_pid *pid)
@@ -74,8 +74,6 @@ int	exec_pure_p(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 
 static int	is_built_in_p(t_param	*param, t_env *env, int *fd, t_pid *pid)
 {
-	char	**str;
-
 	(void)fd;
 	(void)pid;
 	if (!ft_strcmp(param->content, "exit"))
@@ -85,14 +83,7 @@ static int	is_built_in_p(t_param	*param, t_env *env, int *fd, t_pid *pid)
 		return (-2);
 	}
 	else if (!ft_strcmp(param->content, "echo"))
-	{
-		str = param_to_arg(env, param->next);
-		if (!str)
-			str[1] = ft_strdup("");
-		echo(str);
-		free_tab(str);
-		return (-2);
-	}
+		return (echo_built_in (param, env));
 	else if (!ft_strcmp(param->content, "cd"))
 		return (-2);
 	else if (!ft_strcmp(param->content, "env"))
@@ -105,5 +96,16 @@ static int	is_built_in_p(t_param	*param, t_env *env, int *fd, t_pid *pid)
 		return (-2);
 	else
 		return (1);
+	return (-2);
+}
+static int	echo_built_in (t_param	*param, t_env *env)
+{
+	char	**str;
+
+	str = param_to_arg(env, param->next);
+	if (!str)
+		str[1] = ft_strdup("");
+	echo(str);
+	free_tab(str);
 	return (-2);
 }

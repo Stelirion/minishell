@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:31:02 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/21 23:03:36 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 18:10:37 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	pid_clear(t_pid *pid)
 			free(tmp);
 		}
 	}
+	free(pid);
 }
 
 void	pid_lstadd_back(t_pid **pid, t_pid *next)
@@ -63,11 +64,11 @@ t_pid	*pid_lstnew(int pid)
 	{
 		new->pid = malloc(sizeof(int));
 		if (!new->pid)
-			return (NULL);
+			return (free(new), NULL);
 		new->pid[0] = pid;
 	}
 	else
-		return (NULL);
+		return (free(new), NULL);
 	new->next = NULL;
 	return (new);
 }

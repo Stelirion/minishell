@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:33:35 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 16:59:56 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 17:27:51 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ void	exec_test(char **tmp, t_param *param, char **arg, char **env_a)
 	size_t	i;
 	char	*cmd;
 
-	i = 0;
-	while (tmp[++i])
+	i = -1;
+	while (tmp && tmp[++i])
 	{
 		cmd = ft_strjoin(tmp[i], "/");
 		cmd = ft_strjoin_free(cmd, param->content);

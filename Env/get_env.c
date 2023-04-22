@@ -6,15 +6,16 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/21 20:00:32 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 17:44:54 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 char		**env_split(char **env, int nb);
-
+char		**env_split2(char **env, int nb, size_t *i, char **rtn);
 static void	env_fill(t_env *list);
+t_env		*shlvl(t_env *env);
 
 t_env	*get_env(char **env)
 {
@@ -28,10 +29,7 @@ t_env	*get_env(char **env)
 		list = env_lstnew(NULL);
 		if (!list)
 			error_handler(130, NULL, NULL);
-		env_fill (list);
-		tmp = list->next;
-		free(list);
-		return (tmp);
+		return (env_fill (list), tmp = list->next, free(list), tmp);
 	}
 	i = 0;
 	str = env_split(env, 0);
@@ -45,8 +43,7 @@ t_env	*get_env(char **env)
 		env_lstadd_back(&list, env_lstnew(str));
 		free(str);
 	}
-	env_fill (list);
-	return (list);
+	return (env_fill (list), list);
 }
 
 t_env	*fill_in(int nb, t_env *env)
@@ -66,22 +63,7 @@ t_env	*fill_in(int nb, t_env *env)
 		env_lstadd_back(&env, env_lstnew(str));
 	}
 	else if (nb == 3)
-	{
-		if ((ft_atoi(env_search(env, "SHLVL=")->content)) > 999)
-		{
-			ft_putstr_fd("Minishell : warning: shell level too high", 1);
-			ft_putstr_fd(" ( > 1000), resetting to 1\n", 1);
-			str [1] = ft_strdup("1");
-			free(env_search(env, "SHLVL=")->content);
-			env_search(env, "SHLVL=")->content = str[1];
-		}
-		else
-		{
-			str[0] = ft_itoa((ft_atoi(env_search(env, "SHLVL=")->content) + 1));
-			free(env_search(env, "SHLVL=")->content);
-			env_search(env, "SHLVL=")->content = str[0];
-		}
-	}
+		env = shlvl(env);
 	return (env);
 }
 
@@ -112,40 +94,65 @@ static void	env_fill(t_env *list)
 
 char	**env_split(char **env, int nb)
 {	
-	size_t			i;
+	size_t			i[3];
 	char			**rtn;
-	size_t			max;
-	size_t			stop;
-	char			*tmp;
 
-	i = 0;
+	i[0] = 0;
 	rtn = malloc(sizeof(char *) * 2);
 	if (!rtn)
 		error_handler(130, NULL, NULL);
-	max = ft_strlen(env[nb]);
-	while (i < max && env[nb][i] != '=')
-		i++;
-	if (env[nb][i] == '=')
-		stop = ++i;
+	i[1] = ft_strlen(env[nb]);
+	while (i[0] < i[1] && env[nb][i[0]] != '=')
+		i[0]++;
+	if (env[nb][i[0]] == '=')
+		i[2] = ++i[0];
 	else
-		stop = i;
-	rtn[0] = malloc(sizeof(char) * (stop + 1));
-	rtn[1] = malloc(sizeof(char) * (max - stop + 1));
+		i[2] = i[0];
+	rtn[0] = malloc(sizeof(char) * (i[2] + 1));
+	rtn[1] = malloc(sizeof(char) * (i[1] - i[2] + 1));
 	if (!rtn[0] || !rtn[1])
 		error_handler(130, NULL, NULL);
-	i = -1;
-	while (++i < stop)
-		rtn[0][i] = env[nb][i];
-	rtn[0][i] = '\0';
-	if (rtn[0][i - 1] != '=')
+	rtn = env_split2(env, nb, i, rtn);
+	return (rtn);
+}
+
+char	**env_split2(char **env, int nb, size_t *i, char **rtn)
+{
+	char	*tmp;
+
+	i[0] = -1;
+	while (++i[0] < i[2])
+		rtn[0][i[0]] = env[nb][i[0]];
+	rtn[0][i[0]] = '\0';
+	if (rtn[0][i[0] - 1] != '=')
 	{
 		tmp = ft_strjoin(rtn[0], "=");
 		free(rtn[0]);
 		rtn[0] = tmp;
 	}
-	i = -1;
-	while (++i < max - stop)
-		rtn[1][i] = env[nb][stop + i];
-	rtn[1][i] = '\0';
+	i[0] = -1;
+	while (++i[0] < i[1] - i[2])
+		rtn[1][i[0]] = env[nb][i[2] + i[0]];
+	rtn[1][i[0]] = '\0';
 	return (rtn);
+}
+
+t_env	*shlvl(t_env *env)
+{
+	char	*str[2];
+
+	if ((ft_atoi(env_search(env, "SHLVL=")->content)) > 999)
+	{
+		ft_putstr_fd("Minishell : warning: shell level too high", 1);
+		ft_putstr_fd(" ( > 1000), resetting to 1\n", 1);
+		free(env_search(env, "SHLVL=")->content);
+		env_search(env, "SHLVL=")->content = ft_strdup("1");
+	}
+	else
+	{
+		str[0] = ft_itoa((ft_atoi(env_search(env, "SHLVL=")->content) + 1));
+		free(env_search(env, "SHLVL=")->content);
+		env_search(env, "SHLVL=")->content = str[0];
+	}
+	return (env);
 }

@@ -6,13 +6,14 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/09 15:45:13 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/21 23:03:42 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 18:47:15 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 void	ft_piped(int arg_nb, int *pipefd, int *fd);
+static	void	ft_infile(t_param *param, t_env *env, t_pipe *s_pipe);
 
 int	*first_pipe(t_env *env, t_param *param)
 {
@@ -73,13 +74,7 @@ t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *s_pipe)
 	while (tmp && tmp->type != PIPE)
 	{
 		if (tmp->type == INFILE)
-		{
-			str = ft_strjoin(env_search(env, "PWD=")->content, param->content);
-			if (!str)
-				error_handler(130, env, param);
-			s_pipe->first[0] = open(str, O_RDONLY);
-			free(str);
-		}
+			ft_infile(param, env, s_pipe);
 		if (tmp->type == OUTFILE)
 		{
 			str = ft_strjoin(env_search(env, "PWD=")->content, param->content);
@@ -94,36 +89,13 @@ t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *s_pipe)
 	return (s_pipe);
 }
 
-/*
-int	pipex_core(char **argv, int arg_nb, char **envp, int *fd)
+static	void	ft_infile(t_param *param, t_env *env, t_pipe *s_pipe)
 {
-	int	res_fork;
-	int	pipefd[2];
+	char	*str;
 
-	pipe(pipefd);
-	res_fork = fork();
-	ft_piped (arg_nb, pipefd, fd);
-	return (res_fork);
+	str = ft_strjoin(env_search(env, "PWD=")->content, param->content);
+	if (!str)
+		error_handler(130, env, param);
+	s_pipe->first[0] = open(str, O_RDONLY);
+	free(str);
 }
-
-void	pipex_main(int argc, char **argv, char **envp)
-{
-	int	arg_nb;
-	int	fd[2];
-	int	res_fork;
-
-	fd[1] = open (argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
-	fd[0] = open (argv[1], O_RDONLY);
-	pipex_error_arg(argc, argv);
-	arg_nb = 2;
-	while (arg_nb <= argc - 2)
-	{
-	//	ft_piped (arg_nb, pipefd);
-		res_fork = pipex_core(argv, arg_nb++, envp, fd);
-	// close (pipefd[0]);
-	//	close (file_fd_in);
-		close (fd[0]);
-	}
-	close (fd[1]);
-//	waitpid(res_fork, fd, 0);
-}*/

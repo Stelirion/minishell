@@ -6,54 +6,25 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/21 23:00:49 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 18:44:02 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	arg_exit(t_param *param, t_env *env, int *fd, t_pid *pid);
+void		arg_exit(t_param *param, t_env *env, int *fd, t_pid *pid);
+static	void	not_numerical(t_param *param, t_env *env, int *fd);
+int			cd_built_in(t_param	*param, t_env *env);
+int			echo_built_int(t_param	*param, t_env *env);
 
 int	is_built_in(t_param	*param, t_env *env, int *fd, t_pid *pid)
 {
-	char	**str;
-
 	if (!ft_strcmp(param->content, "exit"))
-	{
-		close (0);
-		close (1);
-		return (arg_exit(param, env, fd, pid), -2);
-	}
+		return (close (0), close (1), arg_exit(param, env, fd, pid), -2);
 	else if (!ft_strcmp(param->content, "echo"))
-	{
-		str = param_to_arg(env, param->next);
-		if (!str)
-			str[1] = ft_strdup("");
-		echo(str);
-		free_tab(str);
-		return (-2);
-	}
+		return (echo_built_int(param, env));
 	else if (!ft_strcmp(param->content, "cd"))
-	{
-		if (param_lstsize_nb_arg(param) > 1)
-			ft_putstr_fd("Minishell : cd take only 1 argument\n", 1);
-		else if (param_lstsize_nb_arg(param) == 0)
-		{
-			if (env_search(env, "HOME=") == 0 || \
-					!env_search(env, "HOME=")->content)
-				ft_putstr_fd("HOME unset\n", 2);
-			else
-				cd(env, env_search(env, "HOME=")->content);
-		}
-		else
-		{
-			if (param->next && param->next->content)
-				cd(env, param->next->content);
-			else
-				cd(env, "");
-		}
-		return (-2);
-	}
+		return (cd_built_in(param, env));
 	else if (!ft_strcmp(param->content, "env"))
 		print_env(env);
 	else if (!ft_strcmp(param->content, "pwd"))
@@ -112,10 +83,7 @@ void	arg_exit(t_param *param, t_env *env, int *fd, t_pid *pid)
 		tmp = tmp->next;
 	}
 	if (i > 1)
-	{
-		ft_putstr_fd("exit : Too many arguments\n", 2);
-		return ;
-	}
+		return (ft_putstr_fd("exit : Too many arguments\n", 2), (void)0);
 	pid_clear(pid);
 	tmp = param;
 	while (i == 1 && tmp->type != ARG)
@@ -124,9 +92,46 @@ void	arg_exit(t_param *param, t_env *env, int *fd, t_pid *pid)
 	if (tmp->content && ft_isdigit_str(tmp->content))
 		end_of_prog_exit_fd(env, param, ft_atoi(tmp->content) % 256, fd);
 	if (tmp->content && tmp->type == 4)
-	{
-		ft_putstr_fd("exit take only numerical argument\n", 2);
-		end_of_prog_exit_fd(env, param, 0, fd);
-	}
+		not_numerical(param, env, fd);
 	end_of_prog_exit_fd(env, param, g_return_value, fd);
+}
+
+static	void	not_numerical(t_param *param, t_env *env, int *fd)
+{
+	ft_putstr_fd("exit take only numerical argument\n", 2);
+	end_of_prog_exit_fd(env, param, 0, fd);
+}
+
+int	cd_built_in(t_param	*param, t_env *env)
+{
+	if (param_lstsize_nb_arg(param) > 1)
+		ft_putstr_fd("Minishell : cd take only 1 argument\n", 1);
+	else if (param_lstsize_nb_arg(param) == 0)
+	{
+		if (env_search(env, "HOME=") == 0 || \
+				!env_search(env, "HOME=")->content)
+			ft_putstr_fd("HOME unset\n", 2);
+		else
+			cd(env, env_search(env, "HOME=")->content);
+	}
+	else
+	{
+		if (param->next && param->next->content)
+			cd(env, param->next->content);
+		else
+			cd(env, "");
+	}
+	return (-2);
+}
+
+int	echo_built_int(t_param	*param, t_env *env)
+{
+	char	**str;
+
+	str = param_to_arg(env, param->next);
+	if (!str)
+		str[1] = ft_strdup("");
+	echo(str);
+	free_tab(str);
+	return (-2);
 }

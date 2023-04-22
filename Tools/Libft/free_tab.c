@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 16:13:39 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 16:34:04 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 17:02:53 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,3 @@ void	free_tab_size_t(size_t *target)
 	}
 	free(target);
 }
-
