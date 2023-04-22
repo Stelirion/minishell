@@ -6,12 +6,11 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 11:09:48 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 18:11:08 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 23:01:00 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
 
 int	ft_redirect(t_param *param, int *i)
 {

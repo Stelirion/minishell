@@ -6,10 +6,9 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 13:24:59 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 13:43:24 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 15:38:06 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -98,7 +97,6 @@ char	*before(const char *s)
 	str[i + j] = '\0';
 	return (str);
 }
-
 
 char	**ft_split_shell(char const *s)
 {

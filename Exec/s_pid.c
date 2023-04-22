@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:31:02 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/19 23:19:40 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 23:03:36 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ void	waiting(t_pid *pid)
 				else
 					g_return_value = 128 + WTERMSIG(g_return_value);
 			}			
-
 		}
 		tmp = tmp->next;
 	}

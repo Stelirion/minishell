@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:04:58 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/21 21:12:45 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 23:04:08 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,3 @@ static int	is_built_in_p(t_param	*param, t_env *env, int *fd, t_pid *pid)
 		return (1);
 	return (-2);
 }
-
-
-

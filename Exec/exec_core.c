@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/21 21:11:00 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/21 23:00:49 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	is_built_in(t_param	*param, t_env *env, int *fd, t_pid *pid)
 			ft_putstr_fd("Minishell : cd take only 1 argument\n", 1);
 		else if (param_lstsize_nb_arg(param) == 0)
 		{
-			if (env_search(env, "HOME=") == 0 || !env_search(env, "HOME=")->content)
+			if (env_search(env, "HOME=") == 0 || \
+					!env_search(env, "HOME=")->content)
 				ft_putstr_fd("HOME unset\n", 2);
 			else
 				cd(env, env_search(env, "HOME=")->content);
@@ -96,7 +97,7 @@ void	exec_core(t_param	*param, t_env *env, int *fd_org)
 	waiting(pid);
 }
 
-void	arg_exit (t_param *param, t_env *env, int *fd, t_pid *pid)
+void	arg_exit(t_param *param, t_env *env, int *fd, t_pid *pid)
 {
 	size_t	i;
 	t_param	*tmp;

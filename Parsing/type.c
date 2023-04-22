@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 09:14:11 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/21 15:14:29 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/21 22:59:54 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_param	*type_setting(t_param *param)
 		if (param->type == CMD)
 			command++;
 		else if (param->type == PIPE)
-			pipe++; 
+			pipe++;
 		param = param->next;
 	}
 	if (command == 0)
