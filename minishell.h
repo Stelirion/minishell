@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 21:45:34 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 21:50:03 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,15 @@ typedef struct s_pid
 	struct s_pid	*next;
 }					t_pid;
 
+typedef struct s_parsing_core
+{
+	size_t	i;
+	size_t	len;
+	size_t	start;
+	char	*next_token;
+	t_param	*new_lst;
+}				t_parsing_core;
+
 extern int	g_return_value;
 
 void	header(void);
@@ -105,7 +114,7 @@ void	exec_core(t_param	*param, t_env *env, int *fd_org);
 char	**param_to_array(t_env *env, t_param *param);
 char	**param_to_arg(t_env *env, t_param *param);
 char	**env_to_array(t_env *env, t_param *param);
-int		try_exec(t_env *env, t_param *param, t_pid pid);
+int		try_exec(t_env *env, t_param *param, t_pid *pid);
 int		*first_pipe(t_env *env, t_param *param);
 t_pipe	*ft_pipe(t_param *param, t_env *env, t_pipe *pipe);
 int		exec_pipe(t_env *env, t_param *param, t_pipe spipe, t_pid	*pid);
