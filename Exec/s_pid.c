@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 12:31:02 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 21:57:51 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 22:37:08 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	pid_clear(t_pid *pid)
 			free(tmp);
 		}
 	}
-	free(pid);
 }
 
 void	pid_lstadd_back(t_pid **pid, t_pid *next)

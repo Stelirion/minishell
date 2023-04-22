@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:33:35 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 21:43:27 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 22:23:35 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	child(t_env *env, t_param *param)
 	if (!tmp)
 		error_handler(130, env, param);
 	arg = arg_array(env, param);
-	env_a = env_to_array(env, param->next);
+	env_a = env_to_array(env, param);
 	if (!access(param->content, X_OK))
 		execve(param->content, arg, env_a);
 	if (ft_strchr(param->content, '/') == NULL)

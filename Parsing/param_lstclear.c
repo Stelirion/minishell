@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param_lstclear.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 17:36:25 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/07 19:09:40 by ngennaro         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 22:14:17 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 

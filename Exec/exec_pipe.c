@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 21:41:56 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/22 22:43:48 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,37 @@
 int				*ft_pipe3(t_param *param, int *i, int j);
 int				check_pipe(t_param *param);
 static	t_pipe	fill(t_pipe pipe, int i[2], int j[2]);
-static void		pipe_child(t_env *env, t_param *param, t_pid *pid, \
+static void		pipe_child(t_env *env, t_param **param, t_pid *pid, \
 			int **fd_tmp);
 
 void	handle_pipe(t_env *env, t_param *param, int *fd_org, t_pid	*pid)
 {
 	int		fd[2];
 	t_pipe	pipe;
+	t_param	*tmp[2];
 
 	pipe = fill(pipe, fd, fd_org);
-	while (param)
+	tmp[1] = param;
+	tmp[0] = param;
+	while (tmp[0])
 	{
-		while (param && param->type != CMD)
-			param = param->next;
-		if (!param)
+		while (tmp[0] && tmp[0]->type != CMD)
+			tmp[0] = tmp[0]->next;
+		if (!tmp[0])
 			break ;
 		signal(SIGINT, cancel_commande);
-		inception(param->content);
-		if (check_pipe(param))
+		inception(tmp[0]->content);
+		if (check_pipe(tmp[0]))
 			pid_lstadd_back(&pid, pid_lstnew
-				(exec_pipe(env, param, pipe, pid)));
+				(exec_pipe(env, tmp, pipe, pid)));
 		else
 			pid_lstadd_back(&pid, pid_lstnew(exec_pure_p(env, \
-				param, fd_org, pid)));
-		param = param->next;
+				tmp[0], fd_org, pid)));
+		tmp[0] = tmp[0]->next;
 	}
 }
 
-int	exec_pipe(t_env *env, t_param *param, t_pipe spipe, t_pid	*pid)
+int	exec_pipe(t_env *env, t_param **param, t_pipe spipe, t_pid	*pid)
 {
 	int	res_fork;
 	int	*fd;
@@ -89,24 +92,24 @@ int	check_pipe(t_param *param)
 	return (0);
 }
 
-static void	pipe_child(t_env *env, t_param *param, t_pid	*pid, int **fd_tmp)
+static void	pipe_child(t_env *env, t_param **param, t_pid	*pid, int **fd_tmp)
 {
 	int	res_fork;
 
 	dup2(fd_tmp[0][1], 1);
-	if (!ft_redirect(param, fd_tmp[0]))
-		return (end_of_prog_exit(env, param, 0), (void)1);
+	if (!ft_redirect(param[0], fd_tmp[0]))
+		return (pid_clear(pid), end_of_prog_exit(env, param[0], 0), (void)1);
 	close(fd_tmp[0][1]);
 	close(fd_tmp[0][0]);
 	close(fd_tmp[1][0]);
 	close(fd_tmp[1][1]);
-	if (param && is_built_in(param, env, fd_tmp[0], pid) != 1)
+	if (param && is_built_in(param[0], env, fd_tmp[0], pid) != 1)
 		;
 	else
-		res_fork = try_exec (env, param, pid);
+		res_fork = try_exec (env, param[0], pid);
 	close (1);
 	waitpid(res_fork, 0, 0);
-	pid_clear(pid);
 	g_return_value = res_fork;
-	end_of_prog_exit(env, param, 0);
+	pid_clear(pid);
+	end_of_prog_exit(env, param[1], 0);
 }
