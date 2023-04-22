@@ -49,6 +49,7 @@ SRCS	=	main.c\
 			Parsing/docs.c\
 			Parsing/heredoc.c\
 			Parsing/parsing_core.c\
+			Parsing/type_handler.c\
 			\
 			ft_split_shell.c\
 			misc.c\

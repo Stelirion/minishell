@@ -6,11 +6,36 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 16:15:19 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/22 17:00:10 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/22 17:22:01 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+size_t	split_token(char *line, size_t start)
+{
+	size_t	i;
+	int		status;
+
+	i = start;
+	status = 0;
+	if (line[i] == '|' || line[i] == '>' || line[i] == '<')
+		return (i + 1);
+	while (line[i])
+	{
+		status = get_status(line[i], status);
+		if (status == 0 && line[i] == ' ')
+			return (i);
+		if (status == 0 && line[i] == '|')
+			return (i);
+		if (status == 0 && line[i] == '>')
+			return (i);
+		if (status == 0 && line[i] == '<')
+			return (i);
+		i++;
+	}
+	return (i);
+}
 
 t_param	*parsing_core(char *line, t_param *param, t_env	*env)
 {

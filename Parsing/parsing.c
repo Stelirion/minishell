@@ -53,31 +53,6 @@ int	token_format(char *line)
 	return (1);
 }
 
-size_t	split_token(char *line, size_t start)
-{
-	size_t	i;
-	int		status;
-
-	i = start;
-	status = 0;
-	if (line[i] == '|' || line[i] == '>' || line[i] == '<')
-		return (i + 1);
-	while (line[i])
-	{
-		status = get_status(line[i], status);
-		if (status == 0 && line[i] == ' ')
-			return (i);
-		if (status == 0 && line[i] == '|')
-			return (i);
-		if (status == 0 && line[i] == '>')
-			return (i);
-		if (status == 0 && line[i] == '<')
-			return (i);
-		i++;
-	}
-	return (i);
-}
-
 ssize_t	replace_value(size_t i, char **new, char *token, t_env *env)
 {
 	char	*to_change;
@@ -107,6 +82,19 @@ ssize_t	replace_value(size_t i, char **new, char *token, t_env *env)
 	return (i - 1);
 }
 
+int	handle_quotes(int *type, char c)
+{
+	if ((c == '\'' && *type == 1) || (c == '"' && *type == 2))
+		*type = 0;
+	else if (c == '\'' && *type == 0)
+		*type = 1;
+	else if (c == '"' && *type == 0)
+		*type = 2;
+	else
+		return (0);
+	return (1);
+}
+
 char	*manage_quote(char *token, t_env *env)
 {
 	ssize_t	i;
@@ -120,19 +108,13 @@ char	*manage_quote(char *token, t_env *env)
 		return (NULL);
 	while (token[i])
 	{
-		if ((token[i] == '\'' && type == 1) || (token[i] == '"' && type == 2))
-			type = 0;
-		else if (token[i] == '\'' && type == 0)
-			type = 1;
-		else if (token[i] == '"' && type == 0)
-			type = 2;
+		if (handle_quotes(&type, token[i]))
+			;
 		else if (token[i] == '$' && type != 1)
 			i = replace_value(i, &new, token, env);
 		else if (!(type == 1 && token[i] == '\\'))
 			new = ft_straddback(new, token[i]);
-		if (!new)
-			return (parsing_error(0), free(token), NULL);
-		else if (i == -1)
+		if (i == -1)
 			return (free(token), NULL);
 		i++;
 	}
