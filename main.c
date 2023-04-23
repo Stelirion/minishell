@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/23 02:55:22 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/23 03:46:07 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	main(int argc, char **argv, char **envp)
 	tmp = malloc(sizeof(char *) * 2);
 	tmp[0] = ft_strdup("?=");
 	tmp[1] = ft_strdup("0");
+	if (!tmp || !tmp[0] || !tmp[1])
+		return (ft_putstr_fd("Couldn't start\n", 2), free_tab(tmp), 1);
 	env_lstadd_back(&env, env_lstnew(tmp));
 	free(tmp);
 	header();
@@ -91,12 +93,21 @@ int	main(int argc, char **argv, char **envp)
 static t_env	*add_dummy(t_env *env)
 {
 	char	**tmp;
+	t_env	*new;
 
 	tmp = malloc(sizeof(char *) * 2);
+	if (!tmp)
+		exit(1);
 	tmp[1] = "0";
 	tmp[0] = "0";
-	env_lstadd_front(&env, env_lstnew(tmp));
-	env_lstadd_front(&env, env_lstnew(tmp));
+	new = env_lstnew(tmp);
+	if (!new)
+		exit(1);
+	env_lstadd_front(&env, new);
+	new = env_lstnew(tmp);
+	if (!new)
+		exit(1);
+	env_lstadd_front(&env, new);
 	free(tmp);
 	return (env);
 }

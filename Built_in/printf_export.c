@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:59:48 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 16:15:45 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/23 03:34:59 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_env	*find_next(t_env *list, size_t nb)
 		if (test == nb)
 			return (target);
 		target = target->next;
-		if (!target->next)
+		if (!target || (target && !target->next))
 			break ;
 		tmp = list;
 		test = 0;

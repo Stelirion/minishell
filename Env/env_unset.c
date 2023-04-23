@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:40:06 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/23 02:52:31 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/23 03:39:02 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_env	*env_unset(t_env *env, char *src)
 	char	*str;
 
 	str = ft_strjoin(src, "=");
-	if (!str || !env_search(env, str))
+	if (!str || !env_search(env, str) || !ft_strcmp(src, "?"))
 		return (free(str), unset_error(env, src));
 	last = env_search_before(env, str);
 	if (last == env)

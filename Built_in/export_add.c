@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 15:14:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/03/09 14:38:33 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/23 03:40:53 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	export_handler(t_param *param, t_env *env)
 		error_handler(130, env, param);
 	if (!str[1] || str[1][0] == '\0')
 	{
-		print_export(env);
+		print_export(env->next->next);
 	}
 	else
 	{
