@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 16:35:56 by mbrement          #+#    #+#             */
-/*   Updated: 2023/02/27 13:59:31 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/23 00:38:21 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	env_change(char *name, char *content, t_env *env)
 		return ;
 	tmp = env_search(env, name);
 	if (!tmp)
-		return ;
-	free(tmp->content);
+		return (free (content));
+	if (tmp->content)
+		free(tmp->content);
 	tmp->content = content;
 }

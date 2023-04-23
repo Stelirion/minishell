@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 19:43:43 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 19:46:53 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/23 00:15:49 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	exec_test(char **tmp, t_param *param, char **arg, char **env_a)
 		if (!access(cmd, F_OK))
 		{
 			g_return_value = 126;
+			free(cmd);
 			break ;
 		}
 		free(cmd);

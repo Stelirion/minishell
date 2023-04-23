@@ -6,10 +6,11 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/22 22:30:35 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/23 02:55:22 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Tools/Libft/libft.h"
 #include "minishell.h"
 
 int	g_return_value;
@@ -59,6 +60,7 @@ int	display(t_env *env, int	*fd_org)
 	launchpad(line, env, tmp, fd_org);
 	return (1);
 }
+static t_env	*add_dummy(t_env *env);
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -74,13 +76,27 @@ int	main(int argc, char **argv, char **envp)
 	if (fd_org[1] == -1 || fd_org[0] == -1)
 		return (1);
 	env = get_env(envp);
+	env = add_dummy(env);
 	tmp = malloc(sizeof(char *) * 2);
 	tmp[0] = ft_strdup("?=");
 	tmp[1] = ft_strdup("0");
 	env_lstadd_back(&env, env_lstnew(tmp));
-	header();
 	free(tmp);
+	header();
 	retry = 1;
 	while (retry)
 		retry = display(env, fd_org);
+}
+
+static t_env	*add_dummy(t_env *env)
+{
+	char	**tmp;
+
+	tmp = malloc(sizeof(char *) * 2);
+	tmp[1] = "0";
+	tmp[0] = "0";
+	env_lstadd_front(&env, env_lstnew(tmp));
+	env_lstadd_front(&env, env_lstnew(tmp));
+	free(tmp);
+	return (env);
 }

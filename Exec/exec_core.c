@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 19:48:01 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/23 02:14:20 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,11 @@ int	is_built_in(t_param	*param, t_env *env, int *fd, t_pid *pid)
 		export_handler(param, env);
 	else if (!ft_strcmp(param->content, "unset"))
 	{
-		while (param->next)
+		while (param->next && param->type != PIPE)
 		{
 			param = param->next;
-			env = env_unset(env, param->content);
+			if (param->type == ARG)
+				env = env_unset(env, param->content);
 		}
 	}
 	else

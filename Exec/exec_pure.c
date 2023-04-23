@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:04:58 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 21:42:14 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/23 02:06:02 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	is_built_in_p(t_param	*param, t_env *env, int *fd, t_pid *pid);
 static int	echo_built_in(t_param	*param, t_env *env);
+static void	export_handler2(t_param *param, t_env *env);
 
 int	exec_pure(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 {
@@ -91,7 +92,7 @@ static int	is_built_in_p(t_param	*param, t_env *env, int *fd, t_pid *pid)
 	else if (!ft_strcmp(param->content, "pwd"))
 		pwd();
 	else if (!ft_strcmp(param->content, "export"))
-		return (-2);
+		return (export_handler2(param, env), 1);
 	else if (!ft_strcmp(param->content, "unset"))
 		return (-2);
 	else
@@ -109,4 +110,20 @@ static int	echo_built_in(t_param	*param, t_env *env)
 	echo(str);
 	free_tab(str);
 	return (-2);
+}
+
+static void	export_handler2(t_param *param, t_env *env)
+{
+	char	**str;
+
+	str = param_to_array(env, param);
+	(void) env;
+	if (!str)
+		error_handler(130, env, param);
+	if (!str[1] || str[1][0] == '\0')
+	{
+		print_export(env);
+	}
+	free_tab(str);
+	g_return_value = 0;
 }

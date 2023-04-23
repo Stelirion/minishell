@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:40:06 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 17:10:27 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/23 02:52:31 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,22 @@ t_env	*unset_error(t_env *env, char *str)
 	ft_putstr_fd(str, 1);
 	ft_putstr_fd("' doen't exist\n", 1);
 	return (env);
+}
+
+t_env	*env_lstdelone2(t_env *lst)
+{
+	t_env	*rtn;
+
+	rtn = lst->next;
+	if (!lst)
+		return (NULL);
+	if (lst->name)
+		free(lst->name);
+	if (lst->content)
+		free(lst->content);
+	free(lst);
+	lst = NULL;
+	return (rtn);
 }
 
 t_env	*env_unset(t_env *env, char *src)
@@ -32,19 +48,19 @@ t_env	*env_unset(t_env *env, char *src)
 		return (free(str), unset_error(env, src));
 	last = env_search_before(env, str);
 	if (last == env)
-		return (env = env->next, env_lstdelone(last), free(str), env);
+		return (free(str), env_lstdelone2(last));
 	else if (last == env_lstlast(env))
 		return (free(str), env);
 	else if (last->next == env_lstlast(env))
-		return (env_lstdelone(last->next), last->next = NULL, free(str), env);
+		return (free(str), env_lstdelone(last->next), env);
 	tmp = last->next;
 	last->next = NULL;
 	if (!tmp)
-		return (free(str), env);
+		return (env);
 	if (tmp->next)
 		next = tmp->next;
 	else
 		next = NULL;
 	env_lstdelone(tmp);
-	return (last->next = next, g_return_value = 0, free(str), env);
+	return (free(str), last->next = next, g_return_value = 0, env);
 }

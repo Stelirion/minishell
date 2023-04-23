@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   misc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:15:46 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/20 01:40:14 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/23 00:10:47 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,21 @@ char	*last_str(t_env *env)
 	size_t	i;
 
 	i = 0;
-	if (env_search(env, "PWD=")->content)
+	if (env_search(env, "PWD=") && env_search(env, "PWD=")->content)
 	{
 		if (env_search(env, "PWD=")->content[0] == '\0')
 			return ("/");
 		tmp = ft_split(env_search(env, "PWD=")->content, '/');
 	}
 	else
-		tmp = NULL;
-	if (tmp == NULL)
-		return ("/");
+		tmp = ft_split("/", ' ');
 	if (tmp && tmp[0] && tmp[0][0] == '\0')
-		return ("/");
+		return (free_tab(tmp), "/");
 	while (tmp[i])
 		i++;
 	if (i > 0)
 		str = ft_strdup(tmp[i - 1]);
 	else
 		str = ft_strdup("/");
-	free_tab(tmp);
-	return (str);
+	return (free_tab(tmp), str);
 }
