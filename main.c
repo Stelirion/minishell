@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/23 03:46:07 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 16:29:48 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Tools/Libft/libft.h"
 #include "minishell.h"
 
 int	g_return_value;

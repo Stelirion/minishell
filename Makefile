@@ -6,7 +6,7 @@ DIR_OBJS	=	./
 
 DIR_SRCS	=	./
 
-DIR_LIBFT	=	Tools/Libft/
+DIR_LIBFT	=	Libft/
 
 HEAD	=	minishell.h
 
@@ -66,13 +66,12 @@ SRCS	=	main.c\
 			Exec/exec_child2.c\
 			
 
-
-
 OBJS	=	${SRCS:%.c=${DIR_OBJS}%.o}
 
+DEPS = ${SRCS:%.c=${DIR_OBJS}%.d}
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -lreadline -g3 -fsanitize=address 
+CFLAGS	=	-Wall -Wextra -Werror -lreadline -g3 -fsanitize=address
 #-O3 -g -pg 
 
 
@@ -89,16 +88,16 @@ ${NAME}	:	${OBJS} ${addprefix ${DIR_LIBFT}, ${LIBFT}}
 ${addprefix ${DIR_LIBFT}, ${LIBFT}}	:
 			make ${LIBFT} -C ${DIR_LIBFT}
 
-
-
 fclean_lib		:
 					make fclean -C ${DIR_LIBFT}
 
 clean			:	fclean_lib
 					${RM} ${OBJS}
+					${RM} ${DEPS}
 
 fclean			:	clean fclean_lib
 					${RM} ${NAME}
+					${RM} ${DEPS}
 
 re				:	fclean
 					${MAKE} all

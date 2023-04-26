@@ -1,4 +1,3 @@
-NAME	= libft.a
 SRCS	= 	ft_atoi.c \
 				ft_bzero.c \
 				ft_isalnum.c \
@@ -51,29 +50,42 @@ SRCS	= 	ft_atoi.c \
 				ft_lstfree.c\
 				ft_isdigit_str.c\
 
-HEADERS		=	libft.h
-OBJS		= ${SRCS:.c=.o}
-CC			= cc
-CCWFLAGS	= -Wall -Werror -Wextra #-g3 -fsanitize=address
-RM 			= rm -f
-AR 			= ar
-ARFLAGS		= -rcs
+DIR_SRCS = src/
 
-all : $(NAME)
+DIR_OBJS = .objs/
 
-$(NAME) : $(OBJS) 
-		$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+DIR_HEAD = ./
 
+OBJS	=	${SRCS:%.c=${DIR_OBJS}%.o}
 
-%.o : %.c $(HEADERS)
-		$(CC) $(CCWFLAGS) -I. -c $< -o $@ 
+CC	= cc
 
-clean : 
-	-$(RM) $(OBJS)
+MKDIR	=	mkdir -p
 
-fclean : clean
-	-$(RM) $(NAME)
+HEADERS	= 	libft.h
 
-re : fclean all
+NAME	= libft.a
 
-.PHONY: all clean fclean re bonus
+CFLAGS	= -Wall -Wextra -Werror
+
+all :		${NAME}
+
+clean :
+			rm -rf ${DIR_OBJS}
+
+fclean :	clean
+			rm -rf ${NAME}
+
+re :		fclean
+			$(MAKE) all
+
+${DIR_OBJS}%.o: 	${DIR_SRCS}%.c	${addprefix ${DIR_HEAD}, ${HEADERS}} Makefile | ${DIR_OBJS}
+					${CC} ${CFLAGS} -I ${DIR_HEAD} -c $< -o $@
+
+${DIR_OBJS}		:
+					${MKDIR} ${DIR_OBJS}
+
+${NAME} :	${OBJS}
+			ar -rc ${NAME} ${OBJS}
+
+.PHONY:		all clean fclean re

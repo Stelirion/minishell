@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/23 02:22:39 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 16:29:03 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "Tools/Libft/libft.h"
+# include "Libft/libft.h"
 # include <dirent.h>
 # include <errno.h>
 # include <string.h>

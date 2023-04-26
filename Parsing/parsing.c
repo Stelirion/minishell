@@ -77,7 +77,7 @@ ssize_t	replace_value(size_t i, char **new, char *token, t_env *env)
 	env_value = env_search(env, to_change);
 	free(to_change);
 	if (!env_value)
-		return (parsing_error(1), free(*new), -1);
+		return (i - 1);
 	*new = ft_strjoin_free(*new, env_value->content);
 	return (i - 1);
 }
