@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/26 16:50:27 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 17:32:37 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include <unistd.h>
 
 int	g_return_value;
 
@@ -22,7 +23,7 @@ int	launchpad(char *line, t_env *env, char *tmp, int *fd_org)
 	signal(SIGINT, cancel_commande);
 	signal(SIGQUIT, command_back);
 	if (!line)
-		return (end_of_prog_exit(env, param, 0), 1);
+		return (write(1, "Exit\n", 5), end_of_prog_exit(env, param, 0), 1);
 	if (!token_format(line))
 		return (parsing_error(6), free(line), 1);
 	param = parsing_core(line, param, env);

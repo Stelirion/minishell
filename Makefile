@@ -81,7 +81,6 @@ MKDIR	=	mkdir -p
 
 all		:	${NAME}
 
-
 ${NAME}	:	${OBJS} ${addprefix ${DIR_LIBFT}, ${LIBFT}}
 			${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L${DIR_LIBFT} -lft -lreadline
 
