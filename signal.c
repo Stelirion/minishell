@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/20 01:40:53 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/22 14:51:11 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/26 17:40:15 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,11 @@ void	inception(char *token)
 		if (ft_strcmp(token + i, to_check))
 			return ;
 		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else
+	{
+		signal(SIGINT, cancel_commande);
+		signal(SIGQUIT, command_back);
 	}
 }
