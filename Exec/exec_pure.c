@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:04:58 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/23 03:29:07 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 17:44:31 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	exec_pure(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 		param = param->next;
 	if (!(param && is_built_in(param, env, give, pid) != 1))
 	{
-		signal(SIGINT, cancel_commande);
 		inception(param->content);
 		res_fork = try_exec (env, param, pid);
 		close(fd[1]);

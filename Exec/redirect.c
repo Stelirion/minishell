@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 11:09:48 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/26 14:35:24 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 17:28:41 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_redirect(t_param *param, int *i)
 				dup2(i[0], 0);
 			close (i[0]);
 		}
-		else if (tmp->type == OUTFILE && ft_outfile(param, i, tmp))
+		else if (tmp->type == OUTFILE && ft_outfile(param, i, tmp) == 0)
 			return (0);
 		else if (tmp->type == APPEND && ft_append(param, i, tmp) == 0)
 			return (0);

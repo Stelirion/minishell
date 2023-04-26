@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:59:48 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/26 14:28:53 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 17:27:31 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ void	print_export(t_env *list)
 	target = find_next(list, i);
 	while (i < env_lstsize(list))
 	{
-		ft_putstr_fd("declare -x '", 1);
+		ft_putstr_fd("declare -x ", 1);
 		ft_putstr_fd(target->name, 1);
+		ft_putstr_fd("'", 1);
 		ft_putstr_fd(target->content, 1);
 		ft_putstr_fd("'", 1);
 		write (1, "\n", 1);
