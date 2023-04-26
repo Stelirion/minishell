@@ -93,11 +93,9 @@ fclean_lib		:
 
 clean			:	fclean_lib
 					${RM} ${OBJS}
-					${RM} ${DEPS}
 
 fclean			:	clean fclean_lib
 					${RM} ${NAME}
-					${RM} ${DEPS}
 
 re				:	fclean
 					${MAKE} all
