@@ -13,6 +13,7 @@ HEAD	=	minishell.h
 SRCS	=	main.c\
 			end_of_prog.c\
 			signal.c\
+			misc.c\
 			\
 			Error/error.c\
 			\
@@ -51,9 +52,6 @@ SRCS	=	main.c\
 			Parsing/heredoc.c\
 			Parsing/parsing_core.c\
 			Parsing/type_handler.c\
-			\
-			ft_split_shell.c\
-			misc.c\
 			\
 			Exec/param_to_string.c\
 			Exec/exec_core.c\

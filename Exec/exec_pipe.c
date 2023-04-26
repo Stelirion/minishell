@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/26 17:38:13 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 17:50:27 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ static void	pipe_child(t_env *env, t_param **param, t_pid	*pid, int **fd_tmp)
 	int	res_fork;
 
 	dup2(fd_tmp[0][1], 1);
+	res_fork = -1;
 	if (!ft_redirect(param[0], fd_tmp[0]))
 		return (pid_clear(pid), end_of_prog_exit(env, param[0], 0), (void)1);
 	close(fd_tmp[0][1]);

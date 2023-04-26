@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:40:06 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/26 14:54:24 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 17:52:06 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_env	*unset_error(t_env *env, char *str)
 {
 	ft_putstr_fd("unset : invalid parameter, '", 1);
 	ft_putstr_fd(str, 1);
-	ft_putstr_fd("' doen't exist\n", 1);
+	ft_putstr_fd("' doesn't exist\n", 1);
 	return (env);
 }
 
