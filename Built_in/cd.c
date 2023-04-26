@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 02:48:20 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/26 16:08:50 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 16:48:27 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static void	print_cd(void)
 t_env	*cd(t_env *env, char *str)
 {
 	char	*tmp[2];
-
 
 	if (!str)
 		return (env);

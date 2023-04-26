@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:34:28 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/26 16:23:17 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 16:48:00 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ void	echo(char	**str)
 	i = 0;
 	flag = 0;
 	if (!str || !str[0])
-	{
-		write (1, "\n", 1);
-		return ;
-	}
+		return (write (1, "\n", 1), (void) NULL);
 	while (self_check(str[i]))
 	{
 		flag = 1;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/26 16:34:59 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/26 16:50:27 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	display(t_env *env, int	*fd_org)
 
 	g_return_value = 0;
 	tmp = last_str(env);
-	line = ft_strjoin ("\x1B[34;1m Minishell : \x1B[35m", tmp);
+	line = ft_strjoin ("\001\x1B[34;1m\002 Minishell : \001\x1B[35m\002", tmp);
 	free(tmp);
-	tmp = ft_strjoin (line, "\x1B[0m : ");
+	tmp = ft_strjoin (line, "\001\x1B[0m\002 : ");
 	free(line);
 	signal(SIGINT, new_prompt);
 	signal(SIGQUIT, SIG_IGN);
