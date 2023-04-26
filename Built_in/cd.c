@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 02:48:20 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/23 02:21:22 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 16:08:50 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ static t_env	*cd_old_pwd(t_env	*env)
 	}
 	if (env_search(env, "OLDPWD=") && env_search(env, "OLDPWD=")->content)
 	{
-		free (env_search(env, "OLDPWD=")->content);
+		tmp = env_search(env, "OLDPWD=");
+		free (tmp->content);
 		if (env_search(env, "PWD=") && env_search(env, "PWD=")->content
-			&& tmp && tmp->content)
+			&& tmp)
 			tmp->content = ft_strdup(env_search(env, "PWD=")->content);
 	}
 	return (env);
@@ -47,12 +48,15 @@ t_env	*cd(t_env *env, char *str)
 {
 	char	*tmp[2];
 
-	tmp[0] = "PWD=";
-	tmp[1] = "";
+
 	if (!str)
 		return (env);
-	if (!env_search(env, "PWD="))
+	if (env_search(env, "PWD=") == 0)
+	{	
+		tmp[0] = ft_strdup("PWD=");
+		tmp[1] = ft_strdup(" ");
 		env_lstadd_back(&env, env_lstnew(tmp));
+	}
 	if (ft_strlen(str) == 0)
 	{
 		free(env_search(env, "PWD=")->content);
@@ -61,7 +65,7 @@ t_env	*cd(t_env *env, char *str)
 	else if (chdir(str) != -1)
 	{
 		env = cd_old_pwd(env);
-		if (env_search(env, "PWD") && env_search(env, "PWD=")->content)
+		if (env_search(env, "PWD=")->content)
 			free(env_search(env, "PWD=")->content);
 		env_search(env, "PWD=")->content = get_pwd(env);
 	}

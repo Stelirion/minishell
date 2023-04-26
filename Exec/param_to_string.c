@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 11:14:28 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 22:20:06 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 16:12:16 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ char	**param_to_array(t_env *env, t_param *param)
 	str = malloc(sizeof(char *) * (param_lstsize(param) + 1));
 	if (!str)
 		error_handler(130, env, param);
-	while (param)
+	while (param && param->type != PIPE)
 	{
-		tmp = ft_strdup(param->content);
+		if (param->type == ARG)
+			tmp = ft_strdup(param->content);
+		else
+			tmp = ft_strdup("\0");
 		if (!tmp)
 			error_handler(130, env, param);
 		str[i] = tmp;

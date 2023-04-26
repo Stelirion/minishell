@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 17:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 19:42:02 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 13:54:16 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,12 @@ t_env	*fill_in(int nb, t_env *env)
 	}
 	else if (nb == 3)
 		env = shlvl(env);
+	else if (nb == 4)
+	{
+		str[0] = ft_strdup("OLDPWD=");
+		str[1] = ft_strdup("/");
+		env_lstadd_back(&env, env_lstnew(str));
+	}
 	return (env);
 }
 

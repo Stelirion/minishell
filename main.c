@@ -6,11 +6,10 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/23 03:46:07 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 14:14:35 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Tools/Libft/libft.h"
 #include "minishell.h"
 
 int	g_return_value;
@@ -60,7 +59,7 @@ int	display(t_env *env, int	*fd_org)
 	launchpad(line, env, tmp, fd_org);
 	return (1);
 }
-static t_env	*add_dummy(t_env *env);
+static t_env	**add_dummy(t_env **env);
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -76,7 +75,7 @@ int	main(int argc, char **argv, char **envp)
 	if (fd_org[1] == -1 || fd_org[0] == -1)
 		return (1);
 	env = get_env(envp);
-	env = add_dummy(env);
+	env = *add_dummy(&env);
 	tmp = malloc(sizeof(char *) * 2);
 	tmp[0] = ft_strdup("?=");
 	tmp[1] = ft_strdup("0");
@@ -90,7 +89,7 @@ int	main(int argc, char **argv, char **envp)
 		retry = display(env, fd_org);
 }
 
-static t_env	*add_dummy(t_env *env)
+static t_env	**add_dummy(t_env **env)
 {
 	char	**tmp;
 	t_env	*new;
@@ -103,11 +102,17 @@ static t_env	*add_dummy(t_env *env)
 	new = env_lstnew(tmp);
 	if (!new)
 		exit(1);
-	env_lstadd_front(&env, new);
+	new->is_env = 0;
+	new->is_export = 0;
+	env_lstadd_front(env, new);
+	tmp[1] = "1";
+	tmp[0] = "1";
 	new = env_lstnew(tmp);
 	if (!new)
 		exit(1);
-	env_lstadd_front(&env, new);
+	new->is_env = 0;
+	new->is_export = 0;
+	env_lstadd_front(env, new);
 	free(tmp);
 	return (env);
 }

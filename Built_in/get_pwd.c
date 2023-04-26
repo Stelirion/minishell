@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/25 17:56:05 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/21 20:27:59 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 13:52:10 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_pwd(t_env *env)
 		i++;
 		str = malloc(sizeof(char) * (i + 1));
 		if (!str)
-			return (free(str), error_handler(130, NULL, NULL), str);
+			return (error_handler(130, NULL, NULL), str);
 		str[i] = '\0';
 	}
 	return (str);
