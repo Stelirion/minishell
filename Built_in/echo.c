@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 13:34:28 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 19:42:48 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 16:23:17 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static size_t	self_check(char	*str)
 			j++;
 		if (str[i + j] && str[i + j] != ' ')
 			return (0);
-		i += j;
+		i += j + 1;
 	}	
 	return (1);
 }
@@ -55,10 +55,13 @@ void	echo(char	**str)
 		flag = 1;
 		i++;
 	}
-	while (str[i] && str[i][0] != '\0')
+	while (str[i])
 	{
-		ft_putstr_fd(str[i], 1);
-		write(1, " ", 1);
+		if (str[i][0] != '\0')
+		{
+			ft_putstr_fd(str[i], 1);
+			write(1, " ", 1);
+		}
 		i++;
 	}
 	if (flag == 0)

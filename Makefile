@@ -71,7 +71,7 @@ OBJS	=	${SRCS:%.c=${DIR_OBJS}%.o}
 DEPS = ${SRCS:%.c=${DIR_OBJS}%.d}
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -lreadline -g3 -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -lreadline -g3 #-fsanitize=address 
 #-O3 -g -pg 
 
 

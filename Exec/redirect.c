@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 11:09:48 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/22 18:13:28 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 14:35:24 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@ static int	ft_heredoc(t_param *param, int *i, t_param	*tmp)
 static int	ft_outfile(t_param *param, int *i, t_param	*tmp)
 {
 	(void)param;
-	i[0] = open(tmp->content, O_RDONLY);
-	if (i[0] == -1)
+	i[1] = open (tmp->content, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+	if (i[1] == -1)
 		return (ft_putstr_fd(strerror(errno), 2), write(2, "\n", 1), 0);
 	else
-		dup2(i[0], 0);
-	close (i[0]);
+		dup2(i[1], 1);
+	close (i[1]);
 	return (1);
 }

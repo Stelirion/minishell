@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 13:55:33 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/23 02:04:13 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/26 14:09:38 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ t_env	*env_lstnew(char **content)
 		new->content = NULL;
 		new->name = NULL;
 	}
+	new->is_env = 0;
+	new->is_export = 1;
 	new->next = NULL;
 	return (new);
 }
