@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 19:20:20 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/26 17:32:37 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/26 18:18:44 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ int	launchpad(char *line, t_env *env, char *tmp, int *fd_org)
 	signal(SIGQUIT, command_back);
 	if (!line)
 		return (write(1, "Exit\n", 5), end_of_prog_exit(env, param, 0), 1);
+	if (line && line[0] != '\0')
+		add_history(line);
 	if (!token_format(line))
 		return (parsing_error(6), free(line), 1);
 	param = parsing_core(line, param, env);
-	if (line && line[0] != '\0')
-		add_history(line);
 	free(line);
 	if (param)
 		param = type_setting(param);

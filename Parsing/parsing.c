@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../minishell.h"
+#include <stdio.h>
 
 int	get_status(char token, int type)
 {
@@ -29,25 +30,32 @@ int	token_format(char *line)
 {
 	int	i;
 	int	type;
-	int	symbol;
+	int	pipe;
+	int	redirect_out;
+	int	redirect_in;
 
 	i = 0;
-	symbol = 0;
-	while (line[i] && symbol <= 1)
+	pipe = 0;
+	redirect_in = 0;
+	redirect_out = 0;
+	while (line[i])
 	{
 		type = get_status(line[i], type);
-		if (symbol > 1)
+		if (pipe > 1 || redirect_in > 2 || redirect_out > 2
+			|| (redirect_in > 0 && redirect_out > 0))
 			return (0);
-		else if (line[i] == '|' || line[i] == '<' || line[i] == '>')
-		{
-			if ((line[i] == '<' && line[i + 1] == '<')
-				|| (line[i] == '>' && line[i + 1] == '>'))
-				i++;
-			if (++symbol > 1)
-				return (0);
-		}
+		else if (line[i] == '|')
+			pipe++;
+		else if (line[i] == '>')
+			redirect_out++;
+		else if (line[i] == '<')
+			redirect_in++;
 		else if (ft_isalpha(line[i]))
-			symbol = 0;
+		{
+			pipe = 0;
+			redirect_in = 0;
+			redirect_out = 0;
+		}
 		i++;
 	}
 	return (1);
