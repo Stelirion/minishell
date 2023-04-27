@@ -6,32 +6,47 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:07:16 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/27 14:39:09 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/27 16:19:03 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+static void	ft_swap_m(t_param *first, t_param *second);
+
 void	exec_order(t_param	*param)
 {
-	t_param	*tmp;
+	t_param	*first;
 	t_param	*target;
-	char	*str;
 
 	if (param->type == CMD)
 		return ;
-	tmp = param;
-	while (tmp->type == 9)
-		tmp = tmp->next;
-	target = tmp;
-	while (target && target->type != CMD)
+	first = param;
+	if (first->type == 9)
+		ft_swap_m(first, first->next);
+	if (first->type == 9)
+		ft_swap_m(first, first->next->next);
+	target = first->next;
+	while (first->type && first->type != CMD && target)
+	{
 		target = target->next;
-	if (!target)
+		ft_swap_m(first, target);
+		printf("%s\n", first->content);
+	}
+}
+
+static void	ft_swap_m(t_param *first, t_param *second)
+{
+	char	*str;
+	int		i;
+
+	if (!first || !second)
 		return ;
-	str = ft_strdup(target->content);
-	free(target->content);
-	target->content = tmp->content;
-	tmp->content = str;
-	target->type = tmp->type;
-	tmp->type = CMD;
+	str = ft_strdup(first->content);
+	free(first->content);
+	first->content = second->content;
+	second->content = str;
+	i = first->type;
+	first->type = second->type;
+	second->type = i;
 }

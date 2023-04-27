@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/27 14:38:36 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/27 16:28:09 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	handle_pipe(t_env *env, t_param *param, int *fd_org, t_pid	*pid)
 	while (tmp)
 	{
 		exec_order(tmp);
-		while (tmp && tmp->type != CMD)
-			tmp = tmp->next;
 		if (!tmp)
 			break ;
 		inception(tmp->content);
@@ -114,5 +112,5 @@ static void	pipe_child(t_env *env, t_param **param, t_pid	*pid, int **fd_tmp)
 	waitpid(res_fork, 0, 0);
 	g_return_value = res_fork;
 	pid_clear(pid);
-	end_of_prog_exit(env, param[1], 0);
+	end_of_prog_exit(env, param[0], 0);
 }
