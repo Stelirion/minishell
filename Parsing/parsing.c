@@ -41,17 +41,11 @@ int	token_format(char *line)
 		type = get_status(line[i], type);
 		if (pipe > 1 || redirect > 1)
 			return (0);
-		else if (line[i] == '|')
+		else if (line[i] == '|' && type == 0)
 			pipe++;
-		else if (line[i] == '>')
+		else if ((line[i] == '>' || line[i] == '<') && type == 0)
 		{
-			if (line[i + 1] && line[i + 1] == '>')
-				i++;
-			redirect++;
-		}
-		else if (line[i] == '<')
-		{
-			if (line[i + 1] && line[i + 1] == '<')
+			if (line[i + 1] && line[i + 1] == line[i])
 				i++;
 			redirect++;
 		}

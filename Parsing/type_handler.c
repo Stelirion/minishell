@@ -29,7 +29,7 @@ int	handle_redirect_pipe(t_param **param, int *next, int *tilt)
 
 int	handle_redirect_in(t_param **param, int *tilt)
 {
-	if ((*param)->content[0] == '<')
+	if ((*param)->content[0] == '<' && !(*param)->content[1])
 	{
 		(*param)->type = 9;
 		if (!(*param)->next)
@@ -53,7 +53,7 @@ int	handle_redirect_in(t_param **param, int *tilt)
 
 int	handle_redirect_out(t_param **param, int *tilt)
 {
-	if ((*param)->content[0] == '>')
+	if ((*param)->content[0] == '>' && !(*param)->content[1])
 	{
 		(*param)->type = 9;
 		if (!(*param)->next)
