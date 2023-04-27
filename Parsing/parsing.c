@@ -31,18 +31,15 @@ int	token_format(char *line)
 	int	i;
 	int	type;
 	int	pipe;
-	int	redirect_out;
-	int	redirect_in;
+	int	redirect;
 
 	i = 0;
 	pipe = 0;
-	redirect_in = 0;
-	redirect_out = 0;
+	redirect = 0;
 	while (line[i])
 	{
 		type = get_status(line[i], type);
-		if (pipe > 1 || redirect_in > 1 || redirect_out > 1
-			|| (redirect_in > 0 && redirect_out > 0))
+		if (pipe > 1 || redirect > 1)
 			return (0);
 		else if (line[i] == '|')
 			pipe++;
@@ -50,19 +47,18 @@ int	token_format(char *line)
 		{
 			if (line[i + 1] && line[i + 1] == '>')
 				i++;
-			redirect_out++;
+			redirect++;
 		}
 		else if (line[i] == '<')
 		{
 			if (line[i + 1] && line[i + 1] == '<')
 				i++;
-			redirect_in++;
+			redirect++;
 		}
 		else if (ft_isalpha(line[i]))
 		{
 			pipe = 0;
-			redirect_in = 0;
-			redirect_out = 0;
+			redirect = 0;
 		}
 		i++;
 	}
