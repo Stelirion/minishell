@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:04:58 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/26 17:44:31 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/27 14:09:41 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	exec_pure_p(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 	give[3] = fd[0];
 	if (!ft_redirect(param, fd))
 		return (0);
+	exec_order(param);
 	while (param && param->type != CMD)
 		param = param->next;
 	if (!(param && is_built_in_p(param, env, give, pid) != 1))

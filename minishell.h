@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/26 16:35:06 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:08:20 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ size_t	param_lstsize_arg(t_param *param);
 char	**arg_array(t_env *env, t_param *param);
 void	exec_test(char **tmp, t_param *param, char **arg, char **env_a);
 void	exec_test2(t_env *env, t_param *param, char **arg, char **env_a);
+void	exec_order(t_param	*param);
 
 ///BUILT_IN
 void	pwd(void);

@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/26 17:50:27 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/27 14:38:36 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,28 @@ void	handle_pipe(t_env *env, t_param *param, int *fd_org, t_pid	*pid)
 {
 	int		fd[2];
 	t_pipe	pipe;
-	t_param	*tmp[2];
+	t_param	*tmp;
 
 	pipe = fill(pipe, fd, fd_org);
-	tmp[1] = param;
-	tmp[0] = param;
-	while (tmp[0])
+	tmp = param;
+	while (tmp)
 	{
-		while (tmp[0] && tmp[0]->type != CMD)
-			tmp[0] = tmp[0]->next;
-		if (!tmp[0])
+		exec_order(tmp);
+		while (tmp && tmp->type != CMD)
+			tmp = tmp->next;
+		if (!tmp)
 			break ;
-		signal(SIGINT, cancel_commande);
-		inception(tmp[0]->content);
-		if (check_pipe(tmp[0]))
+		inception(tmp->content);
+		if (check_pipe(tmp))
 			pid_lstadd_back(&pid, pid_lstnew
-				(exec_pipe(env, tmp, pipe, pid)));
+				(exec_pipe(env, &tmp, pipe, pid)));
 		else
 			pid_lstadd_back(&pid, pid_lstnew(exec_pure_p(env, \
-				tmp[0], fd_org, pid)));
-		tmp[0] = tmp[0]->next;
+				tmp, fd_org, pid)));
+		while (tmp && tmp->type != PIPE)
+			tmp = tmp->next;
+		if (tmp)
+			tmp = tmp->next;
 	}
 }
 

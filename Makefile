@@ -62,14 +62,14 @@ SRCS	=	main.c\
 			Exec/redirect.c\
 			Exec/s_pid.c\
 			Exec/exec_child2.c\
-			
+			Exec/exec_order.c\
 
 OBJS	=	${SRCS:%.c=${DIR_OBJS}%.o}
 
 DEPS = ${SRCS:%.c=${DIR_OBJS}%.d}
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror -lreadline -g3 #-fsanitize=address 
+CFLAGS	=	-Wall -Wextra -Werror -lreadline -MMD -MP -g3 #-fsanitize=address 
 #-O3 -g -pg 
 
 
@@ -78,6 +78,10 @@ MKDIR	=	mkdir -p
 
 
 all		:	${NAME}
+
+DEP_FLAGS		=	-MMD -MP
+
+-include $(DEPS)
 
 ${NAME}	:	${OBJS} ${addprefix ${DIR_LIBFT}, ${LIBFT}}
 			${CC} ${CFLAGS} -o ${NAME} ${OBJS} -L${DIR_LIBFT} -lft -lreadline
@@ -90,6 +94,7 @@ fclean_lib		:
 
 clean			:	fclean_lib
 					${RM} ${OBJS}
+					${RM} ${DEPS}
 
 fclean			:	clean fclean_lib
 					${RM} ${NAME}
