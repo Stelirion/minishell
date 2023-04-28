@@ -52,7 +52,7 @@ SRCS	=	main.c\
 			Parsing/heredoc.c\
 			Parsing/parsing_core.c\
 			Parsing/type_handler.c\
-			Parsing\token_check.c\
+			Parsing/token_check.c\
 			\
 			Exec/param_to_string.c\
 			Exec/exec_core.c\
