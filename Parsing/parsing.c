@@ -34,6 +34,7 @@ int	token_format(char *line)
 	int	redirect;
 
 	i = 0;
+	type = 0;
 	pipe = 0;
 	redirect = 0;
 	while (line[i])
