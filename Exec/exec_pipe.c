@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/27 16:28:09 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/28 14:27:35 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,27 @@ void	handle_pipe(t_env *env, t_param *param, int *fd_org, t_pid	*pid)
 {
 	int		fd[2];
 	t_pipe	pipe;
-	t_param	*tmp;
+	t_param	*tmp[2];
 
 	pipe = fill(pipe, fd, fd_org);
-	tmp = param;
-	while (tmp)
+	tmp[0] = param;
+	tmp[1] = param;
+	while (tmp[0])
 	{
-		exec_order(tmp);
-		if (!tmp)
+		exec_order(tmp[0]);
+		if (!tmp[0])
 			break ;
-		inception(tmp->content);
-		if (check_pipe(tmp))
+		inception(tmp[0]->content);
+		if (check_pipe(tmp[0]))
 			pid_lstadd_back(&pid, pid_lstnew
-				(exec_pipe(env, &tmp, pipe, pid)));
+				(exec_pipe(env, tmp, pipe, pid)));
 		else
 			pid_lstadd_back(&pid, pid_lstnew(exec_pure_p(env, \
-				tmp, fd_org, pid)));
-		while (tmp && tmp->type != PIPE)
-			tmp = tmp->next;
-		if (tmp)
-			tmp = tmp->next;
+				tmp[0], fd_org, pid)));
+		while (tmp[0] && tmp[0]->type != PIPE)
+			tmp[0] = tmp[0]->next;
+		if (tmp[0])
+			tmp[0] = tmp[0]->next;
 	}
 }
 
@@ -99,7 +100,7 @@ static void	pipe_child(t_env *env, t_param **param, t_pid	*pid, int **fd_tmp)
 	dup2(fd_tmp[0][1], 1);
 	res_fork = -1;
 	if (!ft_redirect(param[0], fd_tmp[0]))
-		return (pid_clear(pid), end_of_prog_exit(env, param[0], 0), (void)1);
+		return (pid_clear(pid), end_of_prog_exit(env, param[1], 0), (void)1);
 	close(fd_tmp[0][1]);
 	close(fd_tmp[0][0]);
 	close(fd_tmp[1][0]);
@@ -112,5 +113,5 @@ static void	pipe_child(t_env *env, t_param **param, t_pid	*pid, int **fd_tmp)
 	waitpid(res_fork, 0, 0);
 	g_return_value = res_fork;
 	pid_clear(pid);
-	end_of_prog_exit(env, param[0], 0);
+	end_of_prog_exit(env, param[1], 0);
 }

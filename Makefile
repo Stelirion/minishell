@@ -103,16 +103,7 @@ fclean			:	clean fclean_lib
 re				:	fclean
 					${MAKE} all
 normy:
-				norminette $(SRCS) | grep Error:
-				norminette $(HEAD) | grep Error:
-
-# bonus			: 
-# 					make -C ./Bonus
-# clean_bonus		: 
-# 					make clean -C ./Bonus
-# fclean_bonus		: 
-# 					make clean -C ./Bonus
-# 					make fclean -C ./Bonus
+				norminette $(SRCS)
+				norminette $(HEAD)
 
 .PHONY:	all clean fclean re fclean_lib fclean_all normy 
-# bonus clean_bonus fclean_bonus
