@@ -32,12 +32,28 @@ ssize_t	replace_value(size_t i, char **new, char *token, t_env *env)
 
 	to_change = 0;
 	env_value = NULL;
+
+
+	if (token[i + 1] == '?')
+	{
+		i++;
+		to_change = ft_straddback(to_change, '?');
+		to_change = ft_straddback(to_change, '=');
+		if (!to_change)
+			return (parsing_error(0), free(*new), 0);
+		env_value = env_search(env, to_change);
+		free(to_change);
+		if (!env_value)
+			return (i - 1);
+		*new = ft_strjoin_free(*new, env_value->content);
+		return (i);
+	}
+
+
 	while (token[i])
 	{
 		i++;
-		if (i == 1 && token[i] == '?' && !token[i + 1])
-			;
-		else if (!ft_isalnum(token[i]) && token[i] != '_')
+		if (!ft_isalnum(token[i]) && token[i] != '_')
 			break ;
 		to_change = ft_straddback(to_change, token[i]);
 		if (!to_change)
