@@ -25,6 +25,28 @@ int	get_status(char token, int type)
 	return (type);
 }
 
+int	except_error(int i, t_env *env, char **new)
+{
+	char	*to_change;
+	t_env	*env_value;
+
+	to_change = 0;
+	env_value = NULL;
+	i++;
+	to_change = ft_straddback(to_change, '?');
+	if (!to_change)
+		return (parsing_error(0), free(*new), 0);
+	to_change = ft_straddback(to_change, '=');
+	if (!to_change)
+		return (parsing_error(0), free(*new), 0);
+	env_value = env_search(env, to_change);
+	free(to_change);
+	if (!env_value)
+		return (i);
+	*new = ft_strjoin_free(*new, env_value->content);
+	return (i);
+}
+
 ssize_t	replace_value(size_t i, char **new, char *token, t_env *env)
 {
 	char	*to_change;
@@ -32,24 +54,8 @@ ssize_t	replace_value(size_t i, char **new, char *token, t_env *env)
 
 	to_change = 0;
 	env_value = NULL;
-
-
 	if (token[i + 1] == '?')
-	{
-		i++;
-		to_change = ft_straddback(to_change, '?');
-		to_change = ft_straddback(to_change, '=');
-		if (!to_change)
-			return (parsing_error(0), free(*new), 0);
-		env_value = env_search(env, to_change);
-		free(to_change);
-		if (!env_value)
-			return (i - 1);
-		*new = ft_strjoin_free(*new, env_value->content);
-		return (i);
-	}
-
-
+		return (except_error(i, env, new));
 	while (token[i])
 	{
 		i++;
