@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:40:06 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/26 17:52:06 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/04/30 14:01:59 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ t_env	*env_lstdelone2(t_env *lst)
 	if (!lst)
 		return (NULL);
 	if (lst->name)
-		free(lst->name);
+		lst->name[0] = '\0';
 	if (lst->content)
-		free(lst->content);
-	free(lst);
-	lst = NULL;
+		lst->content[0] = '\0';
+	lst->is_env = 0;
+	lst->is_export = 0;
 	return (rtn);
 }
 
@@ -52,7 +52,7 @@ t_env	*env_unset(t_env *env, char *src)
 	else if (last == env_lstlast(env))
 		return (free(str), env);
 	else if (last->next == env_lstlast(env))
-		return (free(str), env_lstdelone(last->next), env);
+		return (free(str), env_lstdelone2(last->next), env);
 	tmp = last->next;
 	last->next = NULL;
 	if (!tmp)
@@ -61,6 +61,6 @@ t_env	*env_unset(t_env *env, char *src)
 		next = tmp->next;
 	else
 		next = NULL;
-	env_lstdelone(tmp);
+	env_lstdelone2(tmp);
 	return (free(str), last->next = next, g_return_value = 0, env);
 }
