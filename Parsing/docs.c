@@ -21,7 +21,7 @@ t_param	*manage_dock(t_param *param, t_env *env)
 	{
 		if (param->type == HEREDOC)
 		{
-			param->heredoc_fd = heredoc(param->content, param, env);
+			param->heredoc_fd = heredoc(param->content, init, env);
 			if (param->heredoc_fd == -1)
 				return (param_lstclear(&init), NULL);
 		}
