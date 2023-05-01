@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 16:07:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/23 02:14:20 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 18:35:18 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ void	exec_core(t_param	*param, t_env *env, int *fd_org)
 	if (pipe_fnd != 0)
 		handle_pipe(env, param, fd_org, pid);
 	else
+	{
+		exec_order(param);
 		pid_lstadd_back(&pid, pid_lstnew(exec_pure(env, param, fd_org, pid)));
+	}
 	dup2(fd_org[0], 0);
 	dup2(fd_org[1], 1);
 	waiting(pid);

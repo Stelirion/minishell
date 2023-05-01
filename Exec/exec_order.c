@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 14:07:16 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/27 16:19:03 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 17:25:47 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	exec_order(t_param	*param)
 	{
 		target = target->next;
 		ft_swap_m(first, target);
-		printf("%s\n", first->content);
 	}
 }
 
