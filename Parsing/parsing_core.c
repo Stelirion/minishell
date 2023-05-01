@@ -6,7 +6,7 @@
 /*   By: ngennaro <ngennaro@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 16:15:19 by ngennaro          #+#    #+#             */
-/*   Updated: 2023/04/22 22:08:05 by ngennaro         ###   ########.fr       */
+/*   Updated: 2023/05/01 17:05:25 by ngennaro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	split_token(char *line, size_t start)
 	while (line[i])
 	{
 		status = get_status(line[i], status);
-		if (status == 0 && line[i] == ' ')
+		if (status == 0 && (line[i] == ' ' || line[i] == '	'))
 			return (i);
 		if (status == 0 && line[i] == '|')
 			return (i);
