@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 11:33:35 by mbrement          #+#    #+#             */
-/*   Updated: 2023/05/01 20:51:56 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 20:53:21 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	child(t_env *env, t_param *param)
 	else
 		exec_test2(env, param, arg, env_a);
 	free_tabs(arg, tmp, env_a);
-	// end_of_prog_exit(env, param, g_return_value);
 }
 
 static	void	free_tabs(char **a, char **b, char **c)
