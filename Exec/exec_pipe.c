@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:58:21 by mbrement          #+#    #+#             */
-/*   Updated: 2023/05/01 18:35:52 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 20:49:24 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	handle_pipe(t_env *env, t_param *param, int *fd_org, t_pid	*pid)
 				(exec_pipe(env, tmp, pipe, pid)));
 		else
 			pid_lstadd_back(&pid, pid_lstnew(exec_pure_p(env, \
-				tmp[0], fd_org, pid)));
+				tmp, fd_org, pid)));
 		while (tmp[0] && tmp[0]->type != PIPE)
 			tmp[0] = tmp[0]->next;
 		if (tmp[0])

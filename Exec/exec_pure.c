@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 17:04:58 by mbrement          #+#    #+#             */
-/*   Updated: 2023/05/01 18:35:38 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 20:50:21 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	exec_pure(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 	return (ft_undup(give), close (fd[0]), close(fd_org[1]), res_fork);
 }
 
-int	exec_pure_p(t_env *env, t_param *param, int *fd_org, t_pid *pid)
+int	exec_pure_p(t_env *env, t_param **param, int *fd_org, t_pid *pid)
 {
 	int	res_fork;
 	int	fd[2];
@@ -57,17 +57,17 @@ int	exec_pure_p(t_env *env, t_param *param, int *fd_org, t_pid *pid)
 	give[1] = fd_org[0];
 	give[2] = fd[1];
 	give[3] = fd[0];
-	if (!ft_redirect(param, fd))
+	if (!ft_redirect(param[0], fd))
 		return (0);
-	exec_order(param);
-	while (param && param->type != CMD)
-		param = param->next;
-	if (!(param && is_built_in_p(param, env, give, pid) != 1))
+	exec_order(param[0]);
+	while (param && param[0]->type != CMD)
+		param[0] = param[0]->next;
+	if (!(param && is_built_in_p(param[0], env, give, pid) != 1))
 	{
-		res_fork = try_exec (env, param, pid);
+		res_fork = try_exec (env, param[0], pid);
 		close(fd[1]);
 		if (res_fork == 0)
-			end_of_prog_exit_fd(env, param, 0, give);
+			end_of_prog_exit_fd(env, param[1], 0, give);
 	}
 	ft_undup(give);
 	return (close (fd[0]), close(fd_org[1]), res_fork);

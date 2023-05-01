@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/27 18:40:06 by mbrement          #+#    #+#             */
-/*   Updated: 2023/04/30 14:01:59 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 20:19:57 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ t_env	*env_lstdelone2(t_env *lst)
 t_env	*env_unset(t_env *env, char *src)
 {
 	t_env	*tmp;
-	t_env	*next;
 	t_env	*last;
 	char	*str;
 
@@ -54,13 +53,6 @@ t_env	*env_unset(t_env *env, char *src)
 	else if (last->next == env_lstlast(env))
 		return (free(str), env_lstdelone2(last->next), env);
 	tmp = last->next;
-	last->next = NULL;
-	if (!tmp)
-		return (env);
-	if (tmp->next)
-		next = tmp->next;
-	else
-		next = NULL;
 	env_lstdelone2(tmp);
-	return (free(str), last->next = next, g_return_value = 0, env);
+	return (free(str), g_return_value = 0, env);
 }

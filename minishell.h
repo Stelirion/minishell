@@ -6,7 +6,7 @@
 /*   By: mbrement <mbrement@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 14:36:01 by mbrement          #+#    #+#             */
-/*   Updated: 2023/05/01 17:13:14 by mbrement         ###   ########lyon.fr   */
+/*   Updated: 2023/05/01 20:49:33 by mbrement         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ t_pid	*pid_lstnew(int pid);
 void	pid_lstadd_back(t_pid **pid, t_pid *next);
 void	pid_clear(t_pid *pid);
 void	waiting(t_pid *pid);
-int		exec_pure_p(t_env *env, t_param *param, int *fd_org, t_pid *pid);
+int		exec_pure_p(t_env *env, t_param **param, int *fd_org, t_pid *pid);
 void	inception(char *token);
 size_t	param_lstsize_arg(t_param *param);
 char	**arg_array(t_env *env, t_param *param);
